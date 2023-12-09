@@ -12,7 +12,7 @@ import java.time.LocalDate;
  * <h1>Bank Card</h1>
  *
  * @since 2023-05-13
- * @version 1.0
+ * @version 2.0
  * @author Q
  */
 @Builder

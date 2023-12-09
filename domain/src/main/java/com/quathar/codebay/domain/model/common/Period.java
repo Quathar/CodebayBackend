@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * <h1>Period</h1>
  *
  * @since 2023-04-14
- * @version 1.0
+ * @version 2.0
  * @author Q
  */
 @Builder
