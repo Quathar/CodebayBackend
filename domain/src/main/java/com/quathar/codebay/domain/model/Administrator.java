@@ -1,19 +1,18 @@
 package com.quathar.codebay.domain.model;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 /**
  * <h1>Administrator Model</h1>
  *
  * @since 2023-03-27
- * @version 1.0
+ * @version 2.0
  * @author Q
  */
-@Builder
+@SuperBuilder
 @Getter
 @Setter
-public class Administrator {
-
+public class Administrator extends User {
 }
