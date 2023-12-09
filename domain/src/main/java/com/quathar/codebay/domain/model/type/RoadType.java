@@ -1,8 +1,8 @@
 package com.quathar.codebay.domain.model.type;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 /**
  * <h1>Road Type</h1>
@@ -11,7 +11,7 @@ import lombok.Setter;
  * @version 1.0
  * @author Q
  */
-@Builder
+@SuperBuilder
 @Getter
 @Setter
 public class RoadType extends BaseType {
