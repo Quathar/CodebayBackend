@@ -1,4 +1,4 @@
-package com.quathar.codebay.application.inputport.crud;
+package com.quathar.codebay.application.usecase.crud;
 
 /**
  * <h1>Create Model Use Case</h1>

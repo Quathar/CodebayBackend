@@ -1,4 +1,4 @@
-package com.quathar.codebay.application.inputport.crud;
+package com.quathar.codebay.application.usecase.crud;
 
 /**
  * <h1>Delete Model Use Case</h1>
@@ -17,6 +17,6 @@ public interface DeleteModelUseCase<ID>  {
      * @param id The identifier of the domain model to delete.
      * @return true if the deletion is successful, otherwise false.
      */
-    boolean deleteById(ID id);
+    Boolean deleteById(ID id);
 
 }

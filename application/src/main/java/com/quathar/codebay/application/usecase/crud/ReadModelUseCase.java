@@ -1,4 +1,6 @@
-package com.quathar.codebay.application.inputport.crud;
+package com.quathar.codebay.application.usecase.crud;
+
+import com.quathar.codebay.domain.exception.ResourceNotFoundException;
 
 /**
  * <h1>Read Model Use Case</h1>
@@ -17,7 +19,8 @@ public interface ReadModelUseCase<M, ID>  {
      *
      * @param id The identifier of the domain model to retrieve.
      * @return The retrieved domain model, or null if not found.
+     * @throws ResourceNotFoundException if the given identifier does not point an existing resource of the model
      */
-    M getById(ID id);
+    M getById(ID id) throws ResourceNotFoundException;
 
 }
