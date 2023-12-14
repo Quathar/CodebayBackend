@@ -47,6 +47,6 @@ public interface CrudRepositoryPort<M, ID> {
      * @param id The identifier of the domain model to delete
      * @return {@code true} if the deletion was successful, {@code false} otherwise
      */
-    boolean deleteById(ID id);
+    Boolean deleteById(ID id);
 
 }
