@@ -27,7 +27,7 @@ public record CreateUserRequest(
 
         @NotNull
         @NotBlank
-        @Pattern(regexp = "")
+        @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{12,128}$")
         String password,
 
         @NotNull
@@ -36,6 +36,6 @@ public record CreateUserRequest(
 
         @NotNull
         @NotBlank
-        @Pattern(regexp = "")
+        @Pattern(regexp = "^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}(\\.[a-zA-Z]{2,3})?$")
         String email
 ) {}
