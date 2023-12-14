@@ -1,5 +1,6 @@
 package com.quathar.codebay.application.inputport;
 
+import com.quathar.codebay.application.usecase.LoginUseCase;
 import com.quathar.codebay.domain.model.User;
 
 import java.util.UUID;
@@ -11,5 +12,5 @@ import java.util.UUID;
  * @version 1.0
  * @author Q
  */
-public interface UserServicePort extends CrudServicePort<User, UUID> {
+public interface UserServicePort extends CrudServicePort<User, UUID>, LoginUseCase {
 }
