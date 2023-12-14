@@ -25,7 +25,7 @@ import java.util.Optional;
  */
 public class JpaRepositoryAdapter<M, T, ID> implements CrudRepositoryPort<M, ID>  {
 
-    // <<-FIELD->>
+    // <<-FIELDS->>
     /**
      * The JPA repository to perform database operations.
      */
@@ -37,7 +37,7 @@ public class JpaRepositoryAdapter<M, T, ID> implements CrudRepositoryPort<M, ID>
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a JpaRepositoryAdapter with the provided JPA repository and model mapper.
+     * Constructs a JPA Repository Adapter with the provided JPA repository and model mapper.
      *
      * @param jpaRepository The JPA Repository for database operations.
      * @param modelMapper   The ModelMapper for mapping between Model and Entity types.
