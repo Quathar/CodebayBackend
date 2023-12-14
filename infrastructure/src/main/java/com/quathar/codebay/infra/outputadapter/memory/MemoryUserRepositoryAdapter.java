@@ -6,6 +6,7 @@ import com.quathar.codebay.domain.model.User;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -45,4 +46,11 @@ public class MemoryUserRepositoryAdapter extends MemoryRepositoryAdapter<User, U
         return model;
     }
 
+    @Override
+    public Optional<User> findByUsername(String username) {
+        // TODO: Not implemented
+        // TODO: Not implemented
+        // TODO: Not implemented
+        return Optional.empty();
+    }
 }

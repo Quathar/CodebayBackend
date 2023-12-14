@@ -5,6 +5,7 @@ import com.quathar.codebay.infra.outputadapter.jpa.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -16,4 +17,13 @@ import java.util.UUID;
  */
 @Repository
 public interface JpaUserRepository extends JpaRepository<UserEntity, UUID> {
+
+    /**
+     * Finds a user by their username.
+     *
+     * @param username The username to search for.
+     * @return An Optional containing the UserEntity associated with the provided username, if found.
+     */
+    Optional<UserEntity> findByUsername(String username);
+
 }

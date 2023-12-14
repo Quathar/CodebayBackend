@@ -1,6 +1,7 @@
 package com.quathar.codebay.infra.outputadapter.jpa;
 
 import com.quathar.codebay.application.outputport.UserRepositoryPort;
+import com.quathar.codebay.domain.exception.ResourceNotFoundException;
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.infra.outputadapter.jpa.entity.UserEntity;
 import com.quathar.codebay.infra.outputadapter.jpa.mapper.UserMapper;
@@ -9,6 +10,7 @@ import com.quathar.codebay.infra.outputadapter.jpa.repository.JpaUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -37,6 +39,11 @@ public class JpaUserRepositoryAdapter extends JpaRepositoryAdapter<User, UserEnt
         super(jpaUserRepository, UserMapper.getInstance());
         this.jpaUserRepository = jpaUserRepository;
         this.userMapper        = UserMapper.getInstance();
+    }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return this.jpaUserRepository.findByUsername(username).map(this.userMapper::toModel);
     }
 
 }
