@@ -2,6 +2,7 @@ package com.quathar.codebay.application.outputport;
 
 import com.quathar.codebay.domain.model.User;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -16,4 +17,12 @@ import java.util.UUID;
  * @author Q
  */
 public interface UserRepositoryPort extends CrudRepositoryPort<User, UUID> {
+
+    /**
+     * Retrieves a user by their username.
+     *
+     * @return an optional containing the user if found, empty otherwise
+     */
+    Optional<User> findByUsername(String username);
+
 }
