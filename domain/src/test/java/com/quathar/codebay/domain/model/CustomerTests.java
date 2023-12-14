@@ -1,21 +1,9 @@
 package com.quathar.codebay.domain.model;
 
-import com.quathar.codebay.domain.ModelProvider;
-import com.quathar.codebay.domain.model.common.Address;
-import com.quathar.codebay.domain.model.common.Audit;
-import com.quathar.codebay.domain.model.common.BankCard;
-import com.quathar.codebay.domain.model.enumerator.Gender;
-import com.quathar.codebay.domain.model.type.Country;
-import com.quathar.codebay.domain.model.type.CustomerType;
-import com.quathar.codebay.domain.model.type.DocumentType;
+import com.quathar.codebay.domain.manager.MockProvider;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Set;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,168 +16,142 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class CustomerTests {
 
-    // <<-CONSTANTS->>
-    private static final String DOCUMENT = "12345678A";
-    private static final String NAME = "John";
-    private static final String SURNAMES = "Doe";
-    private static final LocalDate BIRTHDATE = LocalDate.parse("1999-09-09");
-    private static final String PHONE_NUMBER = "+34 600 00 00 00";
-    private static final BigDecimal ACCUMULATED_EXPENDITURE = BigDecimal.valueOf(56.25);
-    private static final String COMMENTS = "some comments";
-    private static final Boolean LICENSE = true;
-
-    // <<-FIELDS->>
-    private UUID id;
-    private User user;
-    private DocumentType documentType;
-    private Country country;
-    private Address homeAddress;
-    private Set<Address> addresses;
-    private Set<BankCard> bankCards;
-    private CustomerType type;
-    private Audit audit;
+    // <<-FIELD->>
+    private Customer mock;
 
     // <<-TEST->>
     @BeforeEach
     void setUp() {
-        this.id           = UUID.randomUUID();
-        this.user         = ModelProvider.getInstance(User.class);
-        this.documentType = ModelProvider.getInstance(DocumentType.class);
-        this.country      = ModelProvider.getInstance(Country.class);
-        this.homeAddress  = ModelProvider.getInstance(Address.class);
-        this.addresses    = Set.of(ModelProvider.getInstance(Address.class));
-        this.bankCards    = Set.of(ModelProvider.getInstance(BankCard.class));
-        this.type         = ModelProvider.getInstance(CustomerType.class);
-        this.audit        = ModelProvider.getInstance(Audit.class);
+        this.mock = MockProvider.getInstance(Customer.class);
     }
 
     @Test
     void fullArgsConstructorTest() {
         Customer customer = new Customer(
-                this.id,
-                this.user,
-                this.documentType,
-                DOCUMENT,
-                NAME,
-                SURNAMES,
-                Gender.MALE,
-                BIRTHDATE,
-                this.country,
-                PHONE_NUMBER,
-                this.homeAddress,
-                this.addresses,
-                this.bankCards,
-                ACCUMULATED_EXPENDITURE,
-                this.type,
-                COMMENTS,
-                LICENSE,
-                this.audit
+                this.mock.getId(),
+                this.mock.getUser(),
+                this.mock.getDocumentType(),
+                this.mock.getDocument(),
+                this.mock.getName(),
+                this.mock.getSurnames(),
+                this.mock.getGender(),
+                this.mock.getBirthdate(),
+                this.mock.getCountry(),
+                this.mock.getPhoneNumber(),
+                this.mock.getHomeAddress(),
+                this.mock.getAddresses(),
+                this.mock.getBankCards(),
+                this.mock.getAccumulatedExpenditure(),
+                this.mock.getType(),
+                this.mock.getComments(),
+                this.mock.getLicense(),
+                this.mock.getAudit()
         );
 
-        assertThat( customer.getId()                     ).isEqualTo( this.id );
-        assertThat( customer.getUser()                   ).isEqualTo( this.user );
-        assertThat( customer.getDocumentType()           ).isEqualTo( this.documentType );
-        assertThat( customer.getDocument()               ).isEqualTo( DOCUMENT );
-        assertThat( customer.getName()                   ).isEqualTo( NAME );
-        assertThat( customer.getSurnames()               ).isEqualTo( SURNAMES );
-        assertThat( customer.getGender()                 ).isEqualTo( Gender.MALE );
-        assertThat( customer.getBirthdate()              ).isEqualTo( BIRTHDATE );
-        assertThat( customer.getCountry()                ).isEqualTo( this.country );
-        assertThat( customer.getPhoneNumber()            ).isEqualTo( PHONE_NUMBER );
-        assertThat( customer.getHomeAddress()            ).isEqualTo( this.homeAddress );
-        assertThat( customer.getAddresses()              ).isEqualTo( this.addresses );
-        assertThat( customer.getBankCards()              ).isEqualTo( this.bankCards );
-        assertThat( customer.getAccumulatedExpenditure() ).isEqualTo( ACCUMULATED_EXPENDITURE );
-        assertThat( customer.getType()                   ).isEqualTo( this.type );
-        assertThat( customer.getComments()               ).isEqualTo( COMMENTS );
-        assertThat( customer.getLicense()                ).isEqualTo( LICENSE );
-        assertThat( customer.getAudit()                  ).isEqualTo( this.audit );
+        assertThat( customer.getId()                     ).isEqualTo( this.mock.getId() );
+        assertThat( customer.getUser()                   ).isEqualTo( this.mock.getUser() );
+        assertThat( customer.getDocumentType()           ).isEqualTo( this.mock.getDocumentType() );
+        assertThat( customer.getDocument()               ).isEqualTo( this.mock.getDocument() );
+        assertThat( customer.getName()                   ).isEqualTo( this.mock.getName() );
+        assertThat( customer.getSurnames()               ).isEqualTo( this.mock.getSurnames() );
+        assertThat( customer.getGender()                 ).isEqualTo( this.mock.getGender() );
+        assertThat( customer.getBirthdate()              ).isEqualTo( this.mock.getBirthdate() );
+        assertThat( customer.getCountry()                ).isEqualTo( this.mock.getCountry() );
+        assertThat( customer.getPhoneNumber()            ).isEqualTo( this.mock.getPhoneNumber() );
+        assertThat( customer.getHomeAddress()            ).isEqualTo( this.mock.getHomeAddress() );
+        assertThat( customer.getAddresses()              ).isEqualTo( this.mock.getAddresses() );
+        assertThat( customer.getBankCards()              ).isEqualTo( this.mock.getBankCards() );
+        assertThat( customer.getAccumulatedExpenditure() ).isEqualTo( this.mock.getAccumulatedExpenditure() );
+        assertThat( customer.getType()                   ).isEqualTo( this.mock.getType() );
+        assertThat( customer.getComments()               ).isEqualTo( this.mock.getComments() );
+        assertThat( customer.getLicense()                ).isEqualTo( this.mock.getLicense() );
+        assertThat( customer.getAudit()                  ).isEqualTo( this.mock.getAudit() );
     }
 
     @Test
     void setterTest() {
         Customer customer = Customer.builder().build();
 
-        customer.setId                    ( this.id );
-        customer.setUser                  ( this.user );
-        customer.setDocumentType          ( this.documentType );
-        customer.setDocument              ( DOCUMENT );
-        customer.setName                  ( NAME );
-        customer.setSurnames              ( SURNAMES );
-        customer.setGender                ( Gender.MALE );
-        customer.setBirthdate             ( BIRTHDATE );
-        customer.setCountry               ( this.country );
-        customer.setPhoneNumber           ( PHONE_NUMBER );
-        customer.setHomeAddress           ( this.homeAddress );
-        customer.setAddresses             ( this.addresses );
-        customer.setBankCards             ( this.bankCards );
-        customer.setAccumulatedExpenditure( ACCUMULATED_EXPENDITURE );
-        customer.setType                  ( this.type );
-        customer.setComments              ( COMMENTS );
-        customer.setLicense               ( LICENSE );
-        customer.setAudit                 ( this.audit );
+        customer.setId                    ( this.mock.getId() );
+        customer.setUser                  ( this.mock.getUser() );
+        customer.setDocumentType          ( this.mock.getDocumentType() );
+        customer.setDocument              ( this.mock.getDocument() );
+        customer.setName                  ( this.mock.getName() );
+        customer.setSurnames              ( this.mock.getSurnames() );
+        customer.setGender                ( this.mock.getGender() );
+        customer.setBirthdate             ( this.mock.getBirthdate() );
+        customer.setCountry               ( this.mock.getCountry() );
+        customer.setPhoneNumber           ( this.mock.getPhoneNumber() );
+        customer.setHomeAddress           ( this.mock.getHomeAddress() );
+        customer.setAddresses             ( this.mock.getAddresses() );
+        customer.setBankCards             ( this.mock.getBankCards() );
+        customer.setAccumulatedExpenditure( this.mock.getAccumulatedExpenditure() );
+        customer.setType                  ( this.mock.getType() );
+        customer.setComments              ( this.mock.getComments() );
+        customer.setLicense               ( this.mock.getLicense() );
+        customer.setAudit                 ( this.mock.getAudit() );
 
-        assertThat( customer.getId()                     ).isEqualTo( this.id );
-        assertThat( customer.getUser()                   ).isEqualTo( this.user );
-        assertThat( customer.getDocumentType()           ).isEqualTo( this.documentType );
-        assertThat( customer.getDocument()               ).isEqualTo( DOCUMENT );
-        assertThat( customer.getName()                   ).isEqualTo( NAME );
-        assertThat( customer.getSurnames()               ).isEqualTo( SURNAMES );
-        assertThat( customer.getGender()                 ).isEqualTo( Gender.MALE );
-        assertThat( customer.getBirthdate()              ).isEqualTo( BIRTHDATE );
-        assertThat( customer.getCountry()                ).isEqualTo( this.country );
-        assertThat( customer.getPhoneNumber()            ).isEqualTo( PHONE_NUMBER );
-        assertThat( customer.getHomeAddress()            ).isEqualTo( this.homeAddress );
-        assertThat( customer.getAddresses()              ).isEqualTo( this.addresses );
-        assertThat( customer.getBankCards()              ).isEqualTo( this.bankCards );
-        assertThat( customer.getAccumulatedExpenditure() ).isEqualTo( ACCUMULATED_EXPENDITURE );
-        assertThat( customer.getType()                   ).isEqualTo( this.type );
-        assertThat( customer.getComments()               ).isEqualTo( COMMENTS );
-        assertThat( customer.getLicense()                ).isEqualTo( LICENSE );
-        assertThat( customer.getAudit()                  ).isEqualTo( this.audit );
+        assertThat( customer.getId()                     ).isEqualTo( this.mock.getId() );
+        assertThat( customer.getUser()                   ).isEqualTo( this.mock.getUser() );
+        assertThat( customer.getDocumentType()           ).isEqualTo( this.mock.getDocumentType() );
+        assertThat( customer.getDocument()               ).isEqualTo( this.mock.getDocument() );
+        assertThat( customer.getName()                   ).isEqualTo( this.mock.getName() );
+        assertThat( customer.getSurnames()               ).isEqualTo( this.mock.getSurnames() );
+        assertThat( customer.getGender()                 ).isEqualTo( this.mock.getGender() );
+        assertThat( customer.getBirthdate()              ).isEqualTo( this.mock.getBirthdate() );
+        assertThat( customer.getCountry()                ).isEqualTo( this.mock.getCountry() );
+        assertThat( customer.getPhoneNumber()            ).isEqualTo( this.mock.getPhoneNumber() );
+        assertThat( customer.getHomeAddress()            ).isEqualTo( this.mock.getHomeAddress() );
+        assertThat( customer.getAddresses()              ).isEqualTo( this.mock.getAddresses() );
+        assertThat( customer.getBankCards()              ).isEqualTo( this.mock.getBankCards() );
+        assertThat( customer.getAccumulatedExpenditure() ).isEqualTo( this.mock.getAccumulatedExpenditure() );
+        assertThat( customer.getType()                   ).isEqualTo( this.mock.getType() );
+        assertThat( customer.getComments()               ).isEqualTo( this.mock.getComments() );
+        assertThat( customer.getLicense()                ).isEqualTo( this.mock.getLicense() );
+        assertThat( customer.getAudit()                  ).isEqualTo( this.mock.getAudit() );
     }
 
     @Test
     void builderTest() {
         Customer customer = Customer.builder()
-                .id                    ( this.id )
-                .user                  ( this.user )
-                .documentType          ( this.documentType )
-                .document              ( DOCUMENT )
-                .name                  ( NAME )
-                .surnames              ( SURNAMES )
-                .gender                ( Gender.MALE )
-                .birthdate             ( BIRTHDATE )
-                .country               ( this.country )
-                .phoneNumber           ( PHONE_NUMBER )
-                .homeAddress           ( this.homeAddress )
-                .addresses             ( this.addresses )
-                .bankCards             ( this.bankCards )
-                .accumulatedExpenditure( ACCUMULATED_EXPENDITURE )
-                .type                  ( this.type )
-                .comments              ( COMMENTS )
-                .license               ( LICENSE )
-                .audit                 ( this.audit)
+                .id                    ( this.mock.getId() )
+                .user                  ( this.mock.getUser() )
+                .documentType          ( this.mock.getDocumentType() )
+                .document              ( this.mock.getDocument() )
+                .name                  ( this.mock.getName() )
+                .surnames              ( this.mock.getSurnames() )
+                .gender                ( this.mock.getGender())
+                .birthdate             ( this.mock.getBirthdate() )
+                .country               ( this.mock.getCountry() )
+                .phoneNumber           ( this.mock.getPhoneNumber() )
+                .homeAddress           ( this.mock.getHomeAddress() )
+                .addresses             ( this.mock.getAddresses() )
+                .bankCards             ( this.mock.getBankCards() )
+                .accumulatedExpenditure( this.mock.getAccumulatedExpenditure() )
+                .type                  ( this.mock.getType() )
+                .comments              ( this.mock.getComments() )
+                .license               ( this.mock.getLicense() )
+                .audit                 ( this.mock.getAudit() )
                 .build();
 
-        assertThat( customer.getId()                     ).isEqualTo( this.id );
-        assertThat( customer.getUser()                   ).isEqualTo( this.user );
-        assertThat( customer.getDocumentType()           ).isEqualTo( this.documentType );
-        assertThat( customer.getDocument()               ).isEqualTo( DOCUMENT );
-        assertThat( customer.getName()                   ).isEqualTo( NAME );
-        assertThat( customer.getSurnames()               ).isEqualTo( SURNAMES );
-        assertThat( customer.getGender()                 ).isEqualTo( Gender.MALE );
-        assertThat( customer.getBirthdate()              ).isEqualTo( BIRTHDATE );
-        assertThat( customer.getCountry()                ).isEqualTo( this.country );
-        assertThat( customer.getPhoneNumber()            ).isEqualTo( PHONE_NUMBER );
-        assertThat( customer.getHomeAddress()            ).isEqualTo( this.homeAddress );
-        assertThat( customer.getAddresses()              ).isEqualTo( this.addresses );
-        assertThat( customer.getBankCards()              ).isEqualTo( this.bankCards );
-        assertThat( customer.getAccumulatedExpenditure() ).isEqualTo( ACCUMULATED_EXPENDITURE );
-        assertThat( customer.getType()                   ).isEqualTo( this.type );
-        assertThat( customer.getComments()               ).isEqualTo( COMMENTS );
-        assertThat( customer.getLicense()                ).isEqualTo( LICENSE );
-        assertThat( customer.getAudit()                  ).isEqualTo( this.audit );
+        assertThat( customer.getId()                     ).isEqualTo( this.mock.getId() );
+        assertThat( customer.getUser()                   ).isEqualTo( this.mock.getUser() );
+        assertThat( customer.getDocumentType()           ).isEqualTo( this.mock.getDocumentType() );
+        assertThat( customer.getDocument()               ).isEqualTo( this.mock.getDocument() );
+        assertThat( customer.getName()                   ).isEqualTo( this.mock.getName() );
+        assertThat( customer.getSurnames()               ).isEqualTo( this.mock.getSurnames() );
+        assertThat( customer.getGender()                 ).isEqualTo( this.mock.getGender() );
+        assertThat( customer.getBirthdate()              ).isEqualTo( this.mock.getBirthdate() );
+        assertThat( customer.getCountry()                ).isEqualTo( this.mock.getCountry() );
+        assertThat( customer.getPhoneNumber()            ).isEqualTo( this.mock.getPhoneNumber() );
+        assertThat( customer.getHomeAddress()            ).isEqualTo( this.mock.getHomeAddress() );
+        assertThat( customer.getAddresses()              ).isEqualTo( this.mock.getAddresses() );
+        assertThat( customer.getBankCards()              ).isEqualTo( this.mock.getBankCards() );
+        assertThat( customer.getAccumulatedExpenditure() ).isEqualTo( this.mock.getAccumulatedExpenditure() );
+        assertThat( customer.getType()                   ).isEqualTo( this.mock.getType() );
+        assertThat( customer.getComments()               ).isEqualTo( this.mock.getComments() );
+        assertThat( customer.getLicense()                ).isEqualTo( this.mock.getLicense() );
+        assertThat( customer.getAudit()                  ).isEqualTo( this.mock.getAudit() );
     }
 
 }

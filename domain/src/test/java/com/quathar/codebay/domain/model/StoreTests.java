@@ -1,14 +1,9 @@
 package com.quathar.codebay.domain.model;
 
-import com.quathar.codebay.domain.ModelProvider;
-import com.quathar.codebay.domain.model.common.Address;
-import com.quathar.codebay.domain.model.common.Coordinates;
-import com.quathar.codebay.domain.model.common.Image;
+import com.quathar.codebay.domain.manager.MockProvider;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -21,65 +16,59 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  */
 class StoreTests {
 
-    // <<-FIELDS->>
-    private UUID id;
-    private Address address;
-    private Image image;
-    private Coordinates coordinates;
+    // <<-FIELD->>
+    private Store mock;
 
     // <<-TESTS->>
     @BeforeEach
     void setUp() {
-        this.id          = UUID.randomUUID();
-        this.address     = ModelProvider.getInstance(Address.class);
-        this.image       = ModelProvider.getInstance(Image.class);
-        this.coordinates = ModelProvider.getInstance(Coordinates.class);
+        this.mock = MockProvider.getInstance(Store.class);
     }
 
     // <<-TESTS->>
     @Test
     void fullArgsConstructorTest() {
         Store store = new Store(
-                this.id,
-                this.address,
-                this.image,
-                this.coordinates
+                this.mock.getId(),
+                this.mock.getAddress(),
+                this.mock.getImage(),
+                this.mock.getCoordinates()
         );
 
-        assertThat( store.getId()          ).isEqualTo(  this.id );
-        assertThat( store.getAddress()     ).isEqualTo(  this.address );
-        assertThat( store.getImage()       ).isEqualTo(  this.image );
-        assertThat( store.getCoordinates() ).isEqualTo(  this.coordinates );
+        assertThat( store.getId()          ).isEqualTo( this.mock.getId() );
+        assertThat( store.getAddress()     ).isEqualTo( this.mock.getAddress() );
+        assertThat( store.getImage()       ).isEqualTo( this.mock.getImage() );
+        assertThat( store.getCoordinates() ).isEqualTo( this.mock.getCoordinates() );
     }
 
     @Test
     void setterTest() {
         Store store = Store.builder().build();
 
-        store.setId         ( this.id );
-        store.setAddress    ( this.address );
-        store.setImage      ( this.image );
-        store.setCoordinates( this.coordinates );
+        store.setId         ( this.mock.getId() );
+        store.setAddress    ( this.mock.getAddress() );
+        store.setImage      ( this.mock.getImage() );
+        store.setCoordinates( this.mock.getCoordinates() );
 
-        assertThat( store.getId()          ).isEqualTo(  this.id );
-        assertThat( store.getAddress()     ).isEqualTo(  this.address );
-        assertThat( store.getImage()       ).isEqualTo(  this.image );
-        assertThat( store.getCoordinates() ).isEqualTo(  this.coordinates );
+        assertThat( store.getId()          ).isEqualTo( this.mock.getId() );
+        assertThat( store.getAddress()     ).isEqualTo( this.mock.getAddress() );
+        assertThat( store.getImage()       ).isEqualTo( this.mock.getImage() );
+        assertThat( store.getCoordinates() ).isEqualTo( this.mock.getCoordinates() );
     }
 
     @Test
     void builderTest() {
         Store store = Store.builder()
-                .id         ( this.id )
-                .address    ( this.address )
-                .image      ( this.image )
-                .coordinates( this.coordinates )
+                .id         ( this.mock.getId() )
+                .address    ( this.mock.getAddress() )
+                .image      ( this.mock.getImage() )
+                .coordinates( this.mock.getCoordinates() )
                 .build();
 
-        assertThat( store.getId()          ).isEqualTo(  this.id );
-        assertThat( store.getAddress()     ).isEqualTo(  this.address );
-        assertThat( store.getImage()       ).isEqualTo(  this.image );
-        assertThat( store.getCoordinates() ).isEqualTo(  this.coordinates );
+        assertThat( store.getId()          ).isEqualTo( this.mock.getId() );
+        assertThat( store.getAddress()     ).isEqualTo( this.mock.getAddress() );
+        assertThat( store.getImage()       ).isEqualTo( this.mock.getImage() );
+        assertThat( store.getCoordinates() ).isEqualTo( this.mock.getCoordinates() );
     }
 
 }

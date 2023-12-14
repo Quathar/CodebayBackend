@@ -1,15 +1,9 @@
 package com.quathar.codebay.domain.model;
 
-import com.quathar.codebay.domain.ModelProvider;
-import com.quathar.codebay.domain.model.common.Audit;
-import com.quathar.codebay.domain.model.common.Image;
+import com.quathar.codebay.domain.manager.MockProvider;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.math.BigDecimal;
-import java.util.Set;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,184 +16,160 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class ProductTests {
 
-    // <<-CONSTANTS->>
-    private static final String CODE = "X382KD";
-    private static final String NAME = "Test Product";
-    private static final String DESCRIPTION = "A test product";
-    private static final String BRAND = "ProductMasters";
-    private static final String MODEL = "ProductA";
-    private static final BigDecimal PRICE = BigDecimal.valueOf(6.25);;
-    private static final Integer RATING_NUMBER = 2;
-    private static final BigDecimal RATING = BigDecimal.valueOf(2.5);;
-    private static final Integer STOCK = 18;
-    private static final Integer UNITS_SOLD = 2;
-    private static final Integer UPPER_LIMIT = 10;
-    private static final Integer LOWER_LIMIT = 5;
-    private static final BigDecimal TOTAL_EARNINGS = BigDecimal.valueOf(12.5);
-    private static final Boolean ON_SALE = true;
-    private static final Boolean ON_OFFER = false;
-    private static final Boolean IS_NEW = true;
-    private static final BigDecimal DISCOUNT = BigDecimal.ZERO;
-    private static final String COMMENTS = "Comments";
-
-    // <<-FIELDS->>
-    private UUID id;
-    private Set<Image> productImages;
-    private Audit audit;
+    // <<-FIELD->>
+    private Product mock;
 
     // <<-TESTS->>
     @BeforeEach
     void setUp() {
-        this.id            = UUID.randomUUID();
-        this.productImages = Set.of(ModelProvider.getInstance(Image.class));
-        this.audit         = ModelProvider.getInstance(Audit.class);
+        this.mock = MockProvider.getInstance(Product.class);
     }
 
     @Test
     void fullArgsConstructorTest() {
         Product product = new Product(
-                this.id,
-                CODE,
-                NAME,
-                DESCRIPTION,
-                BRAND,
-                MODEL,
-                this.productImages,
-                PRICE,
-                RATING_NUMBER,
-                RATING,
-                STOCK,
-                UNITS_SOLD,
-                UPPER_LIMIT,
-                LOWER_LIMIT,
-                TOTAL_EARNINGS,
-                ON_SALE,
-                ON_OFFER,
-                IS_NEW,
-                DISCOUNT,
-                COMMENTS,
-                this.audit
+                this.mock.getId(),
+                this.mock.getCode(),
+                this.mock.getName(),
+                this.mock.getDescription(),
+                this.mock.getBrand(),
+                this.mock.getModel(),
+                this.mock.getProductImages(),
+                this.mock.getPrice(),
+                this.mock.getRatingNumber(),
+                this.mock.getRating(),
+                this.mock.getStock(),
+                this.mock.getUnitsSold(),
+                this.mock.getUpperLimit(),
+                this.mock.getLowerLimit(),
+                this.mock.getTotalEarnings(),
+                this.mock.getOnSale(),
+                this.mock.getOnOffer(),
+                this.mock.getIsNew(),
+                this.mock.getDiscount(),
+                this.mock.getComments(),
+                this.mock.getAudit()
         );
 
-        assertThat( product.getId()            ).isEqualTo( this.id );
-        assertThat( product.getCode()          ).isEqualTo( CODE );
-        assertThat( product.getName()          ).isEqualTo( NAME );
-        assertThat( product.getDescription()   ).isEqualTo( DESCRIPTION );
-        assertThat( product.getBrand()         ).isEqualTo( BRAND );
-        assertThat( product.getModel()         ).isEqualTo( MODEL );
-        assertThat( product.getProductImages() ).isEqualTo( this.productImages );
-        assertThat( product.getPrice()         ).isEqualTo( PRICE );
-        assertThat( product.getRatingNumber()  ).isEqualTo( RATING_NUMBER );
-        assertThat( product.getRating()        ).isEqualTo( RATING );
-        assertThat( product.getStock()         ).isEqualTo( STOCK );
-        assertThat( product.getUnitsSold()     ).isEqualTo( UNITS_SOLD );
-        assertThat( product.getUpperLimit()    ).isEqualTo( UPPER_LIMIT );
-        assertThat( product.getLowerLimit()    ).isEqualTo( LOWER_LIMIT );
-        assertThat( product.getTotalEarnings() ).isEqualTo( TOTAL_EARNINGS );
-        assertThat( product.getOnSale()        ).isEqualTo( ON_SALE );
-        assertThat( product.getOnOffer()       ).isEqualTo( ON_OFFER );
-        assertThat( product.getIsNew()         ).isEqualTo( IS_NEW );
-        assertThat( product.getDiscount()      ).isEqualTo( DISCOUNT );
-        assertThat( product.getComments()      ).isEqualTo( COMMENTS );
-        assertThat( product.getAudit()         ).isEqualTo( this.audit );
+        assertThat( product.getId()            ).isEqualTo( this.mock.getId() );
+        assertThat( product.getCode()          ).isEqualTo( this.mock.getCode() );
+        assertThat( product.getName()          ).isEqualTo( this.mock.getName() );
+        assertThat( product.getDescription()   ).isEqualTo( this.mock.getDescription() );
+        assertThat( product.getBrand()         ).isEqualTo( this.mock.getBrand() );
+        assertThat( product.getModel()         ).isEqualTo( this.mock.getModel() );
+        assertThat( product.getProductImages() ).isEqualTo( this.mock.getProductImages() );
+        assertThat( product.getPrice()         ).isEqualTo( this.mock.getPrice() );
+        assertThat( product.getRatingNumber()  ).isEqualTo( this.mock.getRatingNumber() );
+        assertThat( product.getRating()        ).isEqualTo( this.mock.getRating() );
+        assertThat( product.getStock()         ).isEqualTo( this.mock.getStock() );
+        assertThat( product.getUnitsSold()     ).isEqualTo( this.mock.getUnitsSold() );
+        assertThat( product.getUpperLimit()    ).isEqualTo( this.mock.getUpperLimit() );
+        assertThat( product.getLowerLimit()    ).isEqualTo( this.mock.getLowerLimit() );
+        assertThat( product.getTotalEarnings() ).isEqualTo( this.mock.getTotalEarnings() );
+        assertThat( product.getOnSale()        ).isEqualTo( this.mock.getOnSale() );
+        assertThat( product.getOnOffer()       ).isEqualTo( this.mock.getOnOffer() );
+        assertThat( product.getIsNew()         ).isEqualTo( this.mock.getIsNew() );
+        assertThat( product.getDiscount()      ).isEqualTo( this.mock.getDiscount() );
+        assertThat( product.getComments()      ).isEqualTo( this.mock.getComments() );
+        assertThat( product.getAudit()         ).isEqualTo( this.mock.getAudit() );
     }
 
     @Test
     void setterTest() {
         Product product = Product.builder().build();
 
-        product.setId           ( this.id );
-        product.setCode         ( CODE );
-        product.setName         ( NAME );
-        product.setDescription  ( DESCRIPTION );
-        product.setBrand        ( BRAND );
-        product.setModel        ( MODEL );
-        product.setProductImages( this.productImages );
-        product.setPrice        ( PRICE );
-        product.setRatingNumber ( RATING_NUMBER );
-        product.setRating       ( RATING );
-        product.setStock        ( STOCK );
-        product.setUnitsSold    ( UNITS_SOLD );
-        product.setUpperLimit   ( UPPER_LIMIT );
-        product.setLowerLimit   ( LOWER_LIMIT );
-        product.setTotalEarnings( TOTAL_EARNINGS );
-        product.setOnSale       ( ON_SALE );
-        product.setOnOffer      ( ON_OFFER );
-        product.setIsNew        ( IS_NEW );
-        product.setDiscount     ( DISCOUNT );
-        product.setComments     ( COMMENTS );
-        product.setAudit        ( this.audit );
+        product.setId           ( this.mock.getId() );
+        product.setCode         ( this.mock.getCode() );
+        product.setName         ( this.mock.getName() );
+        product.setDescription  ( this.mock.getDescription() );
+        product.setBrand        ( this.mock.getBrand() );
+        product.setModel        ( this.mock.getModel() );
+        product.setProductImages( this.mock.getProductImages() );
+        product.setPrice        ( this.mock.getPrice() );
+        product.setRatingNumber ( this.mock.getRatingNumber() );
+        product.setRating       ( this.mock.getRating() );
+        product.setStock        ( this.mock.getStock() );
+        product.setUnitsSold    ( this.mock.getUnitsSold() );
+        product.setUpperLimit   ( this.mock.getUpperLimit() );
+        product.setLowerLimit   ( this.mock.getLowerLimit() );
+        product.setTotalEarnings( this.mock.getTotalEarnings() );
+        product.setOnSale       ( this.mock.getOnSale() );
+        product.setOnOffer      ( this.mock.getOnOffer() );
+        product.setIsNew        ( this.mock.getIsNew() );
+        product.setDiscount     ( this.mock.getDiscount() );
+        product.setComments     ( this.mock.getComments() );
+        product.setAudit        ( this.mock.getAudit() );
 
-        assertThat( product.getId()            ).isEqualTo( this.id );
-        assertThat( product.getCode()          ).isEqualTo( CODE );
-        assertThat( product.getName()          ).isEqualTo( NAME );
-        assertThat( product.getDescription()   ).isEqualTo( DESCRIPTION );
-        assertThat( product.getBrand()         ).isEqualTo( BRAND );
-        assertThat( product.getModel()         ).isEqualTo( MODEL );
-        assertThat( product.getProductImages() ).isEqualTo( this.productImages );
-        assertThat( product.getPrice()         ).isEqualTo( PRICE );
-        assertThat( product.getRatingNumber()  ).isEqualTo( RATING_NUMBER );
-        assertThat( product.getRating()        ).isEqualTo( RATING );
-        assertThat( product.getStock()         ).isEqualTo( STOCK );
-        assertThat( product.getUnitsSold()     ).isEqualTo( UNITS_SOLD );
-        assertThat( product.getUpperLimit()    ).isEqualTo( UPPER_LIMIT );
-        assertThat( product.getLowerLimit()    ).isEqualTo( LOWER_LIMIT );
-        assertThat( product.getTotalEarnings() ).isEqualTo( TOTAL_EARNINGS );
-        assertThat( product.getOnSale()        ).isEqualTo( ON_SALE );
-        assertThat( product.getOnOffer()       ).isEqualTo( ON_OFFER );
-        assertThat( product.getIsNew()         ).isEqualTo( IS_NEW );
-        assertThat( product.getDiscount()      ).isEqualTo( DISCOUNT );
-        assertThat( product.getComments()      ).isEqualTo( COMMENTS );
-        assertThat( product.getAudit()         ).isEqualTo( this.audit );
+        assertThat( product.getId()            ).isEqualTo( this.mock.getId() );
+        assertThat( product.getCode()          ).isEqualTo( this.mock.getCode() );
+        assertThat( product.getName()          ).isEqualTo( this.mock.getName() );
+        assertThat( product.getDescription()   ).isEqualTo( this.mock.getDescription() );
+        assertThat( product.getBrand()         ).isEqualTo( this.mock.getBrand() );
+        assertThat( product.getModel()         ).isEqualTo( this.mock.getModel() );
+        assertThat( product.getProductImages() ).isEqualTo( this.mock.getProductImages() );
+        assertThat( product.getPrice()         ).isEqualTo( this.mock.getPrice() );
+        assertThat( product.getRatingNumber()  ).isEqualTo( this.mock.getRatingNumber() );
+        assertThat( product.getRating()        ).isEqualTo( this.mock.getRating() );
+        assertThat( product.getStock()         ).isEqualTo( this.mock.getStock() );
+        assertThat( product.getUnitsSold()     ).isEqualTo( this.mock.getUnitsSold() );
+        assertThat( product.getUpperLimit()    ).isEqualTo( this.mock.getUpperLimit() );
+        assertThat( product.getLowerLimit()    ).isEqualTo( this.mock.getLowerLimit() );
+        assertThat( product.getTotalEarnings() ).isEqualTo( this.mock.getTotalEarnings() );
+        assertThat( product.getOnSale()        ).isEqualTo( this.mock.getOnSale() );
+        assertThat( product.getOnOffer()       ).isEqualTo( this.mock.getOnOffer() );
+        assertThat( product.getIsNew()         ).isEqualTo( this.mock.getIsNew() );
+        assertThat( product.getDiscount()      ).isEqualTo( this.mock.getDiscount() );
+        assertThat( product.getComments()      ).isEqualTo( this.mock.getComments() );
+        assertThat( product.getAudit()         ).isEqualTo( this.mock.getAudit() );
     }
 
     @Test
     void builderTest() {
         Product product = Product.builder()
-                .id           ( this.id )
-                .code         ( CODE )
-                .name         ( NAME )
-                .description  ( DESCRIPTION )
-                .brand        ( BRAND )
-                .model        ( MODEL )
-                .productImages( this.productImages )
-                .price        ( PRICE )
-                .ratingNumber ( RATING_NUMBER )
-                .rating       ( RATING )
-                .stock        ( STOCK )
-                .unitsSold    ( UNITS_SOLD )
-                .upperLimit   ( UPPER_LIMIT )
-                .lowerLimit   ( LOWER_LIMIT )
-                .totalEarnings( TOTAL_EARNINGS )
-                .onSale       ( ON_SALE )
-                .onOffer      ( ON_OFFER )
-                .isNew        ( IS_NEW )
-                .discount     ( DISCOUNT )
-                .comments     ( COMMENTS )
-                .audit        ( this.audit )
+                .id           ( this.mock.getId() )
+                .code         ( this.mock.getCode() )
+                .name         ( this.mock.getName() )
+                .description  ( this.mock.getDescription() )
+                .brand        ( this.mock.getBrand() )
+                .model        ( this.mock.getModel() )
+                .productImages( this.mock.getProductImages() )
+                .price        ( this.mock.getPrice() )
+                .ratingNumber ( this.mock.getRatingNumber() )
+                .rating       ( this.mock.getRating() )
+                .stock        ( this.mock.getStock() )
+                .unitsSold    ( this.mock.getUnitsSold() )
+                .upperLimit   ( this.mock.getUpperLimit() )
+                .lowerLimit   ( this.mock.getLowerLimit() )
+                .totalEarnings( this.mock.getTotalEarnings() )
+                .onSale       ( this.mock.getOnSale() )
+                .onOffer      ( this.mock.getOnOffer() )
+                .isNew        ( this.mock.getIsNew() )
+                .discount     ( this.mock.getDiscount() )
+                .comments     ( this.mock.getComments() )
+                .audit        ( this.mock.getAudit() )
                 .build();
 
-        assertThat( product.getId()            ).isEqualTo( this.id );
-        assertThat( product.getCode()          ).isEqualTo( CODE );
-        assertThat( product.getName()          ).isEqualTo( NAME );
-        assertThat( product.getDescription()   ).isEqualTo( DESCRIPTION );
-        assertThat( product.getBrand()         ).isEqualTo( BRAND );
-        assertThat( product.getModel()         ).isEqualTo( MODEL );
-        assertThat( product.getProductImages() ).isEqualTo( this.productImages );
-        assertThat( product.getPrice()         ).isEqualTo( PRICE );
-        assertThat( product.getRatingNumber()  ).isEqualTo( RATING_NUMBER );
-        assertThat( product.getRating()        ).isEqualTo( RATING );
-        assertThat( product.getStock()         ).isEqualTo( STOCK );
-        assertThat( product.getUnitsSold()     ).isEqualTo( UNITS_SOLD );
-        assertThat( product.getUpperLimit()    ).isEqualTo( UPPER_LIMIT );
-        assertThat( product.getLowerLimit()    ).isEqualTo( LOWER_LIMIT );
-        assertThat( product.getTotalEarnings() ).isEqualTo( TOTAL_EARNINGS );
-        assertThat( product.getOnSale()        ).isEqualTo( ON_SALE );
-        assertThat( product.getOnOffer()       ).isEqualTo( ON_OFFER );
-        assertThat( product.getIsNew()         ).isEqualTo( IS_NEW );
-        assertThat( product.getDiscount()      ).isEqualTo( DISCOUNT );
-        assertThat( product.getComments()      ).isEqualTo( COMMENTS );
-        assertThat( product.getAudit()         ).isEqualTo( this.audit );
+        assertThat( product.getId()            ).isEqualTo( this.mock.getId() );
+        assertThat( product.getCode()          ).isEqualTo( this.mock.getCode() );
+        assertThat( product.getName()          ).isEqualTo( this.mock.getName() );
+        assertThat( product.getDescription()   ).isEqualTo( this.mock.getDescription() );
+        assertThat( product.getBrand()         ).isEqualTo( this.mock.getBrand() );
+        assertThat( product.getModel()         ).isEqualTo( this.mock.getModel() );
+        assertThat( product.getProductImages() ).isEqualTo( this.mock.getProductImages() );
+        assertThat( product.getPrice()         ).isEqualTo( this.mock.getPrice() );
+        assertThat( product.getRatingNumber()  ).isEqualTo( this.mock.getRatingNumber() );
+        assertThat( product.getRating()        ).isEqualTo( this.mock.getRating() );
+        assertThat( product.getStock()         ).isEqualTo( this.mock.getStock() );
+        assertThat( product.getUnitsSold()     ).isEqualTo( this.mock.getUnitsSold() );
+        assertThat( product.getUpperLimit()    ).isEqualTo( this.mock.getUpperLimit() );
+        assertThat( product.getLowerLimit()    ).isEqualTo( this.mock.getLowerLimit() );
+        assertThat( product.getTotalEarnings() ).isEqualTo( this.mock.getTotalEarnings() );
+        assertThat( product.getOnSale()        ).isEqualTo( this.mock.getOnSale() );
+        assertThat( product.getOnOffer()       ).isEqualTo( this.mock.getOnOffer() );
+        assertThat( product.getIsNew()         ).isEqualTo( this.mock.getIsNew() );
+        assertThat( product.getDiscount()      ).isEqualTo( this.mock.getDiscount() );
+        assertThat( product.getComments()      ).isEqualTo( this.mock.getComments() );
+        assertThat( product.getAudit()         ).isEqualTo( this.mock.getAudit() );
     }
 
 }

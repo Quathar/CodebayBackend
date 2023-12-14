@@ -1,7 +1,7 @@
 package com.quathar.codebay.domain.model;
 
-import com.quathar.codebay.domain.ModelProvider;
 
+import com.quathar.codebay.domain.manager.MockProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,9 +35,9 @@ class ShoppingCartTests {
     @BeforeEach
     void setUp() {
         this.id           = UUID.randomUUID();
-        this.customer     = ModelProvider.getInstance(Customer.class);
+        this.customer     = MockProvider.getInstance(Customer.class);
         this.creationDate = LocalDateTime.now();
-        this.product      = ModelProvider.getInstance(Product.class);
+        this.product      = MockProvider.getInstance(Product.class);
     }
 
     @Test

@@ -1,11 +1,9 @@
 package com.quathar.codebay.domain.model;
 
-import com.quathar.codebay.domain.model.enumerator.UserStatus;
+import com.quathar.codebay.domain.manager.MockProvider;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,81 +14,73 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @version 1.0
  * @author Q
  */
-public class UserTests {
+class UserTests {
 
-    // <<-CONSTANTS->>
-    protected static final String USERNAME = "jdoe";
-    protected static final String PASSWORD = "password";
-    protected static final String NICKNAME = "John Doe";
-    protected static final String EMAIL = "jdoe@email.com";
-    protected static final Integer SUCCESSFUL_AUTH = 2;
-    protected static final Integer FAILED_AUTH = 1;
+    // <<-FIELD->>
+    private User mock;
+
+    @BeforeEach
+    void setUp() {
+        this.mock = MockProvider.getInstance(User.class);
+    }
 
     // <<-TEST->>
     @Test
     void userSettersTest() {
-        UUID id = UUID.randomUUID();
-        LocalDateTime lastConnection = LocalDateTime.now();
-        LocalDateTime releaseBlock   = LocalDateTime.now();
-
         User user = User.builder().build();
 
-        user.setId            ( id );
-        user.setUsername      ( USERNAME );
-        user.setPassword      ( PASSWORD );
-        user.setNickname      ( NICKNAME );
-        user.setEmail         ( EMAIL );
-        user.setSuccessfulAuth( SUCCESSFUL_AUTH );
-        user.setFailedAuth    ( FAILED_AUTH );
-        user.setLastConnection( lastConnection );
-        user.setReleaseBlock  ( releaseBlock );
-        user.setStatus        ( UserStatus.ACTIVE );
-        user.setAudit         ( null );
+        user.setId            ( this.mock.getId() );
+        user.setUsername      ( this.mock.getUsername() );
+        user.setPassword      ( this.mock.getPassword() );
+        user.setNickname      ( this.mock.getNickname() );
+        user.setEmail         ( this.mock.getEmail() );
+        user.setSuccessfulAuth( this.mock.getSuccessfulAuth() );
+        user.setFailedAuth    ( this.mock.getFailedAuth() );
+        user.setLastConnection( this.mock.getLastConnection() );
+        user.setReleaseBlock  ( this.mock.getReleaseBlock() );
+        user.setStatus        ( this.mock.getStatus() );
+        user.setAudit         ( this.mock.getAudit() );
 
-        assertThat( user.getId()             ).isEqualTo( id );
-        assertThat( user.getUsername()       ).isEqualTo( USERNAME );
-        assertThat( user.getPassword()       ).isEqualTo( PASSWORD );
-        assertThat( user.getNickname()       ).isEqualTo( NICKNAME );
-        assertThat( user.getEmail()          ).isEqualTo( EMAIL );
-        assertThat( user.getSuccessfulAuth() ).isEqualTo( SUCCESSFUL_AUTH );
-        assertThat( user.getFailedAuth()     ).isEqualTo( FAILED_AUTH );
-        assertThat( user.getLastConnection() ).isEqualTo( lastConnection );
-        assertThat( user.getReleaseBlock()   ).isEqualTo( releaseBlock );
-        assertThat( user.getStatus()         ).isEqualTo( UserStatus.ACTIVE );
-        assertThat( user.getAudit()          ).isEqualTo( null );
+        assertThat( user.getId()             ).isEqualTo( this.mock.getId() );
+        assertThat( user.getUsername()       ).isEqualTo( this.mock.getUsername() );
+        assertThat( user.getPassword()       ).isEqualTo( this.mock.getPassword() );
+        assertThat( user.getNickname()       ).isEqualTo( this.mock.getNickname() );
+        assertThat( user.getEmail()          ).isEqualTo( this.mock.getEmail() );
+        assertThat( user.getSuccessfulAuth() ).isEqualTo( this.mock.getSuccessfulAuth() );
+        assertThat( user.getFailedAuth()     ).isEqualTo( this.mock.getFailedAuth() );
+        assertThat( user.getLastConnection() ).isEqualTo( this.mock.getLastConnection() );
+        assertThat( user.getReleaseBlock()   ).isEqualTo( this.mock.getReleaseBlock() );
+        assertThat( user.getStatus()         ).isEqualTo( this.mock.getStatus() );
+        assertThat( user.getAudit()          ).isEqualTo( this.mock.getAudit() );
     }
 
     @Test
     void userBuilderTest() {
-        UUID id = UUID.randomUUID();
-        LocalDateTime lastConnection = LocalDateTime.now();
-        LocalDateTime releaseBlock   = LocalDateTime.now();
-
         User user = User.builder()
-                .id            ( id )
-                .username      ( USERNAME )
-                .password      ( PASSWORD )
-                .nickname      ( NICKNAME )
-                .email         ( EMAIL )
-                .successfulAuth( SUCCESSFUL_AUTH )
-                .failedAuth    ( FAILED_AUTH )
-                .lastConnection( lastConnection )
-                .releaseBlock  ( releaseBlock )
-                .status        ( UserStatus.ACTIVE )
-                .audit         ( null )
+                .id            ( this.mock.getId() )
+                .username      ( this.mock.getUsername() )
+                .password      ( this.mock.getPassword() )
+                .nickname      ( this.mock.getNickname() )
+                .email         ( this.mock.getEmail() )
+                .successfulAuth( this.mock.getSuccessfulAuth() )
+                .failedAuth    ( this.mock.getFailedAuth() )
+                .lastConnection( this.mock.getLastConnection() )
+                .releaseBlock  ( this.mock.getReleaseBlock() )
+                .status        ( this.mock.getStatus() )
+                .audit         ( this.mock.getAudit() )
                 .build();
 
-        assertThat( user.getId()             ).isEqualTo( id );
-        assertThat( user.getUsername()       ).isEqualTo( USERNAME );
-        assertThat( user.getPassword()       ).isEqualTo( PASSWORD );
-        assertThat( user.getNickname()       ).isEqualTo( NICKNAME );
-        assertThat( user.getEmail()          ).isEqualTo( EMAIL );
-        assertThat( user.getSuccessfulAuth() ).isEqualTo( SUCCESSFUL_AUTH );
-        assertThat( user.getFailedAuth()     ).isEqualTo( FAILED_AUTH );
-        assertThat( user.getLastConnection() ).isEqualTo( lastConnection );
-        assertThat( user.getReleaseBlock()   ).isEqualTo( releaseBlock );
-        assertThat( user.getStatus()         ).isEqualTo( UserStatus.ACTIVE );
-        assertThat( user.getAudit()          ).isEqualTo( null );
+        assertThat( user.getId()             ).isEqualTo( this.mock.getId() );
+        assertThat( user.getUsername()       ).isEqualTo( this.mock.getUsername() );
+        assertThat( user.getPassword()       ).isEqualTo( this.mock.getPassword() );
+        assertThat( user.getNickname()       ).isEqualTo( this.mock.getNickname() );
+        assertThat( user.getEmail()          ).isEqualTo( this.mock.getEmail() );
+        assertThat( user.getSuccessfulAuth() ).isEqualTo( this.mock.getSuccessfulAuth() );
+        assertThat( user.getFailedAuth()     ).isEqualTo( this.mock.getFailedAuth() );
+        assertThat( user.getLastConnection() ).isEqualTo( this.mock.getLastConnection() );
+        assertThat( user.getReleaseBlock()   ).isEqualTo( this.mock.getReleaseBlock() );
+        assertThat( user.getStatus()         ).isEqualTo( this.mock.getStatus() );
+        assertThat( user.getAudit()          ).isEqualTo( this.mock.getAudit() );
     }
 
 }

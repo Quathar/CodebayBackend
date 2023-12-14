@@ -1,11 +1,9 @@
 package com.quathar.codebay.domain.model;
 
-import com.quathar.codebay.domain.model.enumerator.UserStatus;
+import com.quathar.codebay.domain.manager.MockProvider;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,73 +14,73 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @version 1.0
  * @author Q
  */
-class AdministratorTests extends UserTests {
+class AdministratorTests {
+
+    // <<-FIELD->>
+    private Administrator mock;
+
+    @BeforeEach
+    void setUp() {
+        this.mock = MockProvider.getInstance(Administrator.class);
+    }
 
     // <<-TEST->>
     @Test
     void adminSettersTest() {
-        UUID id = UUID.randomUUID();
-        LocalDateTime lastConnection = LocalDateTime.now();
-        LocalDateTime releaseBlock = LocalDateTime.now();
-
         Administrator admin = Administrator.builder().build();
 
-        admin.setId            ( id );
-        admin.setUsername      ( USERNAME );
-        admin.setPassword      ( PASSWORD );
-        admin.setNickname      ( NICKNAME );
-        admin.setEmail         ( EMAIL );
-        admin.setSuccessfulAuth( SUCCESSFUL_AUTH );
-        admin.setFailedAuth    ( FAILED_AUTH );
-        admin.setLastConnection( lastConnection );
-        admin.setReleaseBlock  ( releaseBlock );
-        admin.setStatus        ( UserStatus.ACTIVE );
-        admin.setAudit         ( null );
+        admin.setId            ( this.mock.getId() );
+        admin.setUsername      ( this.mock.getUsername() );
+        admin.setPassword      ( this.mock.getPassword() );
+        admin.setNickname      ( this.mock.getNickname() );
+        admin.setEmail         ( this.mock.getEmail() );
+        admin.setSuccessfulAuth( this.mock.getSuccessfulAuth() );
+        admin.setFailedAuth    ( this.mock.getFailedAuth() );
+        admin.setLastConnection( this.mock.getLastConnection() );
+        admin.setReleaseBlock  ( this.mock.getReleaseBlock() );
+        admin.setStatus        ( this.mock.getStatus() );
+        admin.setAudit         ( this.mock.getAudit() );
 
-        assertThat( admin.getId()             ).isEqualTo( id );
-        assertThat( admin.getUsername()       ).isEqualTo( USERNAME );
-        assertThat( admin.getPassword()       ).isEqualTo( PASSWORD );
-        assertThat( admin.getNickname()       ).isEqualTo( NICKNAME );
-        assertThat( admin.getEmail()          ).isEqualTo( EMAIL );
-        assertThat( admin.getSuccessfulAuth() ).isEqualTo( SUCCESSFUL_AUTH );
-        assertThat( admin.getFailedAuth()     ).isEqualTo( FAILED_AUTH );
-        assertThat( admin.getLastConnection() ).isEqualTo( lastConnection );
-        assertThat( admin.getReleaseBlock()   ).isEqualTo( releaseBlock );
-        assertThat( admin.getStatus()         ).isEqualTo( UserStatus.ACTIVE );
-        assertThat( admin.getAudit()          ).isEqualTo( null );
+        assertThat( admin.getId()             ).isEqualTo( this.mock.getId() );
+        assertThat( admin.getUsername()       ).isEqualTo( this.mock.getUsername() );
+        assertThat( admin.getPassword()       ).isEqualTo( this.mock.getPassword() );
+        assertThat( admin.getNickname()       ).isEqualTo( this.mock.getNickname() );
+        assertThat( admin.getEmail()          ).isEqualTo( this.mock.getEmail() );
+        assertThat( admin.getSuccessfulAuth() ).isEqualTo( this.mock.getSuccessfulAuth() );
+        assertThat( admin.getFailedAuth()     ).isEqualTo( this.mock.getFailedAuth() );
+        assertThat( admin.getLastConnection() ).isEqualTo( this.mock.getLastConnection() );
+        assertThat( admin.getReleaseBlock()   ).isEqualTo( this.mock.getReleaseBlock() );
+        assertThat( admin.getStatus()         ).isEqualTo( this.mock.getStatus() );
+        assertThat( admin.getAudit()          ).isEqualTo( this.mock.getAudit() );
     }
 
     @Test
     void adminBuilderTest() {
-        UUID id = UUID.randomUUID();
-        LocalDateTime lastConnection = LocalDateTime.now();
-        LocalDateTime releaseBlock = LocalDateTime.now();
-
         Administrator admin = Administrator.builder()
-                .id            ( id )
-                .username      ( USERNAME )
-                .password      ( PASSWORD )
-                .nickname      ( NICKNAME )
-                .email         ( EMAIL )
-                .successfulAuth( SUCCESSFUL_AUTH )
-                .failedAuth    ( FAILED_AUTH )
-                .lastConnection( lastConnection )
-                .releaseBlock  ( releaseBlock )
-                .status        ( UserStatus.ACTIVE )
-                .audit         ( null )
+                .id            ( this.mock.getId() )
+                .username      ( this.mock.getUsername() )
+                .password      ( this.mock.getPassword() )
+                .nickname      ( this.mock.getNickname() )
+                .email         ( this.mock.getEmail() )
+                .successfulAuth( this.mock.getSuccessfulAuth() )
+                .failedAuth    ( this.mock.getFailedAuth() )
+                .lastConnection( this.mock.getLastConnection() )
+                .releaseBlock  ( this.mock.getReleaseBlock() )
+                .status        ( this.mock.getStatus() )
+                .audit         ( this.mock.getAudit() )
                 .build();
 
-        assertThat( admin.getId()             ).isEqualTo( id );
-        assertThat( admin.getUsername()       ).isEqualTo( USERNAME );
-        assertThat( admin.getPassword()       ).isEqualTo( PASSWORD );
-        assertThat( admin.getNickname()       ).isEqualTo( NICKNAME );
-        assertThat( admin.getEmail()          ).isEqualTo( EMAIL );
-        assertThat( admin.getSuccessfulAuth() ).isEqualTo( SUCCESSFUL_AUTH );
-        assertThat( admin.getFailedAuth()     ).isEqualTo( FAILED_AUTH );
-        assertThat( admin.getLastConnection() ).isEqualTo( lastConnection );
-        assertThat( admin.getReleaseBlock()   ).isEqualTo( releaseBlock );
-        assertThat( admin.getStatus()         ).isEqualTo( UserStatus.ACTIVE );
-        assertThat( admin.getAudit()          ).isEqualTo( null );
+        assertThat( admin.getId()             ).isEqualTo( this.mock.getId() );
+        assertThat( admin.getUsername()       ).isEqualTo( this.mock.getUsername() );
+        assertThat( admin.getPassword()       ).isEqualTo( this.mock.getPassword() );
+        assertThat( admin.getNickname()       ).isEqualTo( this.mock.getNickname() );
+        assertThat( admin.getEmail()          ).isEqualTo( this.mock.getEmail() );
+        assertThat( admin.getSuccessfulAuth() ).isEqualTo( this.mock.getSuccessfulAuth() );
+        assertThat( admin.getFailedAuth()     ).isEqualTo( this.mock.getFailedAuth() );
+        assertThat( admin.getLastConnection() ).isEqualTo( this.mock.getLastConnection() );
+        assertThat( admin.getReleaseBlock()   ).isEqualTo( this.mock.getReleaseBlock() );
+        assertThat( admin.getStatus()         ).isEqualTo( this.mock.getStatus() );
+        assertThat( admin.getAudit()          ).isEqualTo( this.mock.getAudit() );
     }
 
 }
