@@ -41,7 +41,7 @@ public abstract class MapperManager {
         return switch (clazz.getSimpleName()) {
             case "CreateUserRequestMapper"  -> CreateUserRequestMapper.getInstance();
             case "UpdateUserRequestMapper"  -> UpdateUserRequestMapper.getInstance();
-            case "SignupUserResponseMapper" -> BasicUserResponseMapper.getInstance();
+            case "BasicUserResponseMapper"  -> BasicUserResponseMapper.getInstance();
             default -> null;
         };
     }
