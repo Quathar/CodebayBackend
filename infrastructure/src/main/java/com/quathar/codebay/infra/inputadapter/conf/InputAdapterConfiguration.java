@@ -33,7 +33,7 @@ public class InputAdapterConfiguration {
      * @return An instance of UserServicePort configured with the provided UserRepositoryPort.
      */
     @Bean
-    public UserServicePort userServicePortInputAdapter(@Qualifier("memoryUserRepositoryAdapter") UserRepositoryPort userRepositoryPort) {
+    public UserServicePort userServicePortInputAdapter(@Qualifier("jpaUserRepositoryAdapter") UserRepositoryPort userRepositoryPort) {
         return new UserService(userRepositoryPort);
     }
 
