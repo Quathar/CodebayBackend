@@ -2,13 +2,10 @@ package com.quathar.codebay.application.service;
 
 import com.quathar.codebay.application.inputport.UserServicePort;
 import com.quathar.codebay.application.outputport.UserRepositoryPort;
-import com.quathar.codebay.application.util.PasswordHasher;
-import com.quathar.codebay.domain.exception.InvalidCredentialsException;
-import com.quathar.codebay.domain.exception.ResourceNotFoundException;
+import com.quathar.codebay.application.util.HashManager;
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.model.enumerator.UserStatus;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -33,7 +30,7 @@ public class UserService extends CrudService<User, UUID> implements UserServiceP
     @Override
     public User create(User user) {
         String password = user.getPassword();
-        user.setPassword(PasswordHasher.hash(password));
+        user.setPassword(HashManager.hash(password));
         user.setStatus(UserStatus.ACTIVE);
         user.setSuccessfulAuth(0);
         user.setFailedAuth(0);

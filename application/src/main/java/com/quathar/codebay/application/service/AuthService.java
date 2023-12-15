@@ -2,7 +2,7 @@ package com.quathar.codebay.application.service;
 
 import com.quathar.codebay.application.inputport.AuthServicePort;
 import com.quathar.codebay.application.outputport.UserRepositoryPort;
-import com.quathar.codebay.application.util.PasswordHasher;
+import com.quathar.codebay.application.util.HashManager;
 import com.quathar.codebay.application.util.TokenManager;
 import com.quathar.codebay.domain.exception.InvalidCredentialsException;
 import com.quathar.codebay.domain.model.TokenPair;
@@ -41,7 +41,7 @@ public class AuthService implements AuthServicePort {
      * @throws InvalidCredentialsException if the provided password does not match the user's stored password.
      */
     private TokenPair authenticate(User user, String passwordToVerify) {
-        if (!PasswordHasher.matches(passwordToVerify, user.getPassword())) {
+        if (!HashManager.matches(passwordToVerify, user.getPassword())) {
             Integer failedAuth = user.getFailedAuth();
             user.setFailedAuth(++failedAuth);
             throw new InvalidCredentialsException();
@@ -51,7 +51,7 @@ public class AuthService implements AuthServicePort {
         user.setSuccessfulAuth(++successfulAuth);
         user.setLastConnection(LocalDateTime.now());
 
-        return TokenManager.generateTokenPair(user);
+        return TokenManager.generateTokenPair(user.getId().toString());
     }
 
     @Override
