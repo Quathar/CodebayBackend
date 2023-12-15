@@ -1,11 +1,13 @@
 package com.quathar.codebay.infra.inputadapter.http.config;
 
+import com.quathar.codebay.infra.inputadapter.http.api.BaseAPI;
 import com.quathar.codebay.infra.inputadapter.http.interceptor.AuthInterceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 /**
  * <h1>Interceptor Configuration</h1>
@@ -43,11 +45,11 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(this.authInterceptor)
-                .addPathPatterns("/api/v1/**")
-                .excludePathPatterns("/api/v1/users/sign-up")
-                .excludePathPatterns("/api/v1/auth/username")
-                .excludePathPatterns("/api/v1/auth/email")
-                .excludePathPatterns("/api/v1/admin/**");
+                .addPathPatterns(BaseAPI.BASE_URL + "/**")
+                .excludePathPatterns(BaseAPI.BASE_URL + "/users/sign-up")
+                .excludePathPatterns(BaseAPI.BASE_URL + "/auth/username")
+                .excludePathPatterns(BaseAPI.BASE_URL + "/auth/email")
+                .excludePathPatterns(BaseAPI.BASE_URL + "/admin/**");
     }
 
 }
