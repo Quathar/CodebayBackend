@@ -9,9 +9,13 @@ package com.quathar.codebay.domain.exception;
  */
 public class ResourceNotFoundException extends RuntimeException {
 
-    // <<-CONSTRUCTOR->>
+    // <<-CONSTRUCTORS->>
     public ResourceNotFoundException() {
         super();
+    }
+
+    public ResourceNotFoundException(String message, Throwable cause) {
+        super(message, cause);
     }
 
 }
