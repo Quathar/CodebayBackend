@@ -19,12 +19,12 @@ class UserTests {
     // <<-FIELD->>
     private User mock;
 
+    // <<-TESTS->>
     @BeforeEach
     void setUp() {
         this.mock = MockProvider.getInstance(User.class);
     }
 
-    // <<-TEST->>
     @Test
     void userSettersTest() {
         User user = User.builder().build();
