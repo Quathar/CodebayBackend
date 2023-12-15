@@ -30,6 +30,22 @@ public class MemoryUserRepositoryAdapter extends MemoryRepositoryAdapter<User, U
 
     // <<-METHODS->>
     @Override
+    public Optional<User> findByUsername(String username) {
+        // TODO: Not implemented
+        // TODO: Not implemented
+        // TODO: Not implemented
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        // TODO: Not implemented
+        // TODO: Not implemented
+        // TODO: Not implemented
+        return Optional.empty();
+    }
+
+    @Override
     public User save(User model) {
         UUID id = UUID.randomUUID();
         model.setId(id);
@@ -46,11 +62,4 @@ public class MemoryUserRepositoryAdapter extends MemoryRepositoryAdapter<User, U
         return model;
     }
 
-    @Override
-    public Optional<User> findByUsername(String username) {
-        // TODO: Not implemented
-        // TODO: Not implemented
-        // TODO: Not implemented
-        return Optional.empty();
-    }
 }

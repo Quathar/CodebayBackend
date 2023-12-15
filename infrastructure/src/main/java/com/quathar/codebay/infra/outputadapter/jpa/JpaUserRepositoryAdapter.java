@@ -46,4 +46,9 @@ public class JpaUserRepositoryAdapter extends JpaRepositoryAdapter<User, UserEnt
         return this.jpaUserRepository.findByUsername(username).map(this.userMapper::toModel);
     }
 
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return this.jpaUserRepository.findByEmail(email).map(this.userMapper::toModel);
+    }
+
 }
