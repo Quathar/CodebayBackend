@@ -1,18 +1,6 @@
 package com.quathar.codebay.domain.manager;
 
-import com.quathar.codebay.domain.model.Administrator;
-import com.quathar.codebay.domain.model.Catalog;
-import com.quathar.codebay.domain.model.Category;
-import com.quathar.codebay.domain.model.Customer;
-import com.quathar.codebay.domain.model.Order;
-import com.quathar.codebay.domain.model.Product;
-import com.quathar.codebay.domain.model.Promotion;
-import com.quathar.codebay.domain.model.ShoppingCart;
-import com.quathar.codebay.domain.model.Store;
-import com.quathar.codebay.domain.model.Supplier;
-import com.quathar.codebay.domain.model.SupplierOrder;
-import com.quathar.codebay.domain.model.User;
-import com.quathar.codebay.domain.model.Warning;
+import com.quathar.codebay.domain.model.*;
 import com.quathar.codebay.domain.model.common.Address;
 import com.quathar.codebay.domain.model.common.Audit;
 import com.quathar.codebay.domain.model.common.BankCard;
@@ -60,6 +48,7 @@ public abstract class MockProvider {
             case "Store"         -> getStoreModel();
             case "Supplier"      -> getSupplierModel();
             case "SupplierOrder" -> getSupplierOrderModel();
+            case "TokenPair"     -> getTokenPairModel();
             case "User"          -> getUserModel();
             case "Warning"       -> getWarningModel();
             case "Audit"        -> getAuditModel();
@@ -199,6 +188,14 @@ public abstract class MockProvider {
     private static SupplierOrder getSupplierOrderModel() {
         return SupplierOrder.builder()
                 .id( UUID.randomUUID() )
+                .build();
+    }
+
+    private static TokenPair getTokenPairModel() {
+        return TokenPair.builder()
+                .type( "Bearer..." )
+                .refreshToken( "refreshToken..." )
+                .accessToken( "accessToken..." )
                 .build();
     }
 
