@@ -1,7 +1,9 @@
 package com.quathar.codebay.infra.inputadapter.conf;
 
+import com.quathar.codebay.application.inputport.AuthServicePort;
 import com.quathar.codebay.application.inputport.UserServicePort;
 import com.quathar.codebay.application.outputport.UserRepositoryPort;
+import com.quathar.codebay.application.service.AuthService;
 import com.quathar.codebay.application.service.UserService;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +28,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class InputAdapterConfiguration {
 
+    // <<-CONSTANTS->>
+    /**
+     * Constant representing the qualifier for the UserRepositoryPort bean.
+     */
+    private static final String USER_REPOSITORY_ADAPTER = "jpaUserRepositoryAdapter";
+
+    // <<-BEANS->>
+    /**
+     * Bean configuration method to instantiate the AuthServicePort.
+     *
+     * @param userRepositoryPort The UserRepositoryPort implementation retrieved by qualifier.
+     * @return An instance of AuthServicePort for handling authentication-related operations.
+     */
+    @Bean
+    public AuthServicePort authServicePortInputAdapter(@Qualifier(USER_REPOSITORY_ADAPTER) UserRepositoryPort userRepositoryPort) {
+        return new AuthService(userRepositoryPort);
+    }
+
     /**
      * Configures the UserServicePort using an instance of UserRepositoryPort.
      *
@@ -33,7 +53,7 @@ public class InputAdapterConfiguration {
      * @return An instance of UserServicePort configured with the provided UserRepositoryPort.
      */
     @Bean
-    public UserServicePort userServicePortInputAdapter(@Qualifier("jpaUserRepositoryAdapter") UserRepositoryPort userRepositoryPort) {
+    public UserServicePort userServicePortInputAdapter(@Qualifier(USER_REPOSITORY_ADAPTER) UserRepositoryPort userRepositoryPort) {
         return new UserService(userRepositoryPort);
     }
 
