@@ -25,4 +25,11 @@ public interface UserRepositoryPort extends CrudRepositoryPort<User, UUID> {
      */
     Optional<User> findByUsername(String username);
 
+    /**
+     * Retrieves a user by their email.
+     *
+     * @return an optional containing the user if found, empty otherwise
+     */
+    Optional<User> findByEmail(String email);
+
 }

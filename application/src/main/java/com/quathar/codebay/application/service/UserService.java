@@ -40,24 +40,4 @@ public class UserService extends CrudService<User, UUID> implements UserServiceP
         return this.userRepositoryPort.save(user);
     }
 
-    @Override
-    public String login(String username, String password) {
-        User user = this.userRepositoryPort.findByUsername(username).orElseThrow(InvalidCredentialsException::new);
-
-        if (!PasswordHasher.matches(password, user.getPassword())) {
-            Integer failedAuth = user.getFailedAuth();
-            user.setFailedAuth(++failedAuth);
-            throw new InvalidCredentialsException();
-        }
-
-        Integer successfulAuth = user.getSuccessfulAuth();
-        user.setSuccessfulAuth(++successfulAuth);
-        user.setLastConnection(LocalDateTime.now());
-
-        // TODO: finish auth
-        // Generate token
-        // Save token in the repository
-        return "token";
-    }
-
 }
