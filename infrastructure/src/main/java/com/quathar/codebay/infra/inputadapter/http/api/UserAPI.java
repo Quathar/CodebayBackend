@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.UUID;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 /**
  * <h1>User API</h1>
  * <br>
@@ -29,8 +31,13 @@ import java.util.UUID;
  * @version 1.0
  * @author Q
  */
-@RequestMapping(BaseAPI.BASE_URL + "/users")
+@RequestMapping(UserAPI.USER_ROOT)
 public interface UserAPI {
+
+    /**
+     *
+     */
+    String USER_ROOT = BaseAPI.BASE_URL + "/users";
 
     /**
      * Retrieves a user by their unique ID.
@@ -39,7 +46,7 @@ public interface UserAPI {
      * @return ResponseEntity containing the user information if found.
      * @throws com.quathar.codebay.domain.exception.ResourceNotFoundException if the identifier does not exist.
      */
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     ResponseEntity<BasicUserResponse> getById(@PathVariable UUID id);
 
     /**
@@ -49,7 +56,9 @@ public interface UserAPI {
      * @param bindingResult     The result of validation binding.
      * @return ResponseEntity containing the newly created user information with appropriate status.
      */
-    @PostMapping("/sign-up")
+    @PostMapping(value = "/sign-up",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
     ResponseEntity<BasicUserResponse> create(
             @RequestBody
             @Valid
@@ -63,7 +72,9 @@ public interface UserAPI {
      * @param updateUserRequest The request object containing updated user information.
      * @return ResponseEntity containing the updated user information with appropriate status.
      */
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
     ResponseEntity<BasicUserResponse> update(
             @PathVariable
             UUID id,
