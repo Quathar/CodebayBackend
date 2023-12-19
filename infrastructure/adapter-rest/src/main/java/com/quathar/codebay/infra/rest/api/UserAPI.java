@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.UUID;
 
+import static com.quathar.codebay.infra.rest.api.BaseAPI.BASE_URL;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
@@ -30,13 +32,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @version 1.0
  * @author Q
  */
-@RequestMapping(UserAPI.USER_ROOT)
+@RequestMapping(UserAPI.ROOT)
 public interface UserAPI {
 
     /**
-     *
+     * The root path for user management API.
      */
-    String USER_ROOT = BaseAPI.BASE_URL + "/users";
+    String ROOT = BASE_URL + "/users";
 
     /**
      * Retrieves a user by their unique ID.
@@ -59,10 +61,10 @@ public interface UserAPI {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     ResponseEntity<?> create(
-            @RequestBody
-            @Valid
+            @RequestBody @Valid
             CreateUserRequest createUserRequest,
-            BindingResult bindingResult);
+            BindingResult bindingResult
+    );
 
     /**
      * Updates an existing user by their unique identifier.
@@ -77,10 +79,10 @@ public interface UserAPI {
     ResponseEntity<?> update(
             @PathVariable
             UUID id,
-            @RequestBody
-            @Valid
+            @RequestBody @Valid
             UpdateUserRequest updateUserRequest,
-            BindingResult bindingResult);
+            BindingResult bindingResult
+    );
 
     /**
      * Deletes a user by their unique ID.

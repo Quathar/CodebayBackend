@@ -1,6 +1,7 @@
 package com.quathar.codebay.infra.rest.manager;
 
 import com.quathar.codebay.infra.rest.model.mapper.BasicUserResponseMapper;
+import com.quathar.codebay.infra.rest.model.mapper.CreateAdminRequestMapper;
 import com.quathar.codebay.infra.rest.model.mapper.CreateUserRequestMapper;
 import com.quathar.codebay.infra.rest.model.mapper.UpdateUserRequestMapper;
 
@@ -39,9 +40,10 @@ public abstract class MapperManager {
      */
     private static Object createInstance(Class<?> clazz) {
         return switch (clazz.getSimpleName()) {
-            case "CreateUserRequestMapper" -> CreateUserRequestMapper.getInstance();
-            case "UpdateUserRequestMapper" -> UpdateUserRequestMapper.getInstance();
-            case "BasicUserResponseMapper" -> BasicUserResponseMapper.getInstance();
+            case "CreateAdminRequestMapper" -> CreateAdminRequestMapper.getInstance();
+            case "CreateUserRequestMapper"  -> CreateUserRequestMapper.getInstance();
+            case "UpdateUserRequestMapper"  -> UpdateUserRequestMapper.getInstance();
+            case "BasicUserResponseMapper"  -> BasicUserResponseMapper.getInstance();
             default -> null;
         };
     }

@@ -9,6 +9,7 @@ import com.quathar.codebay.infra.rest.model.request.UsernameAuthRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <h1>Admin Auth Controller</h1>
@@ -21,6 +22,7 @@ import org.springframework.validation.BindingResult;
  * @version 1.0
  * @author Q
  */
+@RestController
 public class AuthminController implements AuthminAPI {
 
     // <<-FIELD->>
@@ -37,7 +39,7 @@ public class AuthminController implements AuthminAPI {
     public ResponseEntity<TokenPair> authByUsername(UsernameAuthRequest authRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return ResponseEntity.badRequest().build();
-        TokenPair tokenPair = this.authServicePort.authAdminByEmail(
+        TokenPair tokenPair = this.authServicePort.authAdminByUsername(
                 authRequest.username(),
                 authRequest.password()
         );

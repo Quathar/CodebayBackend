@@ -4,7 +4,7 @@ import com.quathar.codebay.infra.rest.api.AuthAPI;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.quathar.codebay.infra.rest.admin.api.AdminAPI.BASE_URL;
+import static com.quathar.codebay.infra.rest.admin.api.ManagementAPI.BASE_URL;
 
 /**
  * <h1>Administration Authentication API</h1>

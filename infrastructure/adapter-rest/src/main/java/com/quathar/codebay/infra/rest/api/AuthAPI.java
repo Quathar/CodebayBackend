@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static com.quathar.codebay.infra.rest.api.BaseAPI.BASE_URL;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 /**
  * <h1>Authentication API</h1>
  * <br>
@@ -23,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version 1.0
  * @author Q
  */
-@RequestMapping(BaseAPI.BASE_URL + "/auth")
+@RequestMapping(BASE_URL + "/auth")
 public interface AuthAPI {
 
     /**
@@ -32,11 +36,14 @@ public interface AuthAPI {
      * @param authRequest The authentication request containing username and password.
      * @return A response entity with authentication details.
      */
-    @PostMapping("/username")
+    @PostMapping(value = "/username",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
     ResponseEntity<TokenPair> authByUsername(
             @RequestBody @Valid
             UsernameAuthRequest authRequest,
-            BindingResult bindingResult);
+            BindingResult bindingResult
+    );
 
     /**
      * Authenticate using an email address.
@@ -44,10 +51,13 @@ public interface AuthAPI {
      * @param authRequest The authentication request containing email and password.
      * @return A response entity with authentication details.
      */
-    @PostMapping("/email")
+    @PostMapping(value = "/email",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
     ResponseEntity<TokenPair> authByEmail(
             @RequestBody @Valid
             EmailAuthRequest authRequest,
-            BindingResult bindingResult);
+            BindingResult bindingResult
+    );
 
 }

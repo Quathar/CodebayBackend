@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import static com.quathar.codebay.infra.rest.api.BaseAPI.BASE_URL;
+
 /**
  * <h1>Interceptor Configuration</h1>
  * <br>
@@ -44,11 +46,11 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(this.authInterceptor)
-                .addPathPatterns(BaseAPI.BASE_URL + "/**")
-                .excludePathPatterns(BaseAPI.BASE_URL + "/users/sign-up")
-                .excludePathPatterns(BaseAPI.BASE_URL + "/auth/username")
-                .excludePathPatterns(BaseAPI.BASE_URL + "/auth/email")
-                .excludePathPatterns(BaseAPI.BASE_URL + "/admin/**");
+                .addPathPatterns    (BASE_URL + "/**")
+                .excludePathPatterns(BASE_URL + "/users/sign-up")
+                .excludePathPatterns(BASE_URL + "/auth/username")
+                .excludePathPatterns(BASE_URL + "/auth/email")
+                .excludePathPatterns(BASE_URL + "/admin/**");
     }
 
 }

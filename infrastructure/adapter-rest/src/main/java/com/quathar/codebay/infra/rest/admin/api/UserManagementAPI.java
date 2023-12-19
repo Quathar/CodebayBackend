@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.quathar.codebay.infra.rest.admin.api.AdminAPI.BASE_URL;
+import static com.quathar.codebay.infra.rest.admin.api.ManagementAPI.BASE_URL;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
  * <h1>User Management API</h1>
@@ -21,15 +23,19 @@ import static com.quathar.codebay.infra.rest.admin.api.AdminAPI.BASE_URL;
  * @version 1.0
  * @author Q
  */
-@RequestMapping(UserManagementAPI.ROOT)
+@RequestMapping(UserManagementAPI.MANAGEMENT_ROOT)
 public interface UserManagementAPI extends UserAPI {
 
     /**
      * The root path for user management API.
      */
-    String ROOT = BASE_URL + "/users";
+    String MANAGEMENT_ROOT = BASE_URL + "/users";
 
-    @GetMapping
+    /**
+     *
+     * @return
+     */
+    @GetMapping(value = "", produces = APPLICATION_JSON_VALUE)
     ResponseEntity<?> getAll();
 
 }

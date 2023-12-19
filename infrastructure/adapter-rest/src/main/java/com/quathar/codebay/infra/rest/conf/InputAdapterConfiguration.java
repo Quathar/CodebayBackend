@@ -1,9 +1,11 @@
 package com.quathar.codebay.infra.rest.conf;
 
+import com.quathar.codebay.application.inputport.AdminServicePort;
 import com.quathar.codebay.application.inputport.AuthServicePort;
 import com.quathar.codebay.application.inputport.UserServicePort;
 import com.quathar.codebay.application.outputport.AdminRepositoryPort;
 import com.quathar.codebay.application.outputport.UserRepositoryPort;
+import com.quathar.codebay.application.service.AdminService;
 import com.quathar.codebay.application.service.AuthService;
 import com.quathar.codebay.application.service.UserService;
 
@@ -57,6 +59,17 @@ public class InputAdapterConfiguration {
             @Qualifier(ADMIN_REPOSITORY_ADAPTER) AdminRepositoryPort adminRepositoryPort,
             @Qualifier(USER_REPOSITORY_ADAPTER)  UserRepositoryPort userRepositoryPort) {
         return new AuthService(adminRepositoryPort, userRepositoryPort);
+    }
+
+    /**
+     * Configures the AdminServicePort using an instance of AdminRepositoryPort.
+     *
+     * @param adminRepositoryPort The AdminRepositoryPort implementation used by the AdminServicePort.
+     * @return An instance of AdminServicePort configured with the provided AdminRepositoryPort.
+     */
+    @Bean
+    public AdminServicePort adminServicePortInputAdapter(@Qualifier(ADMIN_REPOSITORY_ADAPTER) AdminRepositoryPort adminRepositoryPort) {
+        return new AdminService(adminRepositoryPort);
     }
 
     /**
