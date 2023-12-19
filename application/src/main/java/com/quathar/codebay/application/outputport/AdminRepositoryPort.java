@@ -3,6 +3,7 @@ package com.quathar.codebay.application.outputport;
 import com.quathar.codebay.domain.model.Administrator;
 
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * <h1>Administrator Repository Port</h1>
@@ -15,7 +16,7 @@ import java.util.Optional;
  * @version 2.0
  * @author Q
  */
-public interface AdminRepositoryPort {
+public interface AdminRepositoryPort extends CrudRepositoryPort<Administrator, UUID> {
 
     /**
      * Retrieves an admin by their username.

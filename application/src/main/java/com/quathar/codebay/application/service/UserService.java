@@ -15,7 +15,9 @@ import java.util.UUID;
  * @version 1.0
  * @author Q
  */
-public class UserService extends CrudService<User, UUID> implements UserServicePort {
+public class      UserService
+       extends    CrudService<User, UUID>
+       implements UserServicePort {
 
     // <<-FIELD->>
     private final UserRepositoryPort userRepositoryPort;
