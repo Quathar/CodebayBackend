@@ -13,7 +13,7 @@ import com.quathar.codebay.domain.model.TokenPair;
  * @version 1.0
  * @author Q
  */
-public interface LoginUseCase {
+public interface LoginUserUseCase {
 
     /**
      * Authenticates a user based on the provided username and password.

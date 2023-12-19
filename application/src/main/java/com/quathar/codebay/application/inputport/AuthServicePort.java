@@ -1,6 +1,7 @@
 package com.quathar.codebay.application.inputport;
 
-import com.quathar.codebay.application.usecase.LoginUseCase;
+import com.quathar.codebay.application.usecase.LoginAdminUseCase;
+import com.quathar.codebay.application.usecase.LoginUserUseCase;
 
 /**
  * <h1>Authentication Service Port</h1>
@@ -9,5 +10,5 @@ import com.quathar.codebay.application.usecase.LoginUseCase;
  * @version 1.0
  * @author Q
  */
-public interface AuthServicePort extends LoginUseCase {
+public interface AuthServicePort extends LoginAdminUseCase, LoginUserUseCase {
 }

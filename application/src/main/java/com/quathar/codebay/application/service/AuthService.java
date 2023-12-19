@@ -1,10 +1,12 @@
 package com.quathar.codebay.application.service;
 
 import com.quathar.codebay.application.inputport.AuthServicePort;
+import com.quathar.codebay.application.outputport.AdminRepositoryPort;
 import com.quathar.codebay.application.outputport.UserRepositoryPort;
 import com.quathar.codebay.application.util.HashManager;
 import com.quathar.codebay.application.util.TokenManager;
 import com.quathar.codebay.domain.exception.InvalidCredentialsException;
+import com.quathar.codebay.domain.model.Administrator;
 import com.quathar.codebay.domain.model.TokenPair;
 import com.quathar.codebay.domain.model.User;
 
@@ -24,11 +26,13 @@ import java.time.LocalDateTime;
 public class AuthService implements AuthServicePort {
 
     // <<-FIELD->>
+    private final AdminRepositoryPort adminRepositoryPort;
     private final UserRepositoryPort userRepositoryPort;
 
     // <<-CONSTRUCTOR->>
-    public AuthService(UserRepositoryPort userRepositoryPort) {
-        this.userRepositoryPort = userRepositoryPort;
+    public AuthService(AdminRepositoryPort adminRepositoryPort, UserRepositoryPort userRepositoryPort) {
+        this.adminRepositoryPort = adminRepositoryPort;
+        this.userRepositoryPort  = userRepositoryPort;
     }
 
     // <<-METHODS->>
@@ -52,6 +56,18 @@ public class AuthService implements AuthServicePort {
         user.setLastConnection(LocalDateTime.now());
 
         return TokenManager.generateTokenPair(user.getId().toString());
+    }
+
+    @Override
+    public TokenPair authAdminByUsername(String username, String password) {
+        Administrator admin = this.adminRepositoryPort.findByUsername(username).orElseThrow(InvalidCredentialsException::new);
+        return this.authenticate(admin, password);
+    }
+
+    @Override
+    public TokenPair authAdminByEmail(String email, String password) {
+        Administrator admin = this.adminRepositoryPort.findByEmail(email).orElseThrow(InvalidCredentialsException::new);
+        return this.authenticate(admin, password);
     }
 
     @Override
