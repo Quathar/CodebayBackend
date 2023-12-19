@@ -83,6 +83,8 @@ project(":bootloader") {
     dependencies {
         implementation(project(":domain"))
         implementation(project(":application"))
-        implementation(project(":infrastructure"))
+        implementation(project(":infrastructure:adapter-memory"))
+        implementation(project(":infrastructure:adapter-jpa"))
+        implementation(project(":infrastructure:adapter-rest"))
     }
 }
