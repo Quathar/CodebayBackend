@@ -1,0 +1,67 @@
+openapi: '3.0.2'
+info:
+  title: Codebay API
+  version: '1.0'
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Codebay Backend Server
+paths:
+  /auth:
+    post:
+      tags:
+        - AUTH
+      summary: Authenticate a user
+      description: Authenticate a user using either username or email along with the password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  properties:
+                    username:
+                      type: string
+                      description: Username
+                    password:
+                      type: string
+                      description: User password
+                  required:
+                    - username
+                    - password
+                - type: object
+                  properties:
+                    email:
+                      type: string
+                      description: User email
+                    password:
+                      type: string
+                      description: User password
+                  required:
+                    - email
+                    - password
+            examples:
+              'Username Authentication':
+                summary: Authentication using username
+                description: Example of authenticating with a username
+                value:
+                  username: jdoe
+                  password: 'i%PHUUBi#5N&'
+              'Email Authentication':
+                summary: Authentication using email
+                description: Example of authenticating with an email
+                value:
+                  email: sudo@email.com
+                  password: 'i%PHUUBi#5N&'
+      responses:
+        '200':
+          description: 'OK: Authentication was successful'
+          content:
+            application/json:
+              example:
+                apiKey: '/NZjs+/WrlC029k+ahQQF+cr/uFrrRrC0ZODzm3mJO8='
+        '400':
+          description: 'BAD REQUEST: <username>, <email> or <password> was not provided or has an invalid format'
+        '401':
+          description: 'UNAUTHORIZED: Invalid credentials, authentication failed'
+  /users/signup:
