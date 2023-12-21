@@ -8,7 +8,7 @@ import com.quathar.codebay.infra.rest.model.mapper.CreateUserRequestMapper;
 import com.quathar.codebay.infra.rest.model.request.PageContentRequest;
 import com.quathar.codebay.infra.rest.model.request.CreateUserRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateUserRequest;
-import com.quathar.codebay.infra.rest.model.response.GetAllContentResponse;
+import com.quathar.codebay.infra.rest.model.response.PageContentResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,9 +39,12 @@ public class UserManagement implements UserManagementAPI {
 
     // <<-METHODS->>
     @Override
-    public ResponseEntity<GetAllContentResponse<User>> getAll(PageContentRequest pageContentRequest) {
-        java.util.List<User> users = this.userServicePort.getAll(pageContentRequest.page(), pageContentRequest.size());
-        GetAllContentResponse<User> response = new GetAllContentResponse<>(pageContentRequest.page(), users.size(), users);
+    public ResponseEntity<PageContentResponse> getAll(PageContentRequest pageContentRequest) {
+        java.util.List<User> users = this.userServicePort.getAll(
+                pageContentRequest.page(),
+                pageContentRequest.size()
+        );
+        PageContentResponse response = new PageContentResponse(pageContentRequest.page(), users.size(), users);
         return ResponseEntity.ok().body(response);
     }
 

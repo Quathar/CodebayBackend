@@ -1,7 +1,7 @@
 package com.quathar.codebay.infra.rest.model.response;
 
 /**
- * <h1>Get All Content Response</h1>
+ * <h1>Page Content Response</h1>
  * <br>
  * <p>
  *     Represents a response containing a paginated set of content of type M.
@@ -17,8 +17,8 @@ package com.quathar.codebay.infra.rest.model.response;
  * @version 1.0
  * @author Q
  */
-public record GetAllContentResponse<M>(
+public record PageContentResponse(
         Integer pageNumber,
         Integer pageSize,
-        java.util.List<M> content
+        java.util.List<?> content
 ) {}
