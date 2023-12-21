@@ -3,7 +3,6 @@ package com.quathar.codebay.application.util;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.quathar.codebay.domain.exception.ResourceNotFoundException;
 import com.quathar.codebay.domain.model.TokenPair;
 
@@ -13,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -26,6 +26,10 @@ import java.util.Properties;
 public abstract class TokenManager {
 
     // <<-CONSTANTS->>
+    /**
+     *
+     */
+    public enum Role { BASIC, ADMIN }
     /**
      * Represents the file path to the token properties file.<br>
      * <br>
@@ -43,6 +47,8 @@ public abstract class TokenManager {
     private static final String TOKEN_TYPE       = "Bearer";
     private static final String REFRESH_TYPE     = "REFRESH";
     private static final String ACCESS_TYPE      = "ACCESS";
+    private static final String CLAIM_ROLE       = "role";
+    private static final String CLAIM_TYPE       = "type";
 
     // <<-METHODS->>
     private static Properties getProperties() {
@@ -57,7 +63,7 @@ public abstract class TokenManager {
         }
     }
 
-    private static String generateToken(Algorithm algorithm, String subject, Instant expirationTime, String type, Map<String, ?> claims) {
+    private static String generateToken(Algorithm algorithm, String subject, Instant expirationTime, Map<String, ?> claims) {
         return JWT.create()
                 .withIssuer( ISSUER )
                 .withIssuedAt( Instant.now() )
@@ -73,7 +79,6 @@ public abstract class TokenManager {
 //                .withNotBefore( Instant.now().plusSeconds(86400) )
                 // A claim with no value, only the key
 //                .withNullClaim("Only for you to know this exist ;)")
-                .withClaim( "type", type )
                 .withPayload( claims )
                 .sign( algorithm );
     }
@@ -94,7 +99,7 @@ public abstract class TokenManager {
      * @return TokenPair containing the refresh and access tokens.
      *
      */
-    public static TokenPair generateTokenPair(String subject, Map<String, ?> claims) {
+    public static TokenPair generateTokenPair(String subject, Map<String, Object> claims) {
         if (subject == null)
             throw new RuntimeException("No Subject provided to generate the pairs");
 
@@ -107,19 +112,22 @@ public abstract class TokenManager {
         Instant refreshTokenExpirationTime = TokenManager.getExpirationTime(now, tokenProperties, REFRESH_TIME_KEY);
         Instant accessTokenExpirationTime  = TokenManager.getExpirationTime(now, tokenProperties, ACCESS_TIME_KEY);
 
+        Map<String, Object> refreshTokenClaims = new HashMap<>(claims);
+        Map<String, Object> accessTokenClaims  = new HashMap<>(claims);
+        refreshTokenClaims.put(CLAIM_TYPE, REFRESH_TYPE);
+        accessTokenClaims .put(CLAIM_TYPE, ACCESS_TYPE);
+
         String refreshToken = TokenManager.generateToken(
                 algorithm,
                 subject,
                 refreshTokenExpirationTime,
-                REFRESH_TYPE,
-                claims
+                refreshTokenClaims
         );
         String accessToken  = TokenManager.generateToken(
                 algorithm,
                 subject,
                 accessTokenExpirationTime,
-                ACCESS_TYPE,
-                claims
+                accessTokenClaims
         );
 
         return TokenPair.builder()
@@ -130,33 +138,71 @@ public abstract class TokenManager {
     }
 
     /**
-     * Generates a pair of tokens (refresh and access) for a given user.
+     * Generates a TokenPair containing the refresh and access tokens for the specified subject and role.
+     *
+     * @param subject The subject for whom the tokens are generated.
+     * @param role    The role associated with the subject.
+     * @return TokenPair containing the refresh and access tokens.
+     */
+    public static TokenPair generateTokenPair(String subject, Role role) {
+        return TokenManager.generateTokenPair(subject, Map.of(CLAIM_ROLE, role.name()));
+    }
+
+    /**
+     * Generates a TokenPair containing the refresh and access tokens for the specified subject with a basic role.
      *
      * @param subject The subject for whom the tokens are generated.
      * @return TokenPair containing the refresh and access tokens.
      */
     public static TokenPair generateTokenPair(String subject) {
-        return TokenManager.generateTokenPair(subject, Map.of());
+        return TokenManager.generateTokenPair(subject, Role.BASIC);
     }
 
     /**
-     * Verifies the validity of a provided token.
+     * Verifies the validity of a provided token for a specific role.
      *
      * @param token The token to be verified.
-     * @return Boolean indicating whether the token is valid or not.
+     * @param role The role against which the token's validity is checked.
+     * @return boolean indicating whether the token is valid ({@code true}) or not ({@code false}).
      * @throws com.auth0.jwt.exceptions.JWTVerificationException If the token cannot be verified
      */
-    public static Boolean verify(String token) {
-        Properties tokenProperties = TokenManager.getProperties();
-        String secretKey = tokenProperties.getProperty(SECRET_KEY);
-        Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
+    public static boolean verify(String token, Role role) {
+        Algorithm algorithm = Algorithm.HMAC256(
+                TokenManager.getProperties()
+                        .getProperty(SECRET_KEY)
+                        .getBytes()
+        );
         try {
-            JWT.require(algorithm).build().verify(token);
-            return true;
+            com.auth0.jwt.interfaces.DecodedJWT decodedJWT = JWT.require(algorithm)
+                    .build()
+                    .verify(token);
+
+
+            return decodedJWT.getClaim(CLAIM_TYPE)
+                    .asString()
+                    .equals(ACCESS_TYPE)
+                    // This second check is to ensure the admins to be able
+                    // to access normal paths
+                && (decodedJWT.getClaim(CLAIM_ROLE)
+                    .asString()
+                    .equals(Role.ADMIN.name())
+                || decodedJWT.getClaim(CLAIM_ROLE)
+                    .asString()
+                    .equals(role.name()));
         } catch (com.auth0.jwt.exceptions.JWTVerificationException e) {
-            System.err.println("saslta la exepcion");
             return false;
         }
+    }
+
+    /**
+     * Verifies the validity of a provided token for the BASIC role.
+     *
+     * @param token The token to be verified.
+     * @return boolean indicating whether the token is valid ({@code true}) or not ({@code false}).
+     * @throws com.auth0.jwt.exceptions.JWTVerificationException If the token cannot be verified
+     */
+    public static boolean verify(String token) {
+        return TokenManager.verify(token, Role.BASIC);
     }
 
 }

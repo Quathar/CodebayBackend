@@ -30,7 +30,7 @@ public class ManagementAuthInterceptor implements HandlerInterceptor {
         if (parts.length != TOKEN_PARTS)
             return false;
         String actualToken = parts[1];
-        return TokenManager.verify(actualToken);
+        return TokenManager.verify(actualToken, TokenManager.Role.ADMIN);
     }
 
     @Override
