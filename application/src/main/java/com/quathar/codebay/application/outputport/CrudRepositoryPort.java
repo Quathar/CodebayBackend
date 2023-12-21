@@ -1,14 +1,13 @@
 package com.quathar.codebay.application.outputport;
 
-import java.util.Optional;
-
 /**
  * <h1>CRUD Repository Port</h1>
+ * <br>
  * <p>
  *     Represents a contract for basic CRUD operations on a domain model.
  * </p>
  *
- * @param <M> The domain model
+ * @param <M>  The domain model
  * @param <ID> The domain model identifier type
  *
  * @since 2023-12-10
@@ -18,12 +17,21 @@ import java.util.Optional;
 public interface CrudRepositoryPort<M, ID> {
 
     /**
+     * Retrieves a collection of domain models with pagination support.
+     *
+     * @param pageNumber The page number.
+     * @param pageSize   The number of items per page.
+     * @return A set of domain models within the specified page and size.
+     */
+    java.util.List<M> findAll(int pageNumber, int pageSize);
+
+    /**
      * Finds a domain model by its identifier.
      *
      * @param id The identifier of the domain model
-     * @return An {@link Optional} containing the domain model if found, otherwise empty
+     * @return An {@link java.util.Optional} containing the domain model if found, otherwise empty
      */
-    Optional<M> findById(ID id);
+    java.util.Optional<M> findById(ID id);
 
     /**
      * Saves a domain model.
