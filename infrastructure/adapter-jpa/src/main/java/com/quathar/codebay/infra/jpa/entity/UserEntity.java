@@ -2,7 +2,15 @@ package com.quathar.codebay.infra.jpa.entity;
 
 import com.quathar.codebay.domain.model.enumerator.UserStatus;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +18,8 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static jakarta.persistence.EnumType.ORDINAL;
 
 /**
  * <h1>User Entity</h1>
@@ -55,8 +65,8 @@ public class UserEntity {
     @Column(name = "release_block")
     private LocalDateTime releaseBlock;
 
+    @Enumerated(ORDINAL)
     @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
     private UserStatus status;
 
     // TODO: Add all the fields necessary for persistence
