@@ -1,10 +1,10 @@
-package com.quathar.codebay.infra.rest.admin.api;
+package com.quathar.codebay.infra.rest.management.api;
 
 import com.quathar.codebay.infra.rest.api.AuthAPI;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.quathar.codebay.infra.rest.admin.api.ManagementAPI.BASE_URL;
+import static com.quathar.codebay.infra.rest.management.api.ManagementAPI.MANAGE_URL;
 
 /**
  * <h1>Administration Authentication API</h1>
@@ -17,6 +17,6 @@ import static com.quathar.codebay.infra.rest.admin.api.ManagementAPI.BASE_URL;
  * @version 1.0
  * @author Q
  */
-@RequestMapping(BASE_URL + "/auth")
+@RequestMapping(MANAGE_URL + "/auth")
 public interface AuthminAPI extends AuthAPI {
 }

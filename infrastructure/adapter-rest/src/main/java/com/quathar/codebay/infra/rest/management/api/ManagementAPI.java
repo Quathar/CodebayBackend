@@ -1,6 +1,6 @@
-package com.quathar.codebay.infra.rest.admin.api;
+package com.quathar.codebay.infra.rest.management.api;
 
-import com.quathar.codebay.infra.rest.api.BaseAPI;
+import static com.quathar.codebay.infra.rest.api.BaseAPI.BASE_URL;
 
 /**
  * <h1>Admin API (Application Programming Interface)</h1>
@@ -19,6 +19,6 @@ public interface ManagementAPI {
     /**
      * Base URL for the admin API endpoints.
      */
-    String BASE_URL = BaseAPI.BASE_URL + "/admin";
+    String MANAGE_URL = BASE_URL + "/manage";
 
 }

@@ -1,8 +1,8 @@
-package com.quathar.codebay.infra.rest.admin.controller;
+package com.quathar.codebay.infra.rest.management.controller;
 
 import com.quathar.codebay.application.inputport.AdminServicePort;
 import com.quathar.codebay.domain.model.Administrator;
-import com.quathar.codebay.infra.rest.admin.api.AdminAPI;
+import com.quathar.codebay.infra.rest.management.api.AdminAPI;
 import com.quathar.codebay.infra.rest.manager.MapperManager;
 import com.quathar.codebay.infra.rest.model.mapper.CreateAdminRequestMapper;
 import com.quathar.codebay.infra.rest.model.request.CreateUserRequest;

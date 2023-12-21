@@ -27,8 +27,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @version 1.0
  * @author Q
  */
-@RequestMapping(BASE_URL + "/auth")
+@RequestMapping(AuthAPI.AUTH_ROOT)
 public interface AuthAPI {
+
+    String AUTH_ROOT = BASE_URL + "/auth";
 
     /**
      * Authenticate using a username.

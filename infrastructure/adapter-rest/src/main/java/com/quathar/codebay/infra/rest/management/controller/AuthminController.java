@@ -1,8 +1,8 @@
-package com.quathar.codebay.infra.rest.admin.controller;
+package com.quathar.codebay.infra.rest.management.controller;
 
 import com.quathar.codebay.application.inputport.AuthServicePort;
 import com.quathar.codebay.domain.model.TokenPair;
-import com.quathar.codebay.infra.rest.admin.api.AuthminAPI;
+import com.quathar.codebay.infra.rest.management.api.AuthminAPI;
 import com.quathar.codebay.infra.rest.model.request.EmailAuthRequest;
 import com.quathar.codebay.infra.rest.model.request.UsernameAuthRequest;
 

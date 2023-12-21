@@ -1,12 +1,14 @@
-package com.quathar.codebay.infra.rest.admin.controller;
+package com.quathar.codebay.infra.rest.management.controller;
 
 import com.quathar.codebay.application.inputport.UserServicePort;
 import com.quathar.codebay.domain.model.User;
-import com.quathar.codebay.infra.rest.admin.api.UserManagementAPI;
+import com.quathar.codebay.infra.rest.management.api.UserManagementAPI;
 import com.quathar.codebay.infra.rest.manager.MapperManager;
 import com.quathar.codebay.infra.rest.model.mapper.CreateUserRequestMapper;
+import com.quathar.codebay.infra.rest.model.request.PageContentRequest;
 import com.quathar.codebay.infra.rest.model.request.CreateUserRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateUserRequest;
+import com.quathar.codebay.infra.rest.model.response.GetAllContentResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,12 +39,12 @@ public class UserManagement implements UserManagementAPI {
 
     // <<-METHODS->>
     @Override
-    public ResponseEntity<java.util.Set<User>> getAll() {
-        // TODO: Implement this
-        // TODO: Implement this
-        // TODO: Implement this
-        return null;
+    public ResponseEntity<GetAllContentResponse<User>> getAll(PageContentRequest pageContentRequest) {
+        java.util.List<User> users = this.userServicePort.getAll(pageContentRequest.page(), pageContentRequest.size());
+        GetAllContentResponse<User> response = new GetAllContentResponse<>(pageContentRequest.page(), users.size(), users);
+        return ResponseEntity.ok().body(response);
     }
+
     @Override
     public ResponseEntity<User> getById(UUID id) {
         User user = this.userServicePort.getById(id);

@@ -1,6 +1,5 @@
-package com.quathar.codebay.infra.rest.admin.api;
+package com.quathar.codebay.infra.rest.management.api;
 
-import com.quathar.codebay.infra.rest.api.UserAPI;
 import com.quathar.codebay.infra.rest.model.request.CreateUserRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateUserRequest;
 
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.UUID;
 
-import static com.quathar.codebay.infra.rest.admin.api.ManagementAPI.BASE_URL;
+import static com.quathar.codebay.infra.rest.management.api.ManagementAPI.MANAGE_URL;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -39,7 +38,7 @@ public interface AdminAPI {
     /**
      * The root path for admin management API.
      */
-    String ROOT = BASE_URL + "/management";
+    String ROOT = MANAGE_URL + "/admins";
 
     /**
      * Retrieves an admin by their unique ID.

@@ -4,10 +4,18 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 /**
+ * <h1>Username Authentication Request</h1>
+ * <br>
+ * <p>
+ *     Represents a request for authentication using a username and password.
+ * </p>
  *
+ * @param username The username of the user. Cannot be null or blank.
+ * @param password The password of the user. Cannot be null or blank.
  *
- * @param username
- * @param password
+ * @since 2023-12-14
+ * @version 1.0
+ * @author Q
  */
 public record UsernameAuthRequest(
         @NotNull

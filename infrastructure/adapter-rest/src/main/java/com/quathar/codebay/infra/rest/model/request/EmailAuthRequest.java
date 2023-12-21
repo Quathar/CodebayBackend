@@ -5,9 +5,18 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 /**
+ * <h1>Email Authentication Request</h1>
+ * <br>
+ * <p>
+ *     Represents a request for authentication using email and password.
+ * </p>
  *
- * @param email
- * @param password
+ * @param email    The email address of the user. Must adhere to a valid email pattern.
+ * @param password The password of the user. Cannot be null or blank.
+ *
+ * @since 2023-12-14
+ * @version 1.0
+ * @author Q
  */
 public record EmailAuthRequest(
         @NotNull

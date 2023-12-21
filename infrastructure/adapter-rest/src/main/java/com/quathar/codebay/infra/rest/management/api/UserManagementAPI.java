@@ -1,12 +1,14 @@
-package com.quathar.codebay.infra.rest.admin.api;
+package com.quathar.codebay.infra.rest.management.api;
 
 import com.quathar.codebay.infra.rest.api.UserAPI;
 
+import com.quathar.codebay.infra.rest.model.request.PageContentRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.quathar.codebay.infra.rest.admin.api.ManagementAPI.BASE_URL;
+import static com.quathar.codebay.infra.rest.management.api.ManagementAPI.MANAGE_URL;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -29,13 +31,15 @@ public interface UserManagementAPI extends UserAPI {
     /**
      * The root path for user management API.
      */
-    String MANAGEMENT_ROOT = BASE_URL + "/users";
+    String MANAGEMENT_ROOT = MANAGE_URL + "/users";
 
     /**
+     * Retrieves all content based on the provided ContentRequest parameters.
      *
-     * @return
+     * @param pageContentRequest The ContentRequest containing parameters for content retrieval.
+     * @return A ResponseEntity containing the retrieved content or an error response.
      */
     @GetMapping(value = "", produces = APPLICATION_JSON_VALUE)
-    ResponseEntity<?> getAll();
+    ResponseEntity<?> getAll(@Valid PageContentRequest pageContentRequest);
 
 }
