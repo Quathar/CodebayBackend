@@ -2,14 +2,7 @@ package com.quathar.codebay.infra.jpa.entity;
 
 import com.quathar.codebay.domain.model.enumerator.UserStatus;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,17 +43,20 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "successful_auth", nullable = false)
     private Integer successfulAuth;
 
-    @Column(nullable = false)
+    @Column(name = "failed_auth", nullable = false)
     private Integer failedAuth;
 
+    @Column(name = "last_connection")
     private LocalDateTime lastConnection;
 
+    @Column(name = "release_block")
     private LocalDateTime releaseBlock;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     private UserStatus status;
 
     // TODO: Add all the fields necessary for persistence

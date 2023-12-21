@@ -3,9 +3,8 @@ package com.quathar.codebay.infra.jpa;
 import com.quathar.codebay.application.outputport.CrudRepositoryPort;
 import com.quathar.codebay.application.commonport.ModelMapper;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
 
 /**
  * <h1>JPA (Java Persistence API) Repository Adapter</h1>
@@ -49,7 +48,15 @@ public class JpaRepositoryAdapter<M, T, ID> implements CrudRepositoryPort<M, ID>
 
     // <<-METHODS->>
     @Override
-    public Optional<M> findById(ID id) {
+    public java.util.List<M> findAll(int pageNumber, int pageSize) {
+        return this.jpaRepository
+                .findAll(PageRequest.of(pageNumber, pageSize))
+                .map(this.modelMapper::toModel)
+                .toList();
+    }
+
+    @Override
+    public java.util.Optional<M> findById(ID id) {
         return this.jpaRepository.findById(id).map(this.modelMapper::toModel);
     }
 
