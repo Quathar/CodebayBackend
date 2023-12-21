@@ -2,7 +2,6 @@ package com.quathar.codebay.infra.memory;
 
 import com.quathar.codebay.application.outputport.CrudRepositoryPort;
 
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -25,7 +24,7 @@ public class MemoryRepositoryAdapter<M, ID> implements CrudRepositoryPort<M, ID>
     /**
      * In-memory repository for domain models.
      */
-    protected final Map<ID, M> memoryRepository;
+    protected final  java.util.Map<ID, M> memoryRepository;
 
     // <<-CONSTRUCTOR->>
     /**
@@ -36,6 +35,14 @@ public class MemoryRepositoryAdapter<M, ID> implements CrudRepositoryPort<M, ID>
     }
 
     // <<-METHODS->>
+    @Override
+    public java.util.List<M> findAll(int size, int number) {
+        return this.memoryRepository.values()
+                .stream()
+                .limit(size)
+                .toList();
+    }
+
     @Override
     public Optional<M> findById(ID id) {
         return Optional.of(
