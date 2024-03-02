@@ -19,6 +19,6 @@ public interface ManagementAPI {
     /**
      * Base URL for the admin API endpoints.
      */
-    String MANAGE_URL = BASE_URL + "/manage";
+    String MANAGE_URL = BASE_URL + "/management";
 
 }
