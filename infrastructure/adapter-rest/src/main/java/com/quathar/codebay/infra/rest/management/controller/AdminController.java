@@ -4,10 +4,13 @@ import com.quathar.codebay.application.inputport.AdminServicePort;
 import com.quathar.codebay.domain.model.Administrator;
 import com.quathar.codebay.infra.rest.management.api.AdminAPI;
 import com.quathar.codebay.infra.rest.manager.MapperManager;
+import com.quathar.codebay.infra.rest.model.mapper.BasicAdminResponseMapper;
 import com.quathar.codebay.infra.rest.model.mapper.CreateAdminRequestMapper;
 import com.quathar.codebay.infra.rest.model.request.CreateUserRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateUserRequest;
 
+import com.quathar.codebay.infra.rest.model.response.BasicUserResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +43,14 @@ public class AdminController implements AdminAPI {
     public ResponseEntity<Administrator> getById(UUID id) {
         Administrator admin = this.adminServicePort.getById(id);
         return ResponseEntity.ok().body(admin);
+    }
+
+    @Override
+    public ResponseEntity<BasicUserResponse> getProfile(HttpServletRequest request) {
+        String token = request.getHeader("Authorization").split("\\s")[1];
+        Administrator admin = this.adminServicePort.getByToken(token);
+        BasicUserResponse basicUserResponse = MapperManager.getInstance(BasicAdminResponseMapper.class).fromModel(admin);
+        return ResponseEntity.ok().body(basicUserResponse);
     }
 
     @Override

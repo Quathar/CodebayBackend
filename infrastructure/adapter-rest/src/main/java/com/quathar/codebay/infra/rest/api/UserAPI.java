@@ -3,6 +3,7 @@ package com.quathar.codebay.infra.rest.api;
 import com.quathar.codebay.infra.rest.model.request.CreateUserRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateUserRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,14 @@ public interface UserAPI {
      */
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     ResponseEntity<?> getById(@PathVariable UUID id);
+
+    /**
+     *
+     * @param request
+     * @return
+     */
+    @GetMapping(value = "/profile", produces = APPLICATION_JSON_VALUE)
+    ResponseEntity<?> getProfile(HttpServletRequest request);
 
     /**
      * Creates a new user.
