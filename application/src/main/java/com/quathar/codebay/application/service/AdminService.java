@@ -3,6 +3,8 @@ package com.quathar.codebay.application.service;
 import com.quathar.codebay.application.inputport.AdminServicePort;
 import com.quathar.codebay.application.outputport.AdminRepositoryPort;
 import com.quathar.codebay.application.util.HashManager;
+import com.quathar.codebay.application.util.TokenManager;
+import com.quathar.codebay.domain.exception.ResourceNotFoundException;
 import com.quathar.codebay.domain.model.Administrator;
 import com.quathar.codebay.domain.model.enumerator.UserStatus;
 
@@ -29,6 +31,12 @@ public class      AdminService
     }
 
     // <<-METHODS->>
+    @Override
+    public Administrator getByToken(String token) throws ResourceNotFoundException {
+        UUID id = UUID.fromString(TokenManager.getSubject(token));
+        return this.adminRepositoryPort.findById(id).orElseThrow(ResourceNotFoundException::new);
+    }
+
     @Override
     public Administrator create(Administrator user) {
         String password = user.getPassword();

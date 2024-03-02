@@ -3,6 +3,8 @@ package com.quathar.codebay.application.service;
 import com.quathar.codebay.application.inputport.UserServicePort;
 import com.quathar.codebay.application.outputport.UserRepositoryPort;
 import com.quathar.codebay.application.util.HashManager;
+import com.quathar.codebay.application.util.TokenManager;
+import com.quathar.codebay.domain.exception.ResourceNotFoundException;
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.model.enumerator.UserStatus;
 
@@ -29,6 +31,12 @@ public class      UserService
     }
 
     // <<-METHODS->>
+    @Override
+    public User getByToken(String token) throws ResourceNotFoundException {
+        UUID id = UUID.fromString(TokenManager.getSubject(token));
+        return this.userRepositoryPort.findById(id).orElseThrow(ResourceNotFoundException::new);
+    }
+
     @Override
     public User create(User user) {
         String password = user.getPassword();
