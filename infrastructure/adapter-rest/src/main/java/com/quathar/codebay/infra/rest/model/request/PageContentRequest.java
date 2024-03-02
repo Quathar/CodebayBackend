@@ -10,8 +10,8 @@ import jakarta.validation.constraints.NotNull;
  *     Represents a request for content retrieval with pagination details.
  * </p>
  *
- * @param page The page number for content retrieval. Must be a non-negative integer.
- * @param size The size of each page for content retrieval. Must be an integer between 1 and 100 (inclusive).
+ * @param pageIndex The page index for content retrieval. Must be a non-negative integer.
+ * @param pageSize The size of each page for content retrieval. Must be an integer between 1 and 100 (inclusive).
  *
  * @since 2023-12-21
  * @version 1.0
@@ -20,9 +20,9 @@ import jakarta.validation.constraints.NotNull;
 public record PageContentRequest(
         @NotNull
         @Min(value = 0)
-        Integer page,
+        Integer pageIndex,
         @NotNull
         @Min(value = 1)
         @Max(value = 100)
-        Integer size
+        Integer pageSize
 ) {}
