@@ -56,7 +56,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
                 .excludePathPatterns(BASE_URL + "/users/sign-up")
                 .excludePathPatterns(BASE_URL + "/auth/username")
                 .excludePathPatterns(BASE_URL + "/auth/email")
-                .excludePathPatterns(BASE_URL + "/manage/**");
+                .excludePathPatterns(BASE_URL + "/management/**");
         registry.addInterceptor(this.managementAuthInterceptor)
                 .addPathPatterns    (MANAGE_URL + "/**")
                 .excludePathPatterns(MANAGE_URL + "/admins/sign-up")
