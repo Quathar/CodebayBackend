@@ -35,7 +35,7 @@ public abstract class TokenManager {
      * <br>
      * The field is made public and non-final to enable test scenarios
      * where the class needs to load the properties file
-     * from it's own module.
+     * from its own module.
      */
     public static Path FILE = Path.of(System.getProperty("user.dir"), "application",
             "src", "main", "resources",
@@ -203,6 +203,16 @@ public abstract class TokenManager {
      */
     public static boolean verify(String token) {
         return TokenManager.verify(token, Role.BASIC);
+    }
+
+    /**
+     * Retrieves the subject from a JWT token.
+     *
+     * @param token the JWT token from which to extract the subject
+     * @return the subject extracted from the JWT token
+     */
+    public static String getSubject(String token) {
+        return JWT.decode(token).getSubject();
     }
 
 }
