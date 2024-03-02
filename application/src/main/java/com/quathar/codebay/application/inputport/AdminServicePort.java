@@ -1,5 +1,6 @@
 package com.quathar.codebay.application.inputport;
 
+import com.quathar.codebay.application.usecase.crud.ReadTokenUseCase;
 import com.quathar.codebay.domain.model.Administrator;
 
 import java.util.UUID;
@@ -11,5 +12,5 @@ import java.util.UUID;
  * @version 1.0
  * @author Q
  */
-public interface AdminServicePort extends CrudServicePort<Administrator, UUID> {
+public interface AdminServicePort extends CrudServicePort<Administrator, UUID>, ReadTokenUseCase<Administrator> {
 }
