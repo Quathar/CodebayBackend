@@ -11,7 +11,7 @@ import com.quathar.codebay.domain.exception.ResourceNotFoundException;
  *
  * @param <M> The domain model
  *
- * @since 2023-12-10
+ * @since 2024-02-05
  * @version 1.0
  * @author Q
  */
