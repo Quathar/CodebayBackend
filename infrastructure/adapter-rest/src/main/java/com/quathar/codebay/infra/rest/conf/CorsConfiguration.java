@@ -23,7 +23,7 @@ public class CorsConfiguration implements WebMvcConfigurer {
     /**
      * The allowed origin for CORS.
      */
-    private static final String ORIGIN = "localhost:4321";
+    private static final String ORIGIN = "http://localhost:5173";
 
     /**
      * The header used for authorization.
