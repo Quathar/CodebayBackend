@@ -1,10 +1,10 @@
 
-val mapstructVersion = "1.5.5.Final"
-
 subprojects {
     apply(plugin = "java")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
+
+    val mapstructVersion = "1.5.5.Final"
 
     dependencies {
         // [ Modules ]
