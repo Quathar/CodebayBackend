@@ -1,13 +1,13 @@
-package com.quathar.codebay.infra.rest.management.api;
+package com.quathar.codebay.infra.rest.api;
 
 import static com.quathar.codebay.infra.rest.api.BaseAPI.BASE_URL;
 
 /**
- * <h1>Admin API (Application Programming Interface)</h1>
+ * <h1>Management API (Application Programming Interface)</h1>
  * <br>
  * <p>
  *     This interface defines endpoints and functionalities specific to administrative tasks within the application.
- *     It operates under the '/api/v1/admin' base URL.
+ *     It operates under the '/api/v1/management' base URL.
  * </p>
  *
  * @since 2023-12-19

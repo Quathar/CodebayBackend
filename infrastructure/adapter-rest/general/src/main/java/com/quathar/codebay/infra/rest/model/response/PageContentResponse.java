@@ -7,9 +7,9 @@ package com.quathar.codebay.infra.rest.model.response;
  *     Represents a response containing a paginated set of content of type M.
  * </p>
  *
- * @param <M> The type of content within the response.
+ * @param <T> The type of content within the response.
  *
- * @param pageNumber The page number of the content.
+ * @param pageIndex The page number of the content.
  * @param pageSize The size of each page.
  * @param content The set of content for the specified page.
  *
@@ -17,8 +17,8 @@ package com.quathar.codebay.infra.rest.model.response;
  * @version 1.0
  * @author Q
  */
-public record PageContentResponse(
-        Integer pageNumber,
+public record PageContentResponse<T>(
+        Integer pageIndex,
         Integer pageSize,
-        java.util.List<?> content
+        java.util.List<T> content
 ) {}
