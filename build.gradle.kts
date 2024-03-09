@@ -13,6 +13,12 @@ allprojects {
     repositories {
         mavenCentral()
     }
+
+    tasks.register("setRootProjectPath") {
+        doLast {
+            System.setProperty("rootProjectPath", project.rootDir.absolutePath)
+        }
+    }
 }
 
 subprojects {
@@ -35,44 +41,34 @@ subprojects {
 }
 
 // <<-PROJECTS CONFIGURATION->>
-project(":domain") {
-    // In a typical Spring Boot project, the bootJar task
-    // generates an executable JAR file containing all the necessary dependencies
-    // and configurations to run the Spring Boot application.
-    // On the other hand, the jar task
-    // generates a standard JAR file containing only the project's compiled classes.
-    tasks.getByName("bootJar") {
-        enabled = false
+listOf("domain", "application", "infrastructure")
+    .forEach { projectName ->
+        project(":$projectName") {
+            // In a typical Spring Boot project, the bootJar task
+            // generates an executable JAR file containing all the necessary dependencies
+            // and configurations to run the Spring Boot application.
+            // On the other hand, the jar task
+            // generates a standard JAR file containing only the project's compiled classes.
+            tasks.getByName("bootJar") {
+                enabled = false
+            }
+
+            tasks.getByName("jar") {
+                enabled = true
+            }
+        }
     }
 
-    tasks.getByName("jar") {
-        enabled = true
-    }
+project(":domain") {
 }
 
 project(":application") {
-    tasks.getByName("bootJar") {
-        enabled = false
-    }
-
-    tasks.getByName("jar") {
-        enabled = true
-    }
-
     dependencies {
         implementation(project(":domain"))
     }
 }
 
 project(":infrastructure") {
-    tasks.getByName("bootJar") {
-        enabled = false
-    }
-
-    tasks.getByName("jar") {
-        enabled = true
-    }
-
     dependencies {
         implementation(project(":domain"))
         implementation(project(":application"))
@@ -85,6 +81,9 @@ project(":bootloader") {
         implementation(project(":application"))
         implementation(project(":infrastructure:adapter-memory"))
         implementation(project(":infrastructure:adapter-jpa"))
-        implementation(project(":infrastructure:adapter-rest"))
+        implementation(project(":infrastructure:adapter-rest:general"))
+        implementation(project(":infrastructure:adapter-rest:security"))
+        implementation(project(":infrastructure:adapter-rest:management"))
+        implementation(project(":infrastructure:adapter-rest:shop"))
     }
 }
