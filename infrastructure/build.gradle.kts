@@ -1,4 +1,3 @@
-
 subprojects {
     apply(plugin = "java")
     apply(plugin = "org.springframework.boot")
@@ -18,21 +17,18 @@ subprojects {
 }
 
 // <<-PROJECTS CONFIGURATION->>
-listOf(
-        "adapter-memory",
-        "adapter-jpa",
-        "adapter-rest"
-).forEach { projectName ->
-    project(":infrastructure:$projectName") {
-        tasks.getByName("bootJar") {
-            enabled = false
-        }
+listOf("adapter-memory", "adapter-jpa", "adapter-rest")
+    .forEach { projectName ->
+        project(":infrastructure:$projectName") {
+            tasks.getByName("bootJar") {
+                enabled = false
+            }
 
-        tasks.getByName("jar") {
-            enabled = true
+            tasks.getByName("jar") {
+                enabled = true
+            }
         }
     }
-}
 
 project(":infrastructure:adapter-rest") {
     dependencies {
