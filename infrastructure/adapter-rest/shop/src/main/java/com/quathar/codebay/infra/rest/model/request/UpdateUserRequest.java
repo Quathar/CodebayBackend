@@ -24,18 +24,14 @@ import jakarta.validation.constraints.Pattern;
 public record UpdateUserRequest(
         @NotBlank
         String username,
-
         @NotBlank
         @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{12,128}$")
         String password,
-
         @NotBlank
         String nickname,
-
         @NotBlank
         @Pattern(regexp = "^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}(\\.[a-zA-Z]{2,3})?$")
         String email,
-
         @NotNull
         UserStatus status
 ) {}

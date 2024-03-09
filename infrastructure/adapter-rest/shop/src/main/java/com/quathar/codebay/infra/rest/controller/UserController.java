@@ -1,18 +1,16 @@
 package com.quathar.codebay.infra.rest.controller;
 
 import com.quathar.codebay.application.inputport.UserServicePort;
-import com.quathar.codebay.domain.model.Administrator;
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.infra.rest.api.UserAPI;
-import com.quathar.codebay.infra.rest.model.mapper.BasicAdminResponseMapper;
-import com.quathar.codebay.infra.rest.model.mapper.CreateUserRequestMapper;
-import com.quathar.codebay.infra.rest.manager.MapperManager;
+import com.quathar.codebay.infra.rest.manager.ShopMapperManager;
+
 import com.quathar.codebay.infra.rest.model.mapper.BasicUserResponseMapper;
+import com.quathar.codebay.infra.rest.model.mapper.CreateUserRequestMapper;
 import com.quathar.codebay.infra.rest.model.mapper.UpdateUserRequestMapper;
 import com.quathar.codebay.infra.rest.model.request.CreateUserRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateUserRequest;
 import com.quathar.codebay.infra.rest.model.response.BasicUserResponse;
-
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,7 +43,7 @@ public class UserController implements UserAPI {
     @Override
     public ResponseEntity<BasicUserResponse> getById(UUID id) {
         User user = this.userServicePort.getById(id);
-        BasicUserResponse basicUserInfo = MapperManager.getInstance(BasicUserResponseMapper.class).fromModel(user);
+        BasicUserResponse basicUserInfo = ShopMapperManager.getInstance(BasicUserResponseMapper.class).fromModel(user);
         return ResponseEntity.ok().body(basicUserInfo);
     }
 
@@ -53,7 +51,7 @@ public class UserController implements UserAPI {
     public ResponseEntity<BasicUserResponse> getProfile(HttpServletRequest request) {
         String token = request.getHeader("Authorization").split("\\s")[1];
         User user = this.userServicePort.getByToken(token);
-        BasicUserResponse basicUserResponse = MapperManager.getInstance(BasicUserResponseMapper.class).fromModel(user);
+        BasicUserResponse basicUserResponse = ShopMapperManager.getInstance(BasicUserResponseMapper.class).fromModel(user);
         return ResponseEntity.ok().body(basicUserResponse);
     }
 
@@ -61,9 +59,9 @@ public class UserController implements UserAPI {
     public ResponseEntity<BasicUserResponse> create(CreateUserRequest createUserRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return ResponseEntity.badRequest().build();
-        User user = MapperManager.getInstance(CreateUserRequestMapper.class).toModel(createUserRequest);
+        User user = ShopMapperManager.getInstance(CreateUserRequestMapper.class).toModel(createUserRequest);
         User retrievedUser = this.userServicePort.create(user);
-        BasicUserResponse basicUserInfo = MapperManager.getInstance(BasicUserResponseMapper.class).fromModel(retrievedUser);
+        BasicUserResponse basicUserInfo = ShopMapperManager.getInstance(BasicUserResponseMapper.class).fromModel(retrievedUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(basicUserInfo);
     }
 
@@ -71,10 +69,10 @@ public class UserController implements UserAPI {
     public ResponseEntity<BasicUserResponse> update(UUID id, UpdateUserRequest updateUserRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return ResponseEntity.badRequest().build();
-        User user = MapperManager.getInstance(UpdateUserRequestMapper.class).toModel(updateUserRequest);
+        User user = ShopMapperManager.getInstance(UpdateUserRequestMapper.class).toModel(updateUserRequest);
         user.setId(id);
         User retrievedUser = this.userServicePort.update(user);
-        BasicUserResponse basicUserInfo = MapperManager.getInstance(BasicUserResponseMapper.class).fromModel(retrievedUser);
+        BasicUserResponse basicUserInfo = ShopMapperManager.getInstance(BasicUserResponseMapper.class).fromModel(retrievedUser);
         return ResponseEntity.ok().body(basicUserInfo);
     }
 

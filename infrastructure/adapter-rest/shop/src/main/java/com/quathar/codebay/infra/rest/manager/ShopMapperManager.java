@@ -1,10 +1,6 @@
 package com.quathar.codebay.infra.rest.manager;
 
-import com.quathar.codebay.infra.rest.model.mapper.BasicAdminResponseMapper;
-import com.quathar.codebay.infra.rest.model.mapper.BasicUserResponseMapper;
-import com.quathar.codebay.infra.rest.model.mapper.CreateAdminRequestMapper;
-import com.quathar.codebay.infra.rest.model.mapper.CreateUserRequestMapper;
-import com.quathar.codebay.infra.rest.model.mapper.UpdateUserRequestMapper;
+import com.quathar.codebay.infra.rest.model.mapper.*;
 
 /**
  * <h1>Mapper Manager</h1>
@@ -20,7 +16,7 @@ import com.quathar.codebay.infra.rest.model.mapper.UpdateUserRequestMapper;
  * @version 1.0
  * @author Q
  */
-public abstract class MapperManager {
+public abstract class ShopMapperManager {
 
     /**
      * Retrieves an instance of the specified mapper class.
@@ -41,12 +37,10 @@ public abstract class MapperManager {
      */
     private static Object createInstance(Class<?> clazz) {
         return switch (clazz.getSimpleName()) {
-            case "BasicAdminResponseMapper" -> BasicAdminResponseMapper.getInstance();
-            case "BasicUserResponseMapper"  -> BasicUserResponseMapper .getInstance();
-            case "CreateAdminRequestMapper" -> CreateAdminRequestMapper.getInstance();
-            case "CreateUserRequestMapper"  -> CreateUserRequestMapper .getInstance();
-            case "UpdateUserRequestMapper"  -> UpdateUserRequestMapper .getInstance();
-            default -> null;
+            case "BasicUserResponseMapper" -> BasicUserResponseMapper.getInstance();
+            case "CreateUserRequestMapper" -> CreateUserRequestMapper.getInstance();
+            case "UpdateUserRequestMapper" -> UpdateUserRequestMapper.getInstance();
+            default -> throw new RuntimeException("That Mapper DOESN'T EXIST");
         };
     }
 

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quathar.codebay.application.inputport.UserServicePort;
 import com.quathar.codebay.domain.exception.ResourceNotFoundException;
 import com.quathar.codebay.domain.model.User;
-import com.quathar.codebay.infra.rest.config.ControllerTestConfiguration;
+import com.quathar.codebay.infra.rest.config.ShopControllerTestConfiguration;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @version 1.0
  * @author Q
  */
-class UserControllerTest extends ControllerTestConfiguration {
+class UserControllerTest extends ShopControllerTestConfiguration {
 
     //<<-FIELDS->>
     private final MockMvc mockMvc;
@@ -144,10 +144,14 @@ class UserControllerTest extends ControllerTestConfiguration {
                         .content( this.objectMapper.writeValueAsString(user) )
         ).andExpectAll(
                 status().isCreated(),
+                // Content type is the reason why this test is not passed
+                // since the controller is not returning anything
+                // TODO: Check it
                 content().contentType( APPLICATION_JSON_VALUE )
         ).andReturn();
 
         String responseJson = result.getResponse().getContentAsString();
+
         User responseUser = this.objectMapper.readValue(
                 responseJson,
                 User.class
