@@ -7,17 +7,17 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
- * <h1>Basic Admin Response Mapper</h1>
+ * <h1>Basic User Response Mapper</h1>
  *
- * @since 2024-02-04
+ * @since 2023-12-14
  * @version 1.0
  * @author Q
  */
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface BasicAdminResponseMapper extends AdminHttpMapper<BasicUserResponse> {
+public interface BasicUserResponseMapper extends UserHttpMapper<BasicUserResponse> {
 
-    static BasicAdminResponseMapper getInstance() {
-        return Mappers.getMapper(BasicAdminResponseMapper.class);
+    static BasicUserResponseMapper getInstance() {
+        return Mappers.getMapper(BasicUserResponseMapper.class);
     }
 
 }
