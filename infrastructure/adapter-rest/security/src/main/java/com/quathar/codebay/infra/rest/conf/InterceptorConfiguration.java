@@ -1,7 +1,7 @@
 package com.quathar.codebay.infra.rest.conf;
 
-import com.quathar.codebay.infra.rest.interceptor.AuthInterceptor;
 import com.quathar.codebay.infra.rest.interceptor.ManagementAuthInterceptor;
+import com.quathar.codebay.infra.rest.interceptor.ShopAuthInterceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static com.quathar.codebay.infra.rest.api.BaseAPI.BASE_URL;
-import static com.quathar.codebay.infra.rest.management.api.ManagementAPI.MANAGE_URL;
+import static com.quathar.codebay.infra.rest.api.ManagementAPI.MANAGE_URL;
 
 /**
  * <h1>Interceptor Configuration</h1>
@@ -30,7 +30,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
     /**
      * The AuthInterceptor instance used for authentication.
      */
-    private final AuthInterceptor authInterceptor;
+    private final ShopAuthInterceptor authInterceptor;
     /**
      * The ManagementAuthInterceptor instance used for authentication.
      */
@@ -43,7 +43,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
      * @param authInterceptor The AuthInterceptor instance to be used for authentication.
      */
     @Autowired
-    public InterceptorConfiguration(AuthInterceptor authInterceptor, ManagementAuthInterceptor managementAuthInterceptor) {
+    public InterceptorConfiguration(ShopAuthInterceptor authInterceptor, ManagementAuthInterceptor managementAuthInterceptor) {
         this.authInterceptor           = authInterceptor;
         this.managementAuthInterceptor = managementAuthInterceptor;
     }
@@ -56,7 +56,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
                 .excludePathPatterns(BASE_URL + "/users/sign-up")
                 .excludePathPatterns(BASE_URL + "/auth/username")
                 .excludePathPatterns(BASE_URL + "/auth/email")
-                .excludePathPatterns(BASE_URL + "/management/**");
+                .excludePathPatterns(BASE_URL + "/manage/**");
         registry.addInterceptor(this.managementAuthInterceptor)
                 .addPathPatterns    (MANAGE_URL + "/**")
                 .excludePathPatterns(MANAGE_URL + "/admins/sign-up")

@@ -1,13 +1,9 @@
 package com.quathar.codebay.infra.rest.config;
 
-import com.quathar.codebay.infra.rest.conf.InputAdapterConfiguration;
-import com.quathar.codebay.infra.rest.controller.AuthController;
-import com.quathar.codebay.infra.rest.controller.ExceptionControllerAdvice;
-import com.quathar.codebay.infra.rest.controller.UserController;
+import com.quathar.codebay.infra.rest.controller.ShopAuthController;
+import com.quathar.codebay.infra.rest.controller.AuthControllerAdvice;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
@@ -23,14 +19,13 @@ import org.springframework.test.context.ContextConfiguration;
  * @version 1.0
  * @author Q
  */
-@Import({InputAdapterConfiguration.class})
+//@Import({AuthInputAdapterConfiguration.class})
 @WebMvcTest
 @ContextConfiguration(classes = {
-        ExceptionControllerAdvice.class,
-        AuthController.class,
-        UserController.class
+        AuthControllerAdvice.class,
+        ShopAuthController.class
 })
-public abstract class ControllerTestConfiguration {
+public abstract class SecurityControllerTestConfiguration {
 
     // TODO: Before the module restructre the test were passed
     // TODO: Now there is a problem with the Repositories

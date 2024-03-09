@@ -1,10 +1,8 @@
 package com.quathar.codebay.infra.rest.interceptor;
 
 import com.quathar.codebay.application.util.TokenManager;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
@@ -19,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Q
  */
 @Component
-public class AuthInterceptor implements HandlerInterceptor {
+public class ShopAuthInterceptor implements HandlerInterceptor {
 
     // <<-CONSTANT->>
     private static final String AUTH_HEADER = "Authorization";

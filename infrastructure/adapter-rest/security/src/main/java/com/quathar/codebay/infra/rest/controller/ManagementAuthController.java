@@ -1,8 +1,8 @@
-package com.quathar.codebay.infra.rest.management.controller;
+package com.quathar.codebay.infra.rest.controller;
 
 import com.quathar.codebay.application.inputport.AuthServicePort;
 import com.quathar.codebay.domain.model.TokenPair;
-import com.quathar.codebay.infra.rest.management.api.AuthminAPI;
+import com.quathar.codebay.infra.rest.api.ManagementAuthAPI;
 import com.quathar.codebay.infra.rest.model.request.EmailAuthRequest;
 import com.quathar.codebay.infra.rest.model.request.UsernameAuthRequest;
 
@@ -12,7 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <h1>Admin Auth Controller</h1>
+ * <h1>Management Authentication Controller</h1>
  * <br>
  * <p>
  *     Controller handling admin authentication-related endpoints.
@@ -23,14 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Q
  */
 @RestController
-public class AuthminController implements AuthminAPI {
+public class ManagementAuthController implements ManagementAuthAPI {
 
     // <<-FIELD->>
     private final AuthServicePort authServicePort;
 
     // <<-CONSTRUCTOR->>
     @Autowired
-    public AuthminController(AuthServicePort authServicePort) {
+    public ManagementAuthController(AuthServicePort authServicePort) {
         this.authServicePort = authServicePort;
     }
 

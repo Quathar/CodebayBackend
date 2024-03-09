@@ -27,8 +27,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @version 1.0
  * @author Q
  */
-@RequestMapping(AuthAPI.AUTH_ROOT)
-public interface AuthAPI {
+@RequestMapping(ShopAuthAPI.AUTH_ROOT)
+public interface ShopAuthAPI {
 
     String AUTH_ROOT = BASE_URL + "/auth";
 

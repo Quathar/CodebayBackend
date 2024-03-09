@@ -2,7 +2,7 @@ package com.quathar.codebay.infra.rest.controller;
 
 import com.quathar.codebay.application.inputport.AuthServicePort;
 import com.quathar.codebay.domain.model.TokenPair;
-import com.quathar.codebay.infra.rest.api.AuthAPI;
+import com.quathar.codebay.infra.rest.api.ShopAuthAPI;
 import com.quathar.codebay.infra.rest.model.request.EmailAuthRequest;
 import com.quathar.codebay.infra.rest.model.request.UsernameAuthRequest;
 
@@ -12,7 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <h1>Auth Controller</h1>
+ * <h1>Shop Authentication Controller</h1>
  * <br>
  * <p>
  *     Controller handling authentication-related endpoints.
@@ -23,14 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Q
  */
 @RestController
-public class AuthController implements AuthAPI {
+public class ShopAuthController implements ShopAuthAPI {
 
     // <<-FIELD->>
     private final AuthServicePort authServicePort;
 
     // <<-CONSTRUCTOR->>
     @Autowired
-    public AuthController(AuthServicePort authServicePort) {
+    public ShopAuthController(AuthServicePort authServicePort) {
         this.authServicePort = authServicePort;
     }
 
