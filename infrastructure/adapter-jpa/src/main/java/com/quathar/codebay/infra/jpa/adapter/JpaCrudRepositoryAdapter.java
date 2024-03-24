@@ -1,18 +1,16 @@
-package com.quathar.codebay.infra.jpa;
+package com.quathar.codebay.infra.jpa.adapter;
 
 import com.quathar.codebay.application.outputport.CrudRepositoryPort;
-import com.quathar.codebay.application.commonport.ModelMapper;
+import com.quathar.codebay.application.commonport.ModelMapperPort;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * <h1>JPA (Java Persistence API) Repository Adapter</h1>
- * <br>
- * <p>
- *     This class serves as an adapter implementing the CrudRepositoryPort interface,
- *     connecting a JpaRepository with a ModelMapper for CRUD operations.
- * </p>
+ * <h1>JPA (Java Persistence API) CRUD Repository Adapter</h1>
+ *
+ * This class serves as an adapter implementing the CrudRepositoryPort interface,
+ * connecting a JpaRepository with a ModelMapper for CRUD operations.
  *
  * @param <M>  The source type (Model) for mapping.
  * @param <T>  The target type (Entity) for mapping.
@@ -22,7 +20,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  * @author Q
  */
-public class JpaRepositoryAdapter<M, T, ID> implements CrudRepositoryPort<M, ID>  {
+public class JpaCrudRepositoryAdapter<M, T, ID> implements CrudRepositoryPort<M, ID>  {
 
     // <<-FIELDS->>
     /**
@@ -32,7 +30,7 @@ public class JpaRepositoryAdapter<M, T, ID> implements CrudRepositoryPort<M, ID>
     /**
      * The model mapper for converting between Model and Entity types.
      */
-    private final ModelMapper<M, T> modelMapper;
+    private final ModelMapperPort<M, T> modelMapper;
 
     // <<-CONSTRUCTOR->>
     /**
@@ -41,16 +39,16 @@ public class JpaRepositoryAdapter<M, T, ID> implements CrudRepositoryPort<M, ID>
      * @param jpaRepository The JPA Repository for database operations.
      * @param modelMapper   The ModelMapper for mapping between Model and Entity types.
      */
-    public JpaRepositoryAdapter(JpaRepository<T, ID> jpaRepository, ModelMapper<M, T> modelMapper) {
+    public JpaCrudRepositoryAdapter(JpaRepository<T, ID> jpaRepository, ModelMapperPort<M, T> modelMapper) {
         this.jpaRepository = jpaRepository;
         this.modelMapper   = modelMapper;
     }
 
     // <<-METHODS->>
     @Override
-    public java.util.List<M> findAll(int pageNumber, int pageSize) {
+    public java.util.List<M> findAll(int pageIndex, int pageSize) {
         return this.jpaRepository
-                .findAll(PageRequest.of(pageNumber, pageSize))
+                .findAll(PageRequest.of(pageIndex, pageSize))
                 .map(this.modelMapper::toModel)
                 .toList();
     }
@@ -62,28 +60,19 @@ public class JpaRepositoryAdapter<M, T, ID> implements CrudRepositoryPort<M, ID>
 
     @Override
     public M save(M model) {
-        return this.modelMapper.toModel(
-                this.jpaRepository.save(
-                        this.modelMapper.fromModel(model)
-                )
-        );
+        T entityToSave = this.modelMapper.fromModel(model);
+        T savedEntity  = this.jpaRepository.save(entityToSave);
+        return this.modelMapper.toModel(savedEntity);
     }
 
     @Override
     public M update(M model) {
-        return this.modelMapper.toModel(
-                this.jpaRepository.save(
-                        this.modelMapper.fromModel(model)
-                )
-        );
+        return this.save(model);
     }
 
     @Override
-    public Boolean deleteById(ID id) {
-        if (id != null) {
-            this.jpaRepository.deleteById(id);
-            return true;
-        } else return false;
+    public void deleteById(ID id) {
+        this.jpaRepository.deleteById(id);
     }
 
 }
