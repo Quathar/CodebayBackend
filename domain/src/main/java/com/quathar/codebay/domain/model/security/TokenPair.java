@@ -1,4 +1,4 @@
-package com.quathar.codebay.domain.model;
+package com.quathar.codebay.domain.model.security;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +17,6 @@ import lombok.Setter;
 public class TokenPair {
 
     // <<-FIELDS->>
-    private String type;
     private String refreshToken;
     private String accessToken;
 
