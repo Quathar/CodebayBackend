@@ -1,4 +1,4 @@
-package com.quathar.codebay.infra.rest.api;
+package com.quathar.codebay.infra.rest.common.api;
 
 /**
  * <h1>Base API (Application Programming Interface)</h1>
