@@ -15,8 +15,7 @@ public interface DeleteModelUseCase<ID>  {
      * Deletes a domain model based on its identifier.
      *
      * @param id The identifier of the domain model to delete.
-     * @return true if the deletion is successful, otherwise false.
      */
-    Boolean deleteById(ID id);
+    void deleteById(ID id);
 
 }
