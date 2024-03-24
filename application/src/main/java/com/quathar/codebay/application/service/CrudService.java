@@ -6,10 +6,8 @@ import com.quathar.codebay.domain.exception.ResourceNotFoundException;
 
 /**
  * <h1>CRUD Service</h1>
- * <br>
- * <p>
- *     This service provides CRUD (Create, Read, Update, Delete) operations for a specified domain model.
- * </p>
+ *
+ * This service provides CRUD (Create, Read, Update, Delete) operations for a specified domain model.
  *
  * @param <M>  The domain model
  * @param <ID> The domain model identifier type.
@@ -38,8 +36,8 @@ public class CrudService<M, ID> implements CrudServicePort<M, ID> {
 
     // <<-METHODS->>
     @Override
-    public java.util.List<M> getAll(int pageNumber, int pageSize) {
-        return this.crudRepositoryPort.findAll(pageNumber, pageSize);
+    public java.util.List<M> getAll(int pageIndex, int pageSize) {
+        return this.crudRepositoryPort.findAll(pageIndex, pageSize);
     }
 
     @Override
@@ -58,8 +56,8 @@ public class CrudService<M, ID> implements CrudServicePort<M, ID> {
     }
 
     @Override
-    public Boolean deleteById(ID id) {
-        return this.crudRepositoryPort.deleteById(id);
+    public void deleteById(ID id) {
+        this.crudRepositoryPort.deleteById(id);
     }
 
 }
