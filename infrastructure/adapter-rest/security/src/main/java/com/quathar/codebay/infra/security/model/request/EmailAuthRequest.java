@@ -1,4 +1,4 @@
-package com.quathar.codebay.infra.rest.model.request;
+package com.quathar.codebay.infra.security.model.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -6,10 +6,8 @@ import jakarta.validation.constraints.Pattern;
 
 /**
  * <h1>Email Authentication Request</h1>
- * <br>
- * <p>
- *     Represents a request for authentication using email and password.
- * </p>
+ *
+ * Represents a request for authentication using email and password.
  *
  * @param email    The email address of the user. Must adhere to a valid email pattern.
  * @param password The password of the user. Cannot be null or blank.
