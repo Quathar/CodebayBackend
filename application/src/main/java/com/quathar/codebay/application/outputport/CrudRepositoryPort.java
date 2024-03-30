@@ -19,11 +19,11 @@ public interface CrudRepositoryPort<M, ID> {
     /**
      * Retrieves a collection of domain models with pagination support.
      *
-     * @param pageNumber The page number.
+     * @param pageIndex  The page index.
      * @param pageSize   The number of items per page.
      * @return A set of domain models within the specified page and size.
      */
-    java.util.List<M> findAll(int pageNumber, int pageSize);
+    java.util.List<M> findAll(int pageIndex, int pageSize);
 
     /**
      * Finds a domain model by its identifier.
@@ -53,8 +53,7 @@ public interface CrudRepositoryPort<M, ID> {
      * Deletes a domain model by its identifier.
      *
      * @param id The identifier of the domain model to delete
-     * @return {@code true} if the deletion was successful, {@code false} otherwise
      */
-    Boolean deleteById(ID id);
+    void deleteById(ID id);
 
 }
