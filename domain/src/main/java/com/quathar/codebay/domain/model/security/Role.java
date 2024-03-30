@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -19,8 +20,9 @@ import java.util.UUID;
 public class Role {
 
     // <<-FIELDS->>
-    private UUID   id;
-    private String name;
-    private String description;
+    private UUID                    id;
+    private String                  name;
+    private String                  description;
+    private List<GrantedPermission> grantedPermissions;
 
 }
