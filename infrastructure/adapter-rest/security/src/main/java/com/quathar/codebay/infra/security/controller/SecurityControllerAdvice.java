@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -49,7 +50,7 @@ public class SecurityControllerAdvice {
      */
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public Map<String, String> handleAuthenticationException() {
+    public Map<String, String> handleAuthenticationException(AuthenticationException exception) {
         log.debug("Authentication exception occurred.");
         return Map.of("error", "Invalid credentials");
     }
@@ -64,6 +65,18 @@ public class SecurityControllerAdvice {
     public Map<String, String> handleJWTVerificationException() {
         log.debug("JWT verification exception occurred.");
         return Map.of("error", "Invalid token");
+    }
+
+    /**
+     * Handles AccessDeniedException.
+     *
+     * @return A map containing the error message for access denied.
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public Map<String, String> handleAccessDeniedException(AccessDeniedException exception) {
+        log.debug("ACCESS DENIED");
+        return Map.of("error", "ACCESS DENIED");
     }
 
 }
