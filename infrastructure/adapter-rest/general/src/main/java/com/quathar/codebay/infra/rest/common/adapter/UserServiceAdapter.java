@@ -40,6 +40,10 @@ public class       UserServiceAdapter
      * Status indicating user is enabled.
      */
     private static final String ENABLED_STATUS = "ENABLED";
+    /**
+     * Status indicating user is disabled.
+     */
+    private static final String DISABLED_STATUS = "DISABLED";
 
     // <<-FIELDS->>
     /**
@@ -116,7 +120,12 @@ public class       UserServiceAdapter
 
     @Override
     public void deleteByUsername(String username) {
-        this.userRepositoryPort.deleteByUsername(username);
+        this.userRepositoryPort
+                .findByUsername(username)
+                .ifPresent(user -> {
+                    user.setStatus(DISABLED_STATUS);
+                    this.userRepositoryPort.save(user);
+                });
     }
 
 }
