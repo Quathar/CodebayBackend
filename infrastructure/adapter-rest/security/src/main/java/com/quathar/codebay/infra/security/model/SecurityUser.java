@@ -33,7 +33,7 @@ public class SecurityUser implements UserDetails {
     private enum SecurityStatus { ENABLED, DISABLED, BLOCKED }
 
     // <<-FIELDS->>
-    private String        authenticationKey;
+    private String        username;
     private String        password;
     private Role          role;
     private String        status;
@@ -58,7 +58,7 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.authenticationKey;
+        return this.username;
     }
 
     @Override
