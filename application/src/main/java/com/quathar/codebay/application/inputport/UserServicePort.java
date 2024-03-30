@@ -1,9 +1,6 @@
 package com.quathar.codebay.application.inputport;
 
-import com.quathar.codebay.application.usecase.crud.ReadTokenUseCase;
 import com.quathar.codebay.domain.model.User;
-
-import java.util.UUID;
 
 /**
  * <h1>User Service Port</h1>
@@ -12,5 +9,21 @@ import java.util.UUID;
  * @version 1.0
  * @author Q
  */
-public interface UserServicePort extends CrudServicePort<User, UUID>, ReadTokenUseCase<User> {
+public interface UserServicePort extends CrudServicePort<User, java.util.UUID> {
+
+    /**
+     * Retrieves a user by the username.
+     *
+     * @param username the username of the user to retrieve
+     * @return the user model corresponding to the username
+     */
+    User getByUsername(String username);
+
+    /**
+     * Deletes a user by the username.
+     *
+     * @param username the username of the user to delete
+     */
+    void deleteByUsername(String username);
+
 }
