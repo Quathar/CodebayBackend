@@ -7,6 +7,7 @@ subprojects {
         // [ Spring Boot ]
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-validation")
+        implementation("org.springframework.boot:spring-boot-starter-security")
     }
 }
 
@@ -28,6 +29,9 @@ listOf("general", "security", "shop", "management")
 
                 if (projectName != "general")
                     implementation(project(":infrastructure:adapter-rest:general"))
+
+                if (projectName != "general" && projectName != "security")
+                    implementation(project(":infrastructure:adapter-rest:security"))
             }
         }
     }
