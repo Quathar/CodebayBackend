@@ -1,15 +1,16 @@
 package com.quathar.codebay.infra.jpa.entity;
 
-import com.quathar.codebay.domain.model.enumerator.UserStatus;
+import com.quathar.codebay.infra.jpa.entity.security.RoleEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import lombok.Getter;
@@ -19,11 +20,10 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static jakarta.persistence.EnumType.ORDINAL;
-
 /**
  * <h1>User Entity</h1>
  *
+ * @see com.quathar.codebay.domain.model.User
  * @since 2023-12-10
  * @version 1.0
  * @author Q
@@ -53,22 +53,31 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private RoleEntity role;
+
     @Column(name = "successful_auth", nullable = false)
     private Integer successfulAuth;
 
     @Column(name = "failed_auth", nullable = false)
     private Integer failedAuth;
 
-    @Column(name = "last_connection")
+    @Column(name = "creation_date", nullable = false)
+    private LocalDateTime creationDate;
+
+    @Column(name = "password_expiration_date", nullable = false)
+    private LocalDateTime passwordExpirationDate;
+
+    @Column(name = "end_block_date")
+    private LocalDateTime endBlockDate;
+
+    @Column(name = "last_connection", nullable = false)
     private LocalDateTime lastConnection;
 
-    @Column(name = "release_block")
-    private LocalDateTime releaseBlock;
-
-    @Enumerated(ORDINAL)
-    @Column(nullable = false)
-    private UserStatus status;
-
-    // TODO: Add all the fields necessary for persistence
+    // TODO: enable Audit
 
 }
