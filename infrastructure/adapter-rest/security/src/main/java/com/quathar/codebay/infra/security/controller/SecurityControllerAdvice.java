@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -56,7 +57,21 @@ public class SecurityControllerAdvice {
     }
 
     /**
-     * Handles JWTVerificationException.
+     * Handles {@code BadCredentialsException}.
+     *
+     * @return A map containing the error message for authentication failure.
+     */
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Map<String, String> handleBadCredentialsException(BadCredentialsException exception) {
+        log.debug("Bad credentials exception occurred.");
+        // Return the same message of 'AuthenticationException'
+        // so that a malicious user does not know if the username entered was correct.
+        return Map.of("error", "Invalid credentials");
+    }
+
+    /**
+     * Handles {@code JWTVerificationException}.
      *
      * @return A map containing the error message for JWT verification failure.
      */
@@ -68,7 +83,7 @@ public class SecurityControllerAdvice {
     }
 
     /**
-     * Handles AccessDeniedException.
+     * Handles {@code AccessDeniedException}.
      *
      * @return A map containing the error message for access denied.
      */
