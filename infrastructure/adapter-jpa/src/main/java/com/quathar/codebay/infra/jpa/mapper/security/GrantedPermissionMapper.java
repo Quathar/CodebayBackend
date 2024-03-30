@@ -7,6 +7,7 @@ import com.quathar.codebay.infra.jpa.entity.security.GrantedPermissionEntity;
 import com.quathar.codebay.infra.jpa.projection.RoleWithOperationsProjection;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -17,7 +18,7 @@ import org.mapstruct.factory.Mappers;
  * @version 1.0
  * @author Q
  */
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(uses = OperationMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface GrantedPermissionMapper extends ModelMapperPort<GrantedPermission, GrantedPermissionEntity> {
 
     // <<-CONSTANT->>
@@ -27,6 +28,10 @@ public interface GrantedPermissionMapper extends ModelMapperPort<GrantedPermissi
     GrantedPermissionMapper INSTANCE = Mappers.getMapper(GrantedPermissionMapper.class);
 
     // <<-METHODS->>
+    @Override
+    @Mapping(target = "role.grantedPermissions", ignore = true)
+    GrantedPermission toModel(GrantedPermissionEntity entity);
+
     /**
      * Extracts operation names from a JSON string.
      *

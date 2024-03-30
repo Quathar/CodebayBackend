@@ -1,8 +1,9 @@
 package com.quathar.codebay.infra.jpa.mapper;
 
-import com.quathar.codebay.application.commonport.ModelMapper;
+import com.quathar.codebay.application.commonport.ModelMapperPort;
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.infra.jpa.entity.UserEntity;
+import com.quathar.codebay.infra.jpa.mapper.security.RoleMapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -15,14 +16,12 @@ import org.mapstruct.factory.Mappers;
  * @version 1.0
  * @author Q
  */
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface UserMapper extends ModelMapper<User, UserEntity> {
+@Mapper(uses = RoleMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface UserMapper extends ModelMapperPort<User, UserEntity> {
 
     /**
      * Instance of the UserMapper created by MapStruct.
      */
-    static UserMapper getInstance() {
-        return Mappers.getMapper(UserMapper.class);
-    }
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
 }
