@@ -1,15 +1,15 @@
 package com.quathar.codebay.domain.model;
 
 import com.quathar.codebay.domain.model.common.Audit;
-import com.quathar.codebay.domain.model.enumerator.UserStatus;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
+import com.quathar.codebay.domain.model.security.Role;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 /**
  * <h1>User Model</h1>
@@ -27,14 +27,17 @@ public class User {
     // <<-FIELDS->>
     private UUID          id;
     private String        username;
-    private String        password; // hashed password
+    private String        password;
     private String        nickname;
     private String        email;
+    private String        status;
+    private Role          role;
     private Integer       successfulAuth;
     private Integer       failedAuth;
+    private LocalDateTime creationDate;
+    private LocalDateTime passwordExpirationDate;
+    private LocalDateTime endBlockDate;
     private LocalDateTime lastConnection;
-    private LocalDateTime releaseBlock;
-    private UserStatus    status;
     private Audit         audit;
 
 }
