@@ -9,7 +9,7 @@ import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.model.security.Role;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * <h1>User Service Adapter</h1>
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  * @author Q
  */
-@Component
+@Service
 public class       UserServiceAdapter
         extends    CrudService<User, java.util.UUID>
         implements UserServicePort {
