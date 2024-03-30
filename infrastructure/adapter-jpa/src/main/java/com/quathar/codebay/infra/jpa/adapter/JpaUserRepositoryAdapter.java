@@ -1,6 +1,7 @@
-package com.quathar.codebay.infra.jpa;
+package com.quathar.codebay.infra.jpa.adapter;
 
 import com.quathar.codebay.application.outputport.UserRepositoryPort;
+import com.quathar.codebay.domain.exception.ResourceNotFoundException;
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.infra.jpa.entity.UserEntity;
 import com.quathar.codebay.infra.jpa.mapper.UserMapper;
@@ -21,7 +22,7 @@ import java.util.UUID;
  */
 @Component
 public class      JpaUserRepositoryAdapter
-       extends    JpaRepositoryAdapter<User, UserEntity, UUID>
+       extends JpaCrudRepositoryAdapter<User, UserEntity, UUID>
        implements UserRepositoryPort {
 
     // <<-FIELDS->>
@@ -37,9 +38,9 @@ public class      JpaUserRepositoryAdapter
     // <<-CONSTRUCTOR->>
     @Autowired
     public JpaUserRepositoryAdapter(JpaUserRepository jpaUserRepository) {
-        super(jpaUserRepository, UserMapper.getInstance());
+        super(jpaUserRepository, UserMapper.INSTANCE);
         this.jpaUserRepository = jpaUserRepository;
-        this.userMapper        = UserMapper.getInstance();
+        this.userMapper        = UserMapper.INSTANCE;
     }
 
     // <<-METHODS->>
@@ -51,6 +52,16 @@ public class      JpaUserRepositoryAdapter
     @Override
     public Optional<User> findByEmail(String email) {
         return this.jpaUserRepository.findByEmail(email).map(this.userMapper::toModel);
+    }
+
+    @Override
+    public Optional<User> findByAuthenticationKey(String authenticationKey) {
+        return this.jpaUserRepository.findByAuthenticationKey(authenticationKey).map(this.userMapper::toModel);
+    }
+
+    @Override
+    public void deleteByUsername(String username) {
+        this.jpaUserRepository.deleteByUsername(username);
     }
 
 }
