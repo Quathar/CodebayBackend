@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "Users")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 @Getter
 @Setter
