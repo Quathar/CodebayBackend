@@ -33,6 +33,18 @@ insert into Users(id,
                   password, password_expiration_date,
                   last_connection, end_block_date)
     values
+        ('5c78e091-59c9-42b9-bf72-a7e148ec46c1',
+         'root', 'Root', 'root@codebay.com',
+         'ENABLED', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 1,  0,
+         '2023-01-01T00:00:00',
+         '$2a$10$CmY1fJn.F/Vncoc9FAO4xuCFSAw8T2FeDLH4Tm5Hc0jL0sujxcO3e', '2024-06-01T00:00:00',
+         '2023-01-01T20:40:00', null),
+        ('8bbdbe71-6c4c-4760-ad4c-3a8dd049746e',
+         'master', 'Master', 'master@codebay.com',
+         'ENABLED', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 7,  0,
+         '2023-01-01T00:00:00',
+         '$2a$10$jl.tDahzXPHImKeg9Wm5Qu.xRDB5gCeOdJMJXybTLPiY7S2OS00b.', '2024-06-01T00:00:00',
+         '2023-01-01T20:40:00', null),
         ('e2c00c47-e16b-45ac-9dd0-950a105fe67c',
          'jsmith', 'Janie_Smith', 'jane@email.com',
          'ENABLED', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 5,  2,
@@ -76,7 +88,17 @@ insert into Users(id,
          '$2a$10$EQGDnbxNIJxzhJP/tNxYAePeky6DIoafWCxmHqICXSOoBd0REnmfy', '2024-06-01T00:00:00',
          '2023-12-22T09:15:00', null);
 
--- insert into Administrator(username, nickname, email, successful_auth, failed_auth, last_connection, status, end_block_date, id, password)
---     values
---         ('root',   'Root',   'root@codebay.com',   1, 0, '2023-01-01T00:00:00', 0, null, '5c78e091-59c9-42b9-bf72-a7e148ec46c1', '$2a$10$CmY1fJn.F/Vncoc9FAO4xuCFSAw8T2FeDLH4Tm5Hc0jL0sujxcO3e'),
---         ('master', 'Master', 'master@codebay.com', 0, 0, '2023-01-01T00:00:00', 0, null, '8bbdbe71-6c4c-4760-ad4c-3a8dd049746e', '$2a$10$jl.tDahzXPHImKeg9Wm5Qu.xRDB5gCeOdJMJXybTLPiY7S2OS00b.');
+insert into Administrator(user_id,
+                          document_type, document,
+                          name, surnames, gender, birthdate,
+                          phone_code, phone_number)
+    values
+        -- TODO: look if its better to create a superuser category for this admins
+        ('5c78e091-59c9-42b9-bf72-a7e148ec46c1',
+         'NO DEFINED', 'XXXXXXXXX',
+         'Root', 'Root', 'OTHER', '2023-01-01',
+         '+34', '000 00 00 00'),
+        ('8bbdbe71-6c4c-4760-ad4c-3a8dd049746e',
+         'NO DEFINED', 'XXXXXXXXX',
+         'Master', 'Master', 'OTHER', '2023-01-01',
+         '+34', '000 00 00 00');
