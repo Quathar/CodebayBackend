@@ -1,5 +1,7 @@
 package com.quathar.codebay.domain.model;
 
+import com.quathar.codebay.domain.model.valueobject.PersonalInfo;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
@@ -15,4 +17,8 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 public class Administrator extends User {
+
+    // <<-FIELD->>
+    private PersonalInfo personalInfo;
+
 }
