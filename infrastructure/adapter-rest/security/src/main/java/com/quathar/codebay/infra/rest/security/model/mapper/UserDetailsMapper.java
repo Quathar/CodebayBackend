@@ -1,7 +1,8 @@
 package com.quathar.codebay.infra.rest.security.model.mapper;
 
+import com.quathar.codebay.domain.model.User;
+import com.quathar.codebay.domain.usecase.mapper.MapFromModelUseCase;
 import com.quathar.codebay.infra.rest.security.model.SecurityUser;
-import com.quathar.codebay.infra.rest.common.model.mapper.UserHttpMapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -14,5 +15,5 @@ import org.mapstruct.ReportingPolicy;
  * @author Q
  */
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface UserDetailsMapper extends UserHttpMapper<SecurityUser> {
+public interface UserDetailsMapper extends MapFromModelUseCase<User, SecurityUser> {
 }
