@@ -27,6 +27,9 @@ import java.time.LocalDateTime;
 @Setter
 public class SecurityUser implements UserDetails {
 
+    // <<-CONSTANT->>
+    private static final String ROLE_PREFIX = "ROLE_";
+
     // <<-ENUM->>
     // If we want more flexibility,
     // perhaps we can get this as constants from a .properties file
@@ -42,13 +45,15 @@ public class SecurityUser implements UserDetails {
     // <<-METHODS->>
     @Override
     public java.util.Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.role
+        java.util.Set<GrantedAuthority> grantedAuthorities = this.role
                 .getGrantedPermissions()
                 .stream()
                 .map(GrantedPermission::getOperation)
                 .map(Operation::getName)
                 .map(SimpleGrantedAuthority::new)
-                .toList();
+                .collect(java.util.stream.Collectors.toSet());
+        grantedAuthorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + this.role.getName()));
+        return grantedAuthorities;
     }
 
     @Override
