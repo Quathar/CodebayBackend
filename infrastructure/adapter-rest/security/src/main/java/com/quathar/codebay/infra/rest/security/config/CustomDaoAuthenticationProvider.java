@@ -63,12 +63,7 @@ public class CustomDaoAuthenticationProvider extends DaoAuthenticationProvider {
             super.additionalAuthenticationChecks(userDetails, authentication);
         } catch (BadCredentialsException exception) {
             log.debug("Updating failed authentication");
-            this.userRepositoryPort
-                    .findByUsername( userDetails.getUsername() )
-                    .ifPresent(user -> {
-                        user.setFailedAuth( user.getFailedAuth() + 1 );
-                        this.userRepositoryPort.save(user);
-                    });
+            this.userRepositoryPort.incrementFailedAuth( userDetails.getUsername() );
             throw exception;
         }
     }
@@ -76,12 +71,7 @@ public class CustomDaoAuthenticationProvider extends DaoAuthenticationProvider {
     @Override
     protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails userDetails) {
         log.debug("Updating successful authentication");
-        this.userRepositoryPort
-                .findByUsername( authentication.getName() )
-                .ifPresent(user -> {
-                    user.setSuccessfulAuth( user.getSuccessfulAuth() + 1 );
-                    this.userRepositoryPort.save(user);
-                });
+        this.userRepositoryPort.incrementSuccessfulAuth( authentication.getName() );
         return super.createSuccessAuthentication(principal, authentication, userDetails);
     }
 
