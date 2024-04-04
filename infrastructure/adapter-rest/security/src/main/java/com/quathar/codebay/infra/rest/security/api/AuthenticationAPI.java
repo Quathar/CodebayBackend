@@ -1,6 +1,5 @@
 package com.quathar.codebay.infra.rest.security.api;
 
-import com.quathar.codebay.infra.rest.security.annotation.AnonymousAccess;
 import com.quathar.codebay.infra.rest.security.model.request.EmailAuthRequest;
 import com.quathar.codebay.infra.rest.security.model.request.IdAuthenticationRequest;
 import com.quathar.codebay.infra.rest.security.model.request.UsernameAuthRequest;
@@ -8,7 +7,7 @@ import com.quathar.codebay.infra.rest.security.model.response.AuthenticationResp
 
 import jakarta.validation.Valid;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import static com.quathar.codebay.infra.rest.common.api.BaseAPI.BASE_URL;
 
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
@@ -28,7 +28,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @author Q
  */
 @RequestMapping(AuthenticationAPI.ROOT)
-@AnonymousAccess
+@PreAuthorize("isAnonymous()")
 public interface AuthenticationAPI {
 
     // <<-CONSTANT->>
@@ -47,7 +47,7 @@ public interface AuthenticationAPI {
     @PostMapping(value = "/username",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(OK)
     AuthenticationResponse handleUsernameAuthentication(
             @RequestBody @Valid
             UsernameAuthRequest authRequest
@@ -62,7 +62,7 @@ public interface AuthenticationAPI {
     @PostMapping(value = "/email",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(OK)
     AuthenticationResponse handleEmailAuthentication(
             @RequestBody @Valid
             EmailAuthRequest authRequest
@@ -78,7 +78,7 @@ public interface AuthenticationAPI {
     @PostMapping(value = "/id",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(OK)
     AuthenticationResponse handleIdAuthentication(
             @RequestBody @Valid
             IdAuthenticationRequest authRequest
