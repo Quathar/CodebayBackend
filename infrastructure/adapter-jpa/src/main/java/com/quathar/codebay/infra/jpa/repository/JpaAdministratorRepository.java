@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * <h1>JPA Administrator Repository</h1>
@@ -16,7 +15,7 @@ import java.util.UUID;
  * @author Q
  */
 @Repository
-public interface JpaAdminRepository extends JpaRepository<AdministratorEntity, UUID> {
+public interface JpaAdministratorRepository extends JpaRepository<AdministratorEntity, java.util.UUID> {
 
     /**
      * Finds an admin by their username.
