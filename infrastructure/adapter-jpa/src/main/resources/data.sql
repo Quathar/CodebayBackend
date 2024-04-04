@@ -14,18 +14,25 @@ insert into Role(id, name, description)
 
 insert into Operation(id, name)
     values
+        ('77b678af-db22-4920-821b-a89ef5869fbe', 'READ_MY_PROFILE'),
+        ('c5004c5a-273a-42cb-a099-4d167b2e3392', 'MODIFY_MY_PROFILE'),
+        ('f6ae619f-8fdb-4948-bd09-9c2c32105b91', 'DELETE_MY_PROFILE'),
         ('136b09a9-816f-4c9a-b102-64394c5d0c5e', 'READ_ALL_ADMINS'),
         ('a6abfa7f-b5e0-4d5e-937b-a100364236ee', 'READ_ADMIN_BY_ID'),
         ('ab279e72-ae31-4bcb-bd25-d4f6347381f5', 'READ_ADMIN_BY_USERNAME'),
-        ('77b678af-db22-4920-821b-a89ef5869fbe', 'READ_MY_PROFILE'),
         ('88254d6c-aff4-46ed-9637-c5c54dfdb85d', 'CREATE_ADMIN'),
         ('21370d41-8e7a-4f0c-a3d3-fc2bd64e15a7', 'UPDATE_ADMIN'),
         ('d8fd4b4f-8275-4929-8300-1dfc65ab6338', 'DELETE_ADMIN'),
-        ('c5004c5a-273a-42cb-a099-4d167b2e3392', 'MODIFY_MY_PROFILE'),
-        ('f6ae619f-8fdb-4948-bd09-9c2c32105b91', 'DELETE_MY_PROFILE');
+        ('3e7f08c9-6d0c-4425-8c83-94cc01f01a4f', 'READ_ALL_USERS'),
+        ('984f0352-bf27-4c0b-9ddc-7f16e5bf2052', 'READ_USER_BY_ID'),
+        ('94ce90e2-6106-4f26-a492-df3b7962b764', 'READ_USER_BY_USERNAME'),
+        ('ca317bbc-db38-4fda-9687-90e20836a112', 'CREATE_USER'),
+        ('2e23910c-eccb-4941-81ec-480a4609e9d3', 'UPDATE_USER'),
+        ('1a04015d-22ff-4ed0-8591-108e101a1f7a', 'DELETE_USER');
 
 insert into Granted_Permission(id, role_id, operation_id)
     values
+        -- SYSADMIN Permissions
         ('477f6ad1-acda-4ac0-8a9a-473f7a01cccf', '556098f0-b030-4a53-84bd-c5c22e181461', '136b09a9-816f-4c9a-b102-64394c5d0c5e'), -- SYSADMIN, READ_ALL_ADMINS
         ('9e2bb291-de2b-43e5-b2f1-5f51a25ae5f0', '556098f0-b030-4a53-84bd-c5c22e181461', 'a6abfa7f-b5e0-4d5e-937b-a100364236ee'), -- SYSADMIN, READ_ADMIN_BY_ID
         ('2b4d662b-630c-4501-9284-3f15149c4dfd', '556098f0-b030-4a53-84bd-c5c22e181461', 'ab279e72-ae31-4bcb-bd25-d4f6347381f5'), -- SYSADMIN, READ_ADMIN_BY_USERNAME
@@ -33,10 +40,32 @@ insert into Granted_Permission(id, role_id, operation_id)
         ('ce2d30e2-a3f0-4d99-b1bf-147caf6a0f14', '556098f0-b030-4a53-84bd-c5c22e181461', '88254d6c-aff4-46ed-9637-c5c54dfdb85d'), -- SYSADMIN, CREATE_ADMIN
         ('6232200f-f7a2-4feb-8879-84cd5a2deaea', '556098f0-b030-4a53-84bd-c5c22e181461', '21370d41-8e7a-4f0c-a3d3-fc2bd64e15a7'), -- SYSADMIN, UPDATE_ADMIN
         ('4ffb6c59-7df1-4ded-8831-cf138c0a6b25', '556098f0-b030-4a53-84bd-c5c22e181461', 'd8fd4b4f-8275-4929-8300-1dfc65ab6338'), -- SYSADMIN, DELETE_ADMIN
+        ('9dad12e2-9221-470c-ab48-9946795c0b23', '556098f0-b030-4a53-84bd-c5c22e181461', '3e7f08c9-6d0c-4425-8c83-94cc01f01a4f'), -- SYSADMIN, READ_ALL_USERS
+        ('c2343024-55ad-4ae6-8856-6d96a361554c', '556098f0-b030-4a53-84bd-c5c22e181461', '984f0352-bf27-4c0b-9ddc-7f16e5bf2052'), -- SYSADMIN, READ_USER_BY_ID
+        ('2464de9b-6ea8-4df1-951c-37b56bfc035d', '556098f0-b030-4a53-84bd-c5c22e181461', '94ce90e2-6106-4f26-a492-df3b7962b764'), -- SYSADMIN, READ_USER_BY_USERNAME
+        ('52902188-71b4-4442-be1f-21ad2e6ebdfe', '556098f0-b030-4a53-84bd-c5c22e181461', 'ca317bbc-db38-4fda-9687-90e20836a112'), -- SYSADMIN, CREATE_USER
+        ('f1a9a919-ea38-4ed1-be31-306cdf90cbe4', '556098f0-b030-4a53-84bd-c5c22e181461', '2e23910c-eccb-4941-81ec-480a4609e9d3'), -- SYSADMIN, UPDATE_USER
+        ('0fff33d0-905a-4469-8610-9a21ebfddc56', '556098f0-b030-4a53-84bd-c5c22e181461', '1a04015d-22ff-4ed0-8591-108e101a1f7a'), -- SYSADMIN, DELETE_USER
+
+        -- ADMIN Permissions
         ('6ce53dd3-229c-470c-baf7-3e2095f5f202', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 'ab279e72-ae31-4bcb-bd25-d4f6347381f5'), -- ADMIN, READ_ADMIN_BY_USERNAME
         ('044ecf35-1699-4fef-ba95-6d6cf53e2512', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', '77b678af-db22-4920-821b-a89ef5869fbe'), -- ADMIN, READ_MY_PROFILE
-        ('64d4ca63-6164-4a4d-a6ad-cc32ab4f647c', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- ADMIN, MODIFY_MY_PROFILE
+        ('04cf5585-0d99-43ef-8edc-d9463cef5d62', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', '3e7f08c9-6d0c-4425-8c83-94cc01f01a4f'), -- ADMIN, READ_ALL_USERS
+        ('bcedecbc-740e-459a-bee6-62a4a5f86e17', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', '984f0352-bf27-4c0b-9ddc-7f16e5bf2052'), -- ADMIN, READ_USER_BY_ID
+        ('12539350-443a-4681-ae4e-b51fd01862b6', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', '94ce90e2-6106-4f26-a492-df3b7962b764'), -- ADMIN, READ_USER_BY_USERNAME
+        ('b1334db6-218f-4e77-9eec-7d00cf8cc91d', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 'ca317bbc-db38-4fda-9687-90e20836a112'), -- ADMIN, CREATE_USER
+        ('1467175b-b696-4c39-aacb-9d3c25a5e007', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', '2e23910c-eccb-4941-81ec-480a4609e9d3'), -- ADMIN, UPDATE_USER
+        ('dca9081c-a519-4921-a91f-e9b93f1f6b1b', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', '1a04015d-22ff-4ed0-8591-108e101a1f7a'), -- ADMIN, DELETE_USER
+        ('cba67817-6727-44f1-9773-5c5bcf0be0d2', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- ADMIN, MODIFY_MY_PROFILE
+
+        -- ASSISTANT Permissions
         ('fc586245-3ee4-45af-bec2-aafc0f01c95e', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', '77b678af-db22-4920-821b-a89ef5869fbe'), -- ASSISTANT, READ_MY_PROFILE
+        ('620f340a-c393-4a73-b837-7a08fcd2f08b', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', '94ce90e2-6106-4f26-a492-df3b7962b764'), -- ASSISTANT, READ_USER_BY_USERNAME
+        ('6f2f243e-3849-4e2b-b3f7-28c10e020f4b', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', 'ca317bbc-db38-4fda-9687-90e20836a112'), -- ASSISTANT, CREATE_USER
+        ('b6fd3567-b738-45f3-83ca-56dedb19cd7c', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- ASSISTANT, MODIFY_MY_PROFILE
+
+        -- USER Permissions
+        ('33a8641e-2fb8-40ec-a797-970683165b85', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', '77b678af-db22-4920-821b-a89ef5869fbe'), -- USER, READ_MY_PROFILE
         ('33a8641e-2fb8-40ec-a797-970683165b85', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- USER, MODIFY_MY_PROFILE
         ('f8971916-93e5-4b59-8428-0f756385e018', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'f6ae619f-8fdb-4948-bd09-9c2c32105b91'); -- USER, DELETE_MY_PROFILE
 
