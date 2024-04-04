@@ -1,6 +1,10 @@
 package com.quathar.codebay.infra.jpa.entity;
 
+import com.quathar.codebay.infra.jpa.entity.embeddable.PersonalInfoEmbeddable;
+
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 import lombok.Getter;
@@ -16,8 +20,14 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "Administrator")
+@PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
 @NoArgsConstructor
 @Getter
 @Setter
 public class AdministratorEntity extends UserEntity {
+
+    // <<-FIELD->>
+    @Embedded
+    private PersonalInfoEmbeddable personalInfo;
+
 }
