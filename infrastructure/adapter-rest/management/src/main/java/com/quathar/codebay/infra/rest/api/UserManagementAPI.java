@@ -4,13 +4,14 @@ import com.quathar.codebay.infra.rest.model.request.CreateManagementUserRequest;
 import com.quathar.codebay.infra.rest.common.model.request.PageContentRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateManagementUserRequest;
 import com.quathar.codebay.infra.rest.common.model.response.PageContentResponse;
+import com.quathar.codebay.infra.rest.model.response.FullAdminResponse;
 import com.quathar.codebay.infra.rest.model.response.FullUserResponse;
+import com.quathar.codebay.infra.rest.model.response.ManagementAdminResponse;
 import com.quathar.codebay.infra.rest.model.response.ManagementUserResponse;
-import com.quathar.codebay.infra.rest.security.annotation.AuthenticatedAccessByDefault;
 
 import jakarta.validation.Valid;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,15 +23,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.UUID;
 
-import static com.quathar.codebay.infra.rest.api.ManagementAPI.MANAGE_URL;
+import static com.quathar.codebay.infra.rest.api.ManagementAPI.MANAGEMENT_URL;
 
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
  * <h1>User Management API</h1>
  *
- * This interface represents the User Management API, extending the base UserAPI.
- * It provides endpoints and constants related to user management functionality.
+ * This interface defines the endpoints related to user management operations.
  *
  * @see ManagementAPI
  * @since 2023-12-19
@@ -38,70 +41,75 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @author Q
  */
 @RequestMapping(UserManagementAPI.ROOT)
-//@RequiresAdminRole
-@AuthenticatedAccessByDefault
+@PreAuthorize("hasAnyRole('SYSADMIN', 'ADMIN', 'ASSISTANT')")
 public interface UserManagementAPI {
 
     // <<-CONSTANT->>
     /**
      * The root path for user management API.
      */
-    String ROOT = MANAGE_URL + "/users";
+    String ROOT = MANAGEMENT_URL + "/users";
 
     // <<-METHODS->>
     /**
-     * Retrieves all content based on the provided PageContentRequest parameters.
+     * Retrieves a page of users for management.
      *
-     * @param pageContentRequest The ContentRequest containing parameters for content retrieval.
-     * @return A ResponseEntity containing the retrieved content or an error response.
+     * @param pageContentRequest The page params.
+     * @return A {@link PageContentResponse} containing a list of users.
      */
     @GetMapping(path = "", produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('READ_ALL_USERS')")
+    @ResponseStatus(OK)
     PageContentResponse<ManagementUserResponse> getAll(@Valid PageContentRequest pageContentRequest);
 
     /**
-     * Retrieves a user by their unique ID.
+     * Retrieves a user by its ID.
      *
-     * @param id The unique identifier of the model.
-     * @return ResponseEntity containing the model information if found.
+     * @param id The ID of the user to retrieve.
+     * @return The user with the specified ID in a {@link FullUserResponse}.
+     *
      */
     @GetMapping(path = "/id/{id}", produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('READ_USER_BY_ID')")
+    @ResponseStatus(OK)
     FullUserResponse getById(@PathVariable UUID id);
 
     /**
-     * Retrieves a user by their username.
+     * Retrieves a user by its username.
      *
-     * @param username The username of the user.
-     * @return UserManagementResponse containing the user information if found.
+     * @param username The username of the user to retrieve.
+     * @return The user with the specified username in a {@link ManagementUserResponse}.
      */
     @GetMapping(path = "/username/{username}", produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAnyRole('SYSADMIN', 'ADMIN', 'ASSISTANT') AND hasAuthority('READ_USER_BY_USERNAME')")
+    @ResponseStatus(OK)
     ManagementUserResponse getByUsername(@PathVariable String username);
 
     /**
-     * Creates a new user.
+     * Creates a new user from management area.
      *
-     * @param createRequest   The request object containing model information.
-     * @return ResponseEntity containing the newly created model information with appropriate status.
+     * @param createRequest The request body containing details of the user to create.
+     * @return The created user in a {@link ManagementUserResponse}.
      */
-    @PostMapping(value = "/sign-up",
+    @PostMapping(path = "/sign-up",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('CREATE_USER')")
+    @ResponseStatus(CREATED)
     ManagementUserResponse signup(@RequestBody @Valid CreateManagementUserRequest createRequest);
 
     /**
-     * Updates an existing user by their unique identifier.
+     * Updates an existing user.
      *
-     * @param id            The unique identifier of the model to be updated.
-     * @param updateRequest The request object containing updated model information.
-     * @return
+     * @param id            The ID of the user to update.
+     * @param updateRequest The request body containing updated details of the user.
+     * @return The updated user in a {@link ManagementAdminResponse}.
      */
-    @PutMapping(value = "/{id}",
+    @PutMapping(path = "/{id}",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('UPDATE_USER')")
+    @ResponseStatus(OK)
     ManagementUserResponse update(
             @PathVariable UUID id,
             @RequestBody @Valid
@@ -109,12 +117,13 @@ public interface UserManagementAPI {
     );
 
     /**
-     * Deletes a model by their unique ID.
+     * Deletes a user by its ID.
      *
-     * @param id The unique identifier of the model to be deleted.
+     * @param id The ID of the user to delete.
      */
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAuthority('DELETE_USER')")
+    @ResponseStatus(NO_CONTENT)
     void delete(@PathVariable UUID id);
 
 }

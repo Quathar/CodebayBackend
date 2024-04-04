@@ -5,6 +5,7 @@ import com.quathar.codebay.infra.rest.common.model.response.PageContentResponse;
 import com.quathar.codebay.infra.rest.model.request.CreateAdminRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateAdminRequest;
 import com.quathar.codebay.infra.rest.model.response.FullAdminResponse;
+import com.quathar.codebay.infra.rest.model.response.FullUserResponse;
 import com.quathar.codebay.infra.rest.model.response.ManagementAdminResponse;
 
 import jakarta.validation.Valid;
@@ -40,7 +41,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @author Q
  */
 @RequestMapping(AdminManagementAPI.ROOT)
-@PreAuthorize("hasRole('SYSADMIN') OR hasRole('ADMIN') OR hasRole('ASSISTANT')")
+@PreAuthorize("hasAnyRole('SYSADMIN', 'ADMIN', 'ASSISTANT')")
 public interface AdminManagementAPI {
 
     // <<-CONSTANT->>
@@ -65,7 +66,7 @@ public interface AdminManagementAPI {
      * Retrieves an admin by its ID.
      *
      * @param id The ID of the admin to retrieve.
-     * @return The {@link FullAdminResponse} with the specified ID.
+     * @return The admin with the specified ID in a {@link FullAdminResponse}.
      */
     @GetMapping(path = "/id/{id}", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('READ_ADMIN_BY_ID')")
@@ -76,7 +77,7 @@ public interface AdminManagementAPI {
      * Retrieves an admin by its username.
      *
      * @param username The username of the admin to retrieve.
-     * @return The {@link ManagementAdminResponse} with the specified username.
+     * @return The admin with the specified username in a {@link ManagementAdminResponse}.
      */
     @GetMapping(path = "/username/{username}", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('READ_ADMIN_BY_USERNAME')")
@@ -87,7 +88,7 @@ public interface AdminManagementAPI {
     /**
      * Retrieves an admin by its authentication token.
      *
-     * @return The {@link FullAdminResponse} for the specified token.
+     * @return The admin for the specified token in a {@link FullAdminResponse}.
      */
     @GetMapping(path = "/me", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('SYSADMIN', 'ADMIN', 'ASSISTANT') AND hasAuthority('READ_MY_PROFILE')")
@@ -99,7 +100,7 @@ public interface AdminManagementAPI {
      * Creates a new admin.
      *
      * @param createRequest The request body containing details of the admin to create.
-     * @return The created {@link ManagementAdminResponse}.
+     * @return The created admin in a {@link ManagementAdminResponse}.
      */
     @PostMapping(path = "/sign-up",
             consumes = APPLICATION_JSON_VALUE,
@@ -111,9 +112,9 @@ public interface AdminManagementAPI {
     /**
      * Updates an existing admin.
      *
-     * @param id The ID of the admin to update.
+     * @param id            The ID of the admin to update.
      * @param updateRequest The request body containing updated details of the admin.
-     * @return The updated {@link ManagementAdminResponse}.
+     * @return The updated admin in a {@link ManagementAdminResponse}.
      */
     @PutMapping(path = "/{id}",
             consumes = APPLICATION_JSON_VALUE,
