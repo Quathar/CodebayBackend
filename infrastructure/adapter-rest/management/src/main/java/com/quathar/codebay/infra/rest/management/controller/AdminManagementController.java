@@ -2,7 +2,6 @@ package com.quathar.codebay.infra.rest.management.controller;
 
 import com.quathar.codebay.application.inputport.AdministratorServicePort;
 import com.quathar.codebay.domain.model.Administrator;
-import com.quathar.codebay.infra.rest.api.AdminManagementAPI;
 import com.quathar.codebay.infra.rest.common.factory.HttpCommonFactory;
 import com.quathar.codebay.infra.rest.common.model.request.PageContentRequest;
 import com.quathar.codebay.infra.rest.common.model.response.PageContentResponse;
