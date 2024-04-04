@@ -3,20 +3,17 @@ package com.quathar.codebay.application.outputport;
 import com.quathar.codebay.domain.model.User;
 
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * <h1>User Repository Port</h1>
- * <br>
- * <p>
- *     Represents a contract for managing User domain models.
- * </p>
+ *
+ * Represents a contract for managing User domain models.
  *
  * @since 2023-12-10
  * @version 2.0
  * @author Q
  */
-public interface UserRepositoryPort extends CrudRepositoryPort<User, UUID> {
+public interface UserRepositoryPort extends CrudRepositoryPort<User, java.util.UUID> {
 
     /**
      * Retrieves a user by their username.
@@ -48,5 +45,19 @@ public interface UserRepositoryPort extends CrudRepositoryPort<User, UUID> {
      * @param username the username of the user to delete
      */
     void deleteByUsername(String username);
+
+    /**
+     * Increments the count of successful authentications for the user with the given username.
+     *
+     * @param username the username of the user whose successful authentication count will be incremented
+     */
+    void incrementSuccessfulAuth(String username);
+
+    /**
+     * Increments the count of failed authentications for the user with the given username.
+     *
+     * @param username the username of the user whose failed authentication count will be incremented
+     */
+    void incrementFailedAuth(String username);
 
 }
