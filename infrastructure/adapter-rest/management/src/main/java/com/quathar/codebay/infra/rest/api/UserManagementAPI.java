@@ -5,7 +5,6 @@ import com.quathar.codebay.infra.rest.common.model.request.PageContentRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateManagementUserRequest;
 import com.quathar.codebay.infra.rest.common.model.response.PageContentResponse;
 import com.quathar.codebay.infra.rest.model.response.FullUserResponse;
-import com.quathar.codebay.infra.rest.model.response.ManagementAdminResponse;
 import com.quathar.codebay.infra.rest.model.response.ManagementUserResponse;
 
 import jakarta.validation.Valid;
@@ -102,7 +101,7 @@ public interface UserManagementAPI {
      *
      * @param id            The ID of the user to update.
      * @param updateRequest The request body containing updated details of the user.
-     * @return The updated user in a {@link ManagementAdminResponse}.
+     * @return The updated user in a {@link ManagementUserResponse}.
      */
     @PutMapping(path = "/{id}",
             consumes = APPLICATION_JSON_VALUE,
