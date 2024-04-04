@@ -37,7 +37,7 @@ public class      JpaAdministratorRepositoryAdapter
     /**
      * Constructs a new {@code JpaAdministratorRepositoryAdapter} with the specified JpaAdministratorRepository.
      *
-     * @param jpaAdminRepository
+     * @param jpaAdminRepository The JPA repository for Administrator entities.
      */
     @Autowired
     public JpaAdministratorRepositoryAdapter(JpaAdministratorRepository jpaAdminRepository) {
