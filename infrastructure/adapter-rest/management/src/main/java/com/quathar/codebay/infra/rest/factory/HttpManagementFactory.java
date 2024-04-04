@@ -1,11 +1,13 @@
 package com.quathar.codebay.infra.rest.factory;
 
-//import com.quathar.codebay.infra.rest.model.mapper.CreateAdminRequestMapper;
-
 import com.quathar.codebay.infra.rest.model.mapper.user.CreateManagementUserRequestMapper;
 import com.quathar.codebay.infra.rest.model.mapper.user.FullUserResponseMapper;
 import com.quathar.codebay.infra.rest.model.mapper.user.ManagementUserResponseMapper;
 import com.quathar.codebay.infra.rest.model.mapper.user.UpdateManagementUserRequestMapper;
+import com.quathar.codebay.infra.rest.model.mapper.user.admin.CreateAdminRequestMapper;
+import com.quathar.codebay.infra.rest.model.mapper.user.admin.FullAdminResponseMapper;
+import com.quathar.codebay.infra.rest.model.mapper.user.admin.ManagementAdminResponseMapper;
+import com.quathar.codebay.infra.rest.model.mapper.user.admin.UpdateAdminRequestMapper;
 
 import org.mapstruct.factory.Mappers;
 
@@ -23,6 +25,7 @@ import org.mapstruct.factory.Mappers;
  */
 public interface HttpManagementFactory {
 
+    // <<-USER->>
     static FullUserResponseMapper getFullUserResponse() {
         return Mappers.getMapper(FullUserResponseMapper.class);
     }
@@ -39,8 +42,21 @@ public interface HttpManagementFactory {
         return Mappers.getMapper(UpdateManagementUserRequestMapper.class);
     }
 
-//    static CreateAdminRequestMapper setCreateAdminRequest() {
-//        return Mappers.getMapper(CreateAdminRequestMapper.class);
-//    }
+    // <<-ADMIN->>
+    static FullAdminResponseMapper getFullAdminResponse() {
+        return Mappers.getMapper(FullAdminResponseMapper.class);
+    }
+
+    static ManagementAdminResponseMapper getManagementAdminResponse() {
+        return Mappers.getMapper(ManagementAdminResponseMapper.class);
+    }
+
+    static CreateAdminRequestMapper setCreateAdminRequest() {
+        return Mappers.getMapper(CreateAdminRequestMapper.class);
+    }
+
+    static UpdateAdminRequestMapper setUpdateAdminRequest() {
+        return Mappers.getMapper(UpdateAdminRequestMapper.class);
+    }
 
 }
