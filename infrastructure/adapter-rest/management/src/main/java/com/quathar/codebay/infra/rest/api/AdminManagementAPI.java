@@ -5,7 +5,6 @@ import com.quathar.codebay.infra.rest.common.model.response.PageContentResponse;
 import com.quathar.codebay.infra.rest.model.request.CreateAdminRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateAdminRequest;
 import com.quathar.codebay.infra.rest.model.response.FullAdminResponse;
-import com.quathar.codebay.infra.rest.model.response.FullUserResponse;
 import com.quathar.codebay.infra.rest.model.response.ManagementAdminResponse;
 
 import jakarta.validation.Valid;

@@ -4,7 +4,6 @@ import com.quathar.codebay.infra.rest.model.request.CreateManagementUserRequest;
 import com.quathar.codebay.infra.rest.common.model.request.PageContentRequest;
 import com.quathar.codebay.infra.rest.model.request.UpdateManagementUserRequest;
 import com.quathar.codebay.infra.rest.common.model.response.PageContentResponse;
-import com.quathar.codebay.infra.rest.model.response.FullAdminResponse;
 import com.quathar.codebay.infra.rest.model.response.FullUserResponse;
 import com.quathar.codebay.infra.rest.model.response.ManagementAdminResponse;
 import com.quathar.codebay.infra.rest.model.response.ManagementUserResponse;
