@@ -3,6 +3,8 @@ package com.quathar.codebay.infra.rest.common.model.mapper;
 import com.quathar.codebay.domain.model.Administrator;
 import com.quathar.codebay.domain.usecase.mapper.MapFromModelUseCase;
 
+import org.mapstruct.Mapping;
+
 /**
  * <h1>HTTP (HyperText Transfer Protocol) Administrator Response Mapper</h1>
  *
@@ -13,4 +15,9 @@ import com.quathar.codebay.domain.usecase.mapper.MapFromModelUseCase;
  * @author Q
  */
 public interface HttpAdminResponseMapper<R> extends MapFromModelUseCase<Administrator, R> {
+
+    @Override
+    @Mapping(source = "role.name", target = "role")
+    R fromModel(Administrator model);
+
 }
