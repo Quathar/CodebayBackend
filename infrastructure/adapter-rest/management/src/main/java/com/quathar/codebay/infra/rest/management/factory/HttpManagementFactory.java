@@ -1,13 +1,13 @@
 package com.quathar.codebay.infra.rest.factory;
 
-import com.quathar.codebay.infra.rest.model.mapper.user.CreateManagementUserRequestMapper;
-import com.quathar.codebay.infra.rest.model.mapper.user.FullUserResponseMapper;
-import com.quathar.codebay.infra.rest.model.mapper.user.ManagementUserResponseMapper;
-import com.quathar.codebay.infra.rest.model.mapper.user.UpdateManagementUserRequestMapper;
-import com.quathar.codebay.infra.rest.model.mapper.user.admin.CreateAdminRequestMapper;
-import com.quathar.codebay.infra.rest.model.mapper.user.admin.FullAdminResponseMapper;
-import com.quathar.codebay.infra.rest.model.mapper.user.admin.ManagementAdminResponseMapper;
-import com.quathar.codebay.infra.rest.model.mapper.user.admin.UpdateAdminRequestMapper;
+import com.quathar.codebay.infra.rest.management.model.mapper.user.CreateManagementUserRequestMapper;
+import com.quathar.codebay.infra.rest.management.model.mapper.user.FullUserResponseMapper;
+import com.quathar.codebay.infra.rest.management.model.mapper.user.ManagementUserResponseMapper;
+import com.quathar.codebay.infra.rest.management.model.mapper.user.UpdateManagementUserRequestMapper;
+import com.quathar.codebay.infra.rest.management.model.mapper.user.admin.CreateAdminRequestMapper;
+import com.quathar.codebay.infra.rest.management.model.mapper.user.admin.FullAdminResponseMapper;
+import com.quathar.codebay.infra.rest.management.model.mapper.user.admin.ManagementAdminResponseMapper;
+import com.quathar.codebay.infra.rest.management.model.mapper.user.admin.UpdateAdminRequestMapper;
 
 import org.mapstruct.factory.Mappers;
 

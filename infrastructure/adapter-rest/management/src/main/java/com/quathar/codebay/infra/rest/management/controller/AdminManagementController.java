@@ -1,4 +1,4 @@
-package com.quathar.codebay.infra.rest.controller;
+package com.quathar.codebay.infra.rest.management.controller;
 
 import com.quathar.codebay.application.inputport.AdministratorServicePort;
 import com.quathar.codebay.domain.model.Administrator;
@@ -7,10 +7,11 @@ import com.quathar.codebay.infra.rest.common.factory.HttpCommonFactory;
 import com.quathar.codebay.infra.rest.common.model.request.PageContentRequest;
 import com.quathar.codebay.infra.rest.common.model.response.PageContentResponse;
 import com.quathar.codebay.infra.rest.factory.HttpManagementFactory;
-import com.quathar.codebay.infra.rest.model.request.CreateAdminRequest;
-import com.quathar.codebay.infra.rest.model.request.UpdateAdminRequest;
-import com.quathar.codebay.infra.rest.model.response.FullAdminResponse;
-import com.quathar.codebay.infra.rest.model.response.ManagementAdminResponse;
+import com.quathar.codebay.infra.rest.management.api.AdminManagementAPI;
+import com.quathar.codebay.infra.rest.management.model.request.CreateAdminRequest;
+import com.quathar.codebay.infra.rest.management.model.request.UpdateAdminRequest;
+import com.quathar.codebay.infra.rest.management.model.response.FullAdminResponse;
+import com.quathar.codebay.infra.rest.management.model.response.ManagementAdminResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

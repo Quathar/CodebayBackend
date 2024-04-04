@@ -1,11 +1,11 @@
-package com.quathar.codebay.infra.rest.api;
+package com.quathar.codebay.infra.rest.management.api;
 
 import com.quathar.codebay.infra.rest.common.model.request.PageContentRequest;
 import com.quathar.codebay.infra.rest.common.model.response.PageContentResponse;
-import com.quathar.codebay.infra.rest.model.request.CreateAdminRequest;
-import com.quathar.codebay.infra.rest.model.request.UpdateAdminRequest;
-import com.quathar.codebay.infra.rest.model.response.FullAdminResponse;
-import com.quathar.codebay.infra.rest.model.response.ManagementAdminResponse;
+import com.quathar.codebay.infra.rest.management.model.request.CreateAdminRequest;
+import com.quathar.codebay.infra.rest.management.model.request.UpdateAdminRequest;
+import com.quathar.codebay.infra.rest.management.model.response.FullAdminResponse;
+import com.quathar.codebay.infra.rest.management.model.response.ManagementAdminResponse;
 
 import jakarta.validation.Valid;
 
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.UUID;
 
-import static com.quathar.codebay.infra.rest.api.ManagementAPI.MANAGEMENT_URL;
+import static com.quathar.codebay.infra.rest.management.api.ManagementAPI.MANAGEMENT_URL;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;

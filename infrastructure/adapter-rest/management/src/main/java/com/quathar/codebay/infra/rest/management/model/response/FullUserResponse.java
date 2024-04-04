@@ -1,4 +1,4 @@
-package com.quathar.codebay.infra.rest.model.response;
+package com.quathar.codebay.infra.rest.management.model.response;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

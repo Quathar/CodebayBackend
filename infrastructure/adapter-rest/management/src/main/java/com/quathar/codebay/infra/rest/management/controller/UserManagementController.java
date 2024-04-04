@@ -1,16 +1,16 @@
-package com.quathar.codebay.infra.rest.controller;
+package com.quathar.codebay.infra.rest.management.controller;
 
 import com.quathar.codebay.application.inputport.UserServicePort;
 import com.quathar.codebay.domain.model.User;
-import com.quathar.codebay.infra.rest.api.UserManagementAPI;
 import com.quathar.codebay.infra.rest.common.factory.HttpCommonFactory;
 import com.quathar.codebay.infra.rest.factory.HttpManagementFactory;
-import com.quathar.codebay.infra.rest.model.request.CreateManagementUserRequest;
+import com.quathar.codebay.infra.rest.management.api.UserManagementAPI;
+import com.quathar.codebay.infra.rest.management.model.request.CreateManagementUserRequest;
 import com.quathar.codebay.infra.rest.common.model.request.PageContentRequest;
-import com.quathar.codebay.infra.rest.model.request.UpdateManagementUserRequest;
+import com.quathar.codebay.infra.rest.management.model.request.UpdateManagementUserRequest;
 import com.quathar.codebay.infra.rest.common.model.response.PageContentResponse;
-import com.quathar.codebay.infra.rest.model.response.FullUserResponse;
-import com.quathar.codebay.infra.rest.model.response.ManagementUserResponse;
+import com.quathar.codebay.infra.rest.management.model.response.FullUserResponse;
+import com.quathar.codebay.infra.rest.management.model.response.ManagementUserResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

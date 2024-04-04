@@ -1,7 +1,7 @@
-package com.quathar.codebay.infra.rest.model.mapper.user.admin;
+package com.quathar.codebay.infra.rest.management.model.mapper.user.admin;
 
 import com.quathar.codebay.infra.rest.common.model.mapper.HttpAdminResponseMapper;
-import com.quathar.codebay.infra.rest.model.response.ManagementAdminResponse;
+import com.quathar.codebay.infra.rest.management.model.response.ManagementAdminResponse;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

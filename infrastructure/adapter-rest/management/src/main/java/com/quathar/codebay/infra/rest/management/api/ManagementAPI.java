@@ -1,4 +1,4 @@
-package com.quathar.codebay.infra.rest.api;
+package com.quathar.codebay.infra.rest.management.api;
 
 import static com.quathar.codebay.infra.rest.common.api.BaseAPI.BASE_URL;
 

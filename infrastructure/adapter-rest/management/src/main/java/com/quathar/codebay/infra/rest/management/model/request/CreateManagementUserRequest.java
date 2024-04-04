@@ -1,4 +1,4 @@
-package com.quathar.codebay.infra.rest.model.request;
+package com.quathar.codebay.infra.rest.management.model.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

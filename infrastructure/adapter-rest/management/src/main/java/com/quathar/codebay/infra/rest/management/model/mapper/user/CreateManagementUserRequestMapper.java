@@ -1,8 +1,8 @@
-package com.quathar.codebay.infra.rest.model.mapper.user;
+package com.quathar.codebay.infra.rest.management.model.mapper.user;
 
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.infra.rest.common.model.mapper.HttpUserRequestMapper;
-import com.quathar.codebay.infra.rest.model.request.CreateManagementUserRequest;
+import com.quathar.codebay.infra.rest.management.model.request.CreateManagementUserRequest;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
