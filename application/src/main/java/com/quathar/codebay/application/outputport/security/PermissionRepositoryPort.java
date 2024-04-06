@@ -5,13 +5,13 @@ import com.quathar.codebay.domain.model.security.GrantedPermission;
 import com.quathar.codebay.domain.model.security.RoleOperations;
 
 /**
- * <h1>Granted Permission Repository Port</h1>
+ * <h1>Permission Repository Port</h1>
  *
  * @since 2024-03-21
  * @version 1.0
  * @author Q
  */
-public interface GrantedPermissionRepositoryPort extends CrudRepositoryPort<GrantedPermission, java.util.UUID> {
+public interface PermissionRepositoryPort extends CrudRepositoryPort<GrantedPermission, java.util.UUID> {
 
     /**
      * Finds a list of roles with its associated operations.
