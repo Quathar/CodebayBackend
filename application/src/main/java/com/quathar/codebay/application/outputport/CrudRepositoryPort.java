@@ -2,10 +2,8 @@ package com.quathar.codebay.application.outputport;
 
 /**
  * <h1>CRUD Repository Port</h1>
- * <br>
- * <p>
- *     Represents a contract for basic CRUD operations on a domain model.
- * </p>
+ *
+ * Represents a contract for basic CRUD operations on a domain model.
  *
  * @param <M>  The domain model
  * @param <ID> The domain model identifier type
