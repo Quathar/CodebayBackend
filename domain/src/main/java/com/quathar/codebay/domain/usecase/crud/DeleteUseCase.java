@@ -1,4 +1,4 @@
-package com.quathar.codebay.application.usecase.crud;
+package com.quathar.codebay.domain.usecase.crud;
 
 /**
  * <h1>Delete Model Use Case</h1>
@@ -9,7 +9,7 @@ package com.quathar.codebay.application.usecase.crud;
  * @version 1.0
  * @author Q
  */
-public interface DeleteModelUseCase<ID>  {
+public interface DeleteUseCase<ID>  {
 
     /**
      * Deletes a domain model based on its identifier.

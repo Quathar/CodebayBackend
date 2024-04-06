@@ -1,4 +1,4 @@
-package com.quathar.codebay.application.usecase.crud;
+package com.quathar.codebay.domain.usecase.crud;
 
 /**
  * <h1>Update Model Use Case</h1>
@@ -9,7 +9,7 @@ package com.quathar.codebay.application.usecase.crud;
  * @version 1.0
  * @author Q
  */
-public interface UpdateModelUseCase<M>  {
+public interface UpdateUseCase<M>  {
 
     /**
      * Updates an existing domain model.
