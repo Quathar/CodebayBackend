@@ -1,4 +1,4 @@
-package com.quathar.codebay.application.usecase.security;
+package com.quathar.codebay.domain.usecase.security;
 
 import com.quathar.codebay.domain.model.security.TokenPair;
 

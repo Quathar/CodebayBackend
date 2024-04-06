@@ -1,6 +1,6 @@
 package com.quathar.codebay.application.inputport.security;
 
-import com.quathar.codebay.application.usecase.security.AuthenticationUseCase;
+import com.quathar.codebay.domain.usecase.security.AuthenticationUseCase;
 
 /**
  * <h1>Authentication Service Port</h1>
