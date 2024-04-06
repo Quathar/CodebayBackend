@@ -3,7 +3,7 @@ package com.quathar.codebay.domain.usecase.user;
 import com.quathar.codebay.domain.model.User;
 
 /**
- * <h1>Retrieve by username Use Case</h1>
+ * <h1>Read by Username Use Case</h1>
  *
  * @param <M> The type of the user model
  *
@@ -11,13 +11,13 @@ import com.quathar.codebay.domain.model.User;
  * @version 1.0
  * @author Q
  */
-public interface RetrieveByUsernameUseCase<M extends User> {
+public interface ReadByUsernameUseCase<M extends User> {
 
     /**
      * Retrieves a user by the username.
      *
-     * @param username the username of the user to retrieve
-     * @return the user model corresponding to the username
+     * @param username The username of the user to retrieve
+     * @return The user model corresponding to the username
      */
     M getByUsername(String username);
 
