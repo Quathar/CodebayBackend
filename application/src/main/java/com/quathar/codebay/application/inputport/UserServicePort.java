@@ -2,7 +2,7 @@ package com.quathar.codebay.application.inputport;
 
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.usecase.user.DeleteByUsernameUseCase;
-import com.quathar.codebay.domain.usecase.user.RetrieveByUsernameUseCase;
+import com.quathar.codebay.domain.usecase.user.ReadByUsernameUseCase;
 
 /**
  * <h1>User Service Port</h1>
@@ -13,6 +13,6 @@ import com.quathar.codebay.domain.usecase.user.RetrieveByUsernameUseCase;
  */
 public interface UserServicePort
        extends   CrudServicePort<User, java.util.UUID>,
-                 RetrieveByUsernameUseCase<User>,
-                 DeleteByUsernameUseCase<User> {
+                 ReadByUsernameUseCase<User>,
+                 DeleteByUsernameUseCase {
 }
