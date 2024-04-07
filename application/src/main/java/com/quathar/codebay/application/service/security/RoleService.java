@@ -1,9 +1,18 @@
 package com.quathar.codebay.application.service.security;
 
 import com.quathar.codebay.application.inputport.security.RoleServicePort;
-import com.quathar.codebay.application.outputport.security.RoleRepositoryPort;
 import com.quathar.codebay.application.service.CrudService;
 import com.quathar.codebay.domain.model.security.Role;
+import com.quathar.codebay.domain.usecase.crud.CreateModelUseCase;
+import com.quathar.codebay.domain.usecase.crud.DeleteModelUseCase;
+import com.quathar.codebay.domain.usecase.crud.ReadAllModelsUseCase;
+import com.quathar.codebay.domain.usecase.crud.ReadModelUseCase;
+import com.quathar.codebay.domain.usecase.crud.UpdateModelUseCase;
+
+import lombok.NonNull;
+import lombok.experimental.SuperBuilder;
+
+import java.util.UUID;
 
 /**
  * <h1>Role Service</h1>
@@ -12,18 +21,16 @@ import com.quathar.codebay.domain.model.security.Role;
  * @version 1.0
  * @author Q
  */
-public class      RoleService
-       extends    CrudService<Role, java.util.UUID>
-       implements RoleServicePort {
+@SuperBuilder(builderMethodName = "setup", buildMethodName = "seal")
+public final class RoleService
+       extends     CrudService<Role, UUID>
+       implements  RoleServicePort {
 
-    // <<-CONSTRUCTOR->>
-    /**
-     * Constructs a RoleService with the specified RoleRepositoryPort.
-     *
-     * @param roleRepositoryPort The port for role repository.
-     */
-    public RoleService(RoleRepositoryPort roleRepositoryPort) {
-        super(roleRepositoryPort);
-    }
+    // <<-FIELDS->>
+    @NonNull private final ReadAllModelsUseCase<Role>   readAllUseCase;
+    @NonNull private final ReadModelUseCase<Role, UUID> readUseCase;
+    @NonNull private final CreateModelUseCase<Role>     createUseCase;
+    @NonNull private final UpdateModelUseCase<Role>     updateUseCase;
+    @NonNull private final DeleteModelUseCase<UUID>     deleteUseCase;
 
 }
