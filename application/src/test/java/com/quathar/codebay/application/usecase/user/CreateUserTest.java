@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
  * @author Q
  */
 @ExtendWith(MockitoExtension.class)
-class CreateUserImplTest {
+class CreateUserTest {
 
     // <<-FIELDS->>
     @Mock
@@ -37,7 +37,7 @@ class CreateUserImplTest {
     @Mock
     private PasswordServicePort passwordServicePort;
     @InjectMocks
-    private CreateUserImpl createUserImpl;
+    private CreateUser createUser;
 
     // <<-TESTS->>
     @Test
@@ -70,7 +70,7 @@ class CreateUserImplTest {
         when( this.passwordServicePort.encode(password) ).thenReturn( "encodedPassword" );
 
         // [When]
-        User userToTest = this.createUserImpl.create(user);
+        User userToTest = this.createUser.create(user);
 
         // [Then]
         assertThat( userToTest.getId()                     ).isNotNull();

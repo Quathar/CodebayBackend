@@ -18,7 +18,7 @@ import com.quathar.codebay.domain.usecase.crud.CreateModelUseCase;
  * @version 1.0
  * @author Q
  */
-public record CreateUserImpl(
+public record CreateUser(
         UserRepositoryPort  userRepositoryPort,
         RoleRepositoryPort  roleRepositoryPort,
         PasswordServicePort passwordServicePort
