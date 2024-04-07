@@ -5,7 +5,7 @@ import com.quathar.codebay.application.outputport.UserRepositoryPort;
 import com.quathar.codebay.application.outputport.security.RoleRepositoryPort;
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.model.security.Role;
-import com.quathar.codebay.domain.usecase.crud.CreateUseCase;
+import com.quathar.codebay.domain.usecase.crud.CreateModelUseCase;
 
 /**
  * <h1>Create User Use Case Implementation</h1>
@@ -22,7 +22,7 @@ public record CreateUserImpl(
         UserRepositoryPort  userRepositoryPort,
         RoleRepositoryPort  roleRepositoryPort,
         PasswordEncoderPort passwordEncoderPort
-) implements CreateUseCase<User> {
+) implements CreateModelUseCase<User> {
 
     // <<-CONSTANTS->>
     /**
