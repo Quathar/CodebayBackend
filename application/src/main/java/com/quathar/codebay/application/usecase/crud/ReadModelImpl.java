@@ -2,7 +2,7 @@ package com.quathar.codebay.application.usecase.crud;
 
 import com.quathar.codebay.application.outputport.CrudRepositoryPort;
 import com.quathar.codebay.domain.exception.ResourceNotFoundException;
-import com.quathar.codebay.domain.usecase.crud.ReadUseCase;
+import com.quathar.codebay.domain.usecase.crud.ReadModelUseCase;
 
 /**
  * <h1>Read Model Use Case Implementation</h1>
@@ -16,7 +16,7 @@ import com.quathar.codebay.domain.usecase.crud.ReadUseCase;
  * @version 1.0
  * @author Q
  */
-public record ReadImpl<M, ID>(CrudRepositoryPort<M, ID> crudRepositoryPort) implements ReadUseCase<M, ID> {
+public record ReadModelImpl<M, ID>(CrudRepositoryPort<M, ID> crudRepositoryPort) implements ReadModelUseCase<M, ID> {
 
     @Override
     public M getById(ID id) {

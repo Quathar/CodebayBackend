@@ -1,7 +1,7 @@
 package com.quathar.codebay.application.usecase.crud;
 
 import com.quathar.codebay.application.outputport.CrudRepositoryPort;
-import com.quathar.codebay.domain.usecase.crud.UpdateUseCase;
+import com.quathar.codebay.domain.usecase.crud.UpdateModelUseCase;
 
 /**
  * <h1>Update Model Use Case Implementation</h1>
@@ -14,7 +14,7 @@ import com.quathar.codebay.domain.usecase.crud.UpdateUseCase;
  * @version 1.0
  * @author Q
  */
-public record UpdateImpl<M>(CrudRepositoryPort<M, ?> crudRepositoryPort) implements UpdateUseCase<M> {
+public record UpdateModelImpl<M>(CrudRepositoryPort<M, ?> crudRepositoryPort) implements UpdateModelUseCase<M> {
 
     @Override
     public M update(M model) {

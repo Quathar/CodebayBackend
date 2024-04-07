@@ -1,7 +1,7 @@
 package com.quathar.codebay.application.usecase.crud;
 
 import com.quathar.codebay.application.outputport.CrudRepositoryPort;
-import com.quathar.codebay.domain.usecase.crud.DeleteUseCase;
+import com.quathar.codebay.domain.usecase.crud.DeleteModelUseCase;
 
 /**
  * <h1>Delete Model Use Case Implementation</h1>
@@ -14,7 +14,7 @@ import com.quathar.codebay.domain.usecase.crud.DeleteUseCase;
  * @version 1.0
  * @author Q
  */
-public record DeleteImpl<ID>(CrudRepositoryPort<?, ID> crudRepositoryPort) implements DeleteUseCase<ID> {
+public record DeleteModelImpl<ID>(CrudRepositoryPort<?, ID> crudRepositoryPort) implements DeleteModelUseCase<ID> {
 
     @Override
     public void deleteById(ID id) {

@@ -1,7 +1,7 @@
 package com.quathar.codebay.application.usecase.crud;
 
 import com.quathar.codebay.application.outputport.CrudRepositoryPort;
-import com.quathar.codebay.domain.usecase.crud.CreateUseCase;
+import com.quathar.codebay.domain.usecase.crud.CreateModelUseCase;
 
 /**
  * <h1>Create Model Use Case Implementation</h1>
@@ -14,7 +14,7 @@ import com.quathar.codebay.domain.usecase.crud.CreateUseCase;
  * @version 1.0
  * @author Q
  */
-public record CreateImpl<M>(CrudRepositoryPort<M, ?> crudRepositoryPort) implements CreateUseCase<M> {
+public record CreateModelImpl<M>(CrudRepositoryPort<M, ?> crudRepositoryPort) implements CreateModelUseCase<M> {
 
     @Override
     public M create(M model) {
