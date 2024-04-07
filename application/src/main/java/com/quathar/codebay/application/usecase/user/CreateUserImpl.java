@@ -1,6 +1,6 @@
 package com.quathar.codebay.application.usecase.user;
 
-import com.quathar.codebay.application.inputport.security.PasswordEncoderPort;
+import com.quathar.codebay.application.inputport.security.PasswordServicePort;
 import com.quathar.codebay.application.outputport.UserRepositoryPort;
 import com.quathar.codebay.application.outputport.security.RoleRepositoryPort;
 import com.quathar.codebay.domain.model.User;
@@ -12,7 +12,7 @@ import com.quathar.codebay.domain.usecase.crud.CreateModelUseCase;
  *
  * @param userRepositoryPort  The user repository port for managing users
  * @param roleRepositoryPort  The role repository port for managing roles
- * @param passwordEncoderPort The password encoder port for encoding passwords
+ * @param passwordServicePort The password encoder port for encoding passwords
  *
  * @since 2023-12-10
  * @version 1.0
@@ -21,7 +21,7 @@ import com.quathar.codebay.domain.usecase.crud.CreateModelUseCase;
 public record CreateUserImpl(
         UserRepositoryPort  userRepositoryPort,
         RoleRepositoryPort  roleRepositoryPort,
-        PasswordEncoderPort passwordEncoderPort
+        PasswordServicePort passwordServicePort
 ) implements CreateModelUseCase<User> {
 
     // <<-CONSTANTS->>
@@ -50,7 +50,7 @@ public record CreateUserImpl(
      * @return The encoded password
      */
     private String encode(String rawPassword) {
-        return this.passwordEncoderPort.encode(rawPassword);
+        return this.passwordServicePort.encode(rawPassword);
     }
 
     /**

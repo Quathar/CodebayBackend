@@ -1,6 +1,6 @@
 package com.quathar.codebay.application.usecase.user;
 
-import com.quathar.codebay.application.inputport.security.PasswordEncoderPort;
+import com.quathar.codebay.application.inputport.security.PasswordServicePort;
 import com.quathar.codebay.application.outputport.UserRepositoryPort;
 import com.quathar.codebay.application.outputport.security.RoleRepositoryPort;
 import com.quathar.codebay.domain.model.User;
@@ -35,7 +35,7 @@ class CreateUserImplTest {
     @Mock
     private RoleRepositoryPort roleRepositoryPort;
     @Mock
-    private PasswordEncoderPort passwordEncoderPort;
+    private PasswordServicePort passwordServicePort;
     @InjectMocks
     private CreateUserImpl createUserImpl;
 
@@ -67,7 +67,7 @@ class CreateUserImplTest {
                     return retrievedUser;
                 });
         when( this.roleRepositoryPort.findByName(userRole) ).thenReturn( Optional.of(role) );
-        when( this.passwordEncoderPort.encode(password) ).thenReturn( "encodedPassword" );
+        when( this.passwordServicePort.encode(password) ).thenReturn( "encodedPassword" );
 
         // [When]
         User userToTest = this.createUserImpl.create(user);
