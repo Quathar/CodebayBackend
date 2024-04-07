@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter
 @Setter
-public class Administrator extends User {
+public final class Administrator extends User {
 
     // <<-FIELD->>
     private PersonalInfo personalInfo;
