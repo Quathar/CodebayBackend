@@ -8,14 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
- * <h1>JPA (Java Persistence API) Granted Permission Repository</h1>
+ * <h1>JPA (Java Persistence API) Permission Repository</h1>
  *
  * @since 2024-03-21
  * @version 1.0
  * @author Q
  */
 @Repository
-public interface JpaGrantedPermissionRepository extends JpaRepository<GrantedPermissionEntity,  java.util.UUID> {
+public interface JpaPermissionRepository extends JpaRepository<GrantedPermissionEntity,  java.util.UUID> {
 
     /**
      * Retrieves a list of roles with their associated operations grouped by role.

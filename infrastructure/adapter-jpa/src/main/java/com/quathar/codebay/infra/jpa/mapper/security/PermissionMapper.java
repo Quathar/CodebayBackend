@@ -12,20 +12,20 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
- * <h1>Granted Permission Mapper</h1>
+ * <h1>Permission Mapper</h1>
  *
  * @since 2024-03-21
  * @version 1.0
  * @author Q
  */
 @Mapper(uses = OperationMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface GrantedPermissionMapper extends ModelMapperPort<GrantedPermission, GrantedPermissionEntity> {
+public interface PermissionMapper extends ModelMapperPort<GrantedPermission, GrantedPermissionEntity> {
 
     // <<-CONSTANT->>
     /**
      * Instance of the GrantedPermissionMapper created by MapStruct.
      */
-    GrantedPermissionMapper INSTANCE = Mappers.getMapper(GrantedPermissionMapper.class);
+    PermissionMapper INSTANCE = Mappers.getMapper(PermissionMapper.class);
 
     // <<-METHODS->>
     @Override
