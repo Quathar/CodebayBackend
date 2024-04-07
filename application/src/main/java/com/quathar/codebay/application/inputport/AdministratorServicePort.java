@@ -2,7 +2,7 @@ package com.quathar.codebay.application.inputport;
 
 import com.quathar.codebay.domain.model.Administrator;
 import com.quathar.codebay.domain.usecase.user.DeleteByUsernameUseCase;
-import com.quathar.codebay.domain.usecase.user.RetrieveByUsernameUseCase;
+import com.quathar.codebay.domain.usecase.user.ReadByUsernameUseCase;
 
 /**
  * <h1>Administrator Service Port</h1>
@@ -13,6 +13,6 @@ import com.quathar.codebay.domain.usecase.user.RetrieveByUsernameUseCase;
  */
 public interface AdministratorServicePort
        extends   CrudServicePort<Administrator, java.util.UUID>,
-                 RetrieveByUsernameUseCase<Administrator>,
-                 DeleteByUsernameUseCase<Administrator> {
+                 ReadByUsernameUseCase<Administrator>,
+                 DeleteByUsernameUseCase {
 }
