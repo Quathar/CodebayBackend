@@ -9,7 +9,7 @@ package com.quathar.codebay.domain.usecase.crud;
  * @version 1.0
  * @author Q
  */
-public interface CreateUseCase<M> {
+public interface CreateModelUseCase<M> {
 
     /**
      * Creates a new domain model.

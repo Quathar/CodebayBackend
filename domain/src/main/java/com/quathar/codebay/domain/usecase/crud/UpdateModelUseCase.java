@@ -9,7 +9,7 @@ package com.quathar.codebay.domain.usecase.crud;
  * @version 1.0
  * @author Q
  */
-public interface UpdateUseCase<M>  {
+public interface UpdateModelUseCase<M>  {
 
     /**
      * Updates an existing domain model.

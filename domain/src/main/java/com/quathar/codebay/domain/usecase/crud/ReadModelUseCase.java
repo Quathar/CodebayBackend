@@ -10,7 +10,7 @@ package com.quathar.codebay.domain.usecase.crud;
  * @version 1.0
  * @author Q
  */
-public interface ReadUseCase<M, ID>  {
+public interface ReadModelUseCase<M, ID>  {
 
     /**
      * Retrieves a domain model based on its identifier.

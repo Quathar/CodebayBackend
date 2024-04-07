@@ -9,7 +9,7 @@ package com.quathar.codebay.domain.usecase.crud;
  * @version 1.0
  * @author Q
  */
-public interface DeleteUseCase<ID>  {
+public interface DeleteModelUseCase<ID>  {
 
     /**
      * Deletes a domain model based on its identifier.

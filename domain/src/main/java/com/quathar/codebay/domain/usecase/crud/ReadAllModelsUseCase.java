@@ -9,7 +9,7 @@ package com.quathar.codebay.domain.usecase.crud;
  * @version 1.0
  * @author Q
  */
-public interface ReadAllUseCase<M> {
+public interface ReadAllModelsUseCase<M> {
 
     /**
      * Retrieves a collection of domain models with pagination support.
