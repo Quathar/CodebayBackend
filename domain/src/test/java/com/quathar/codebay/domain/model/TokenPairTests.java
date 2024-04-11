@@ -2,6 +2,7 @@ package com.quathar.codebay.domain.model;
 
 import com.quathar.codebay.domain.manager.MockProvider;
 
+import com.quathar.codebay.domain.model.security.TokenPair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,13 +28,12 @@ class TokenPairTests {
 
     @Test
     void fullArgsConstructorTest() {
-        TokenPair tokenPair = new TokenPair(
-                this.mock.getType(),
-                this.mock.getRefreshToken(),
-                this.mock.getAccessToken()
-        );
+        TokenPair tokenPair = null;
+//        TokenPair tokenPair = new TokenPair(
+//                this.mock.getRefreshToken(),
+//                this.mock.getAccessToken()
+//        );
 
-        assertThat( tokenPair.getType()         ).isEqualTo( this.mock.getType() );
         assertThat( tokenPair.getRefreshToken() ).isEqualTo( this.mock.getRefreshToken() );
         assertThat( tokenPair.getAccessToken()  ).isEqualTo( this.mock.getAccessToken() );
     }
@@ -42,11 +42,9 @@ class TokenPairTests {
     void setterTest() {
         TokenPair tokenPair = TokenPair.builder().build();
 
-        tokenPair.setType        ( this.mock.getType() );
         tokenPair.setRefreshToken( this.mock.getRefreshToken() );
         tokenPair.setAccessToken ( this.mock.getAccessToken() );
 
-        assertThat( tokenPair.getType()         ).isEqualTo( this.mock.getType() );
         assertThat( tokenPair.getRefreshToken() ).isEqualTo( this.mock.getRefreshToken() );
         assertThat( tokenPair.getAccessToken()  ).isEqualTo( this.mock.getAccessToken() );
     }
@@ -54,12 +52,10 @@ class TokenPairTests {
     @Test
     void builderTest() {
         TokenPair tokenPair = TokenPair.builder()
-                .type        ( this.mock.getType() )
                 .refreshToken( this.mock.getRefreshToken() )
                 .accessToken ( this.mock.getAccessToken() )
                 .build();
 
-        assertThat( tokenPair.getType()         ).isEqualTo( this.mock.getType() );
         assertThat( tokenPair.getRefreshToken() ).isEqualTo( this.mock.getRefreshToken() );
         assertThat( tokenPair.getAccessToken()  ).isEqualTo( this.mock.getAccessToken() );
     }

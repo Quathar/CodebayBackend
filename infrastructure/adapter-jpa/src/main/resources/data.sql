@@ -66,7 +66,7 @@ insert into Granted_Permission(id, role_id, operation_id)
 
         -- USER Permissions
         ('33a8641e-2fb8-40ec-a797-970683165b85', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', '77b678af-db22-4920-821b-a89ef5869fbe'), -- USER, READ_MY_PROFILE
-        ('33a8641e-2fb8-40ec-a797-970683165b85', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- USER, MODIFY_MY_PROFILE
+        ('5c436f0f-3fb6-432a-9117-a57367a3b713', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- USER, MODIFY_MY_PROFILE
         ('f8971916-93e5-4b59-8428-0f756385e018', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'f6ae619f-8fdb-4948-bd09-9c2c32105b91'); -- USER, DELETE_MY_PROFILE
 
 -- [ USER SCHEMA ]

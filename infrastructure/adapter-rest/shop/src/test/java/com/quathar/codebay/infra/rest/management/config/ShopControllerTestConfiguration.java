@@ -1,6 +1,6 @@
 package com.quathar.codebay.infra.rest.config;
 
-import com.quathar.codebay.infra.rest.controller.ExceptionControllerAdvice;
+import com.quathar.codebay.infra.rest.common.controller.CommonControllerAdvice;
 import com.quathar.codebay.infra.rest.controller.UserController;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,7 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
  */
 @WebMvcTest
 @ContextConfiguration(classes = {
-        ExceptionControllerAdvice.class,
+        CommonControllerAdvice.class,
         UserController.class
 })
 public abstract class ShopControllerTestConfiguration {

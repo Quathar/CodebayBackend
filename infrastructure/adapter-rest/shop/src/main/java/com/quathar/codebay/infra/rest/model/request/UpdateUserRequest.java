@@ -1,6 +1,5 @@
 package com.quathar.codebay.infra.rest.model.request;
 
-import com.quathar.codebay.domain.model.enumerator.UserStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -31,7 +30,5 @@ public record UpdateUserRequest(
         String nickname,
         @NotBlank
         @Pattern(regexp = "^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}(\\.[a-zA-Z]{2,3})?$")
-        String email,
-        @NotNull
-        UserStatus status
+        String email
 ) {}

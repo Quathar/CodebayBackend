@@ -15,7 +15,7 @@ import org.mapstruct.factory.Mappers;
  * @version 1.0
  * @author Q
  */
-@Mapper(uses = GrantedPermissionMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(uses = PermissionMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RoleMapper extends ModelMapperPort<Role, RoleEntity> {
 
     /**

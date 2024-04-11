@@ -1,15 +1,9 @@
 package com.quathar.codebay.infra.rest.model.response;
 
-import java.util.UUID;
-
 /**
  * <h1>Basic User Response</h1>
- * <br>
- * <p>
- *     Represents a basic user response containing essential user details.
- * </p>
+ * Represents a basic user response containing essential user details.
  *
- * @param id       The unique identifier of the user.
  * @param username The username of the user.
  * @param nickname The user's nickname or display name.
  * @param email    The user's email address.
@@ -19,7 +13,6 @@ import java.util.UUID;
  * @author Q
  */
 public record BasicUserResponse(
-        UUID   id,
         String username,
         String nickname,
         String email

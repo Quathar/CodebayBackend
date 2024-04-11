@@ -8,9 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -88,10 +90,20 @@ public class SecurityControllerAdvice {
      * @return A map containing the error message for access denied.
      */
     @ExceptionHandler(AccessDeniedException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public Map<String, String> handleAccessDeniedException(AccessDeniedException exception) {
+    public ResponseEntity<Map<String, String>> handleAccessDeniedException(AccessDeniedException exception) {
+        if (SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal()
+                .equals("anonymousUser")) {
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body(this.handleInvalidCredentialsException());
+        }
         log.debug("ACCESS DENIED");
-        return Map.of("error", "ACCESS DENIED");
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(Map.of("error", "ACCESS DENIED"));
     }
 
 }

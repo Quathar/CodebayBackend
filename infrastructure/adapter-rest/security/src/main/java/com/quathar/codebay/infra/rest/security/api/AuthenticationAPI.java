@@ -44,7 +44,7 @@ public interface AuthenticationAPI {
      * @param authRequest The authentication request containing username and password.
      * @return The authentication response.
      */
-    @PostMapping(value = "/username",
+    @PostMapping(path = "/username",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
@@ -59,7 +59,7 @@ public interface AuthenticationAPI {
      * @param authRequest The authentication request containing email and password.
      * @return The authentication response.
      */
-    @PostMapping(value = "/email",
+    @PostMapping(path = "/email",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
@@ -75,7 +75,7 @@ public interface AuthenticationAPI {
      * @param authRequest The authentication request containing id and password.
      * @return The authentication response.
      */
-    @PostMapping(value = "/id",
+    @PostMapping(path = "/id",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)

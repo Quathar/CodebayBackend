@@ -7,14 +7,16 @@ import com.quathar.codebay.domain.model.common.BankCard;
 import com.quathar.codebay.domain.model.common.Coordinates;
 import com.quathar.codebay.domain.model.common.Image;
 import com.quathar.codebay.domain.model.enumerator.Gender;
-import com.quathar.codebay.domain.model.enumerator.UserStatus;
+import com.quathar.codebay.domain.model.security.*;
 import com.quathar.codebay.domain.model.type.CustomerType;
 import com.quathar.codebay.domain.model.type.DocumentType;
 import com.quathar.codebay.domain.model.type.OrderStatus;
+import com.quathar.codebay.domain.model.valueobject.PersonalInfo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -31,16 +33,30 @@ import java.util.UUID;
  */
 public abstract class MockProvider {
 
+    // <<-CONSTANTS->>
+    private static final int INTEGER = 0;
+    private static final String STRING = "string";
+    private static final UUID IDENTIFIER = UUID.randomUUID();
+    private static final LocalDateTime NOW = LocalDateTime.now();
+
     public static <M> M getInstance(Class<M> clazz) {
         return clazz.cast(createInstance(clazz));
     }
 
     private static Object createInstance(Class<?> clazz) {
         return switch (clazz.getSimpleName()) {
+            case "Role"              -> getRoleModel();
+            case "Operation"         -> getOperationModel();
+            case "GrantedPermission" -> getGrantedPermissionModel();
+            case "TokenPair"         -> getTokenPairModel();
+            case "RoleOperations"    -> getRoleOperationsModel();
+            // ---
+            case "PersonalInfo"  -> getPersonalInfoValueObject();
+            case "User"          -> getUserModel();
             case "Administrator" -> getAdministratorModel();
+            case "Customer"      -> getCustomerModel();
             case "Catalog"       -> getCatalogModel();
             case "Category"      -> getCategoryModel();
-            case "Customer"      -> getCustomerModel();
             case "Order"         -> getOrderModel();
             case "Product"       -> getProductModel();
             case "Promotion"     -> getPromotionModel();
@@ -48,8 +64,6 @@ public abstract class MockProvider {
             case "Store"         -> getStoreModel();
             case "Supplier"      -> getSupplierModel();
             case "SupplierOrder" -> getSupplierOrderModel();
-            case "TokenPair"     -> getTokenPairModel();
-            case "User"          -> getUserModel();
             case "Warning"       -> getWarningModel();
             case "Audit"        -> getAuditModel();
             case "DocumentType" -> getDocumentTypeModel();
@@ -62,19 +76,93 @@ public abstract class MockProvider {
         };
     }
 
+    // [ SECURITY ]
+    private static Role getRoleModel() {
+        return Role.builder()
+                .id( IDENTIFIER )
+                .name( STRING )
+                .description( STRING )
+                .grantedPermissions( List.of(GrantedPermission.builder().build()) )
+                .build();
+    }
+
+    private static Operation getOperationModel() {
+        return Operation.builder()
+                .id( IDENTIFIER )
+                .name( STRING )
+                .build();
+    }
+
+    private static GrantedPermission getGrantedPermissionModel() {
+        return GrantedPermission.builder()
+                .id( IDENTIFIER )
+                .role( getRoleModel() )
+                .operation( getOperationModel() )
+                .build();
+    }
+
+    private static TokenPair getTokenPairModel() {
+        return TokenPair.builder()
+                .accessToken( STRING )
+                .refreshToken( STRING )
+                .build();
+    }
+
+    private static RoleOperations getRoleOperationsModel() {
+        return RoleOperations.builder()
+                .role( STRING )
+                .operations( Set.of(STRING) )
+                .build();
+    }
+
+    // [ USERS ]
+    private static PersonalInfo getPersonalInfoValueObject() {
+        return PersonalInfo.builder()
+//                .document()
+                .name( STRING )
+                .surnames( STRING )
+                .gender( STRING )
+                .birthdate( NOW.toLocalDate() )
+//                .phone()
+                .build();
+    }
+
+    private static User getUserModel() {
+        return User.builder()
+                .id( IDENTIFIER )
+                .username( STRING )
+                .password( STRING )
+                .nickname( STRING )
+                .email( STRING )
+                .status( STRING )
+                .role( getRoleModel() )
+                .successfulAuth( INTEGER )
+                .failedAuth( INTEGER )
+                .creationDate( NOW )
+                .passwordExpirationDate( NOW )
+                .endBlockDate( NOW )
+                .lastConnection( NOW )
+//                .audit( getAuditModel() )
+                .build();
+    }
+
     private static Administrator getAdministratorModel() {
         return Administrator.builder()
-                .id( UUID.randomUUID() )
-                .username( "sudo" )
-                .password( "password" )
-                .nickname( "nickname" )
-                .email( "email" )
-                .successfulAuth( 0 )
-                .failedAuth( 0 )
-                .lastConnection( LocalDateTime.now() )
-                .releaseBlock( LocalDateTime.now() )
-                .status( UserStatus.ACTIVE )
-                .audit( getAuditModel() )
+                .personalInfo( getPersonalInfoValueObject() )
+                .build();
+    }
+
+    private static Customer getCustomerModel() {
+        return Customer.builder()
+                .personalInfo( getPersonalInfoValueObject() )
+                .country( null )
+                .homeAddress( null )
+                .addresses( null )
+                .bankCards( null )
+                .accumulatedExpenditure( BigDecimal.valueOf(56.25) )
+                .type( null )
+                .comments( STRING )
+                .license( true )
                 .build();
     }
 
@@ -98,29 +186,6 @@ public abstract class MockProvider {
                 .description( "description" )
                 .parentCategory( otherCategory )
                 .childCategories( Set.of(otherCategory) )
-                .audit( getAuditModel() )
-                .build();
-    }
-
-    private static Customer getCustomerModel() {
-        return Customer.builder()
-                .id( UUID.randomUUID() )
-                .user( getUserModel() )
-                .documentType( null )
-                .document( "12345678A" )
-                .name( "John" )
-                .surnames( "Doe" )
-                .gender( Gender.MALE )
-                .birthdate( LocalDate.parse("1999-09-09") )
-                .country( null )
-                .phoneNumber( "+34 612 34 56 78" )
-                .homeAddress( null )
-                .addresses( null )
-                .bankCards( null )
-                .accumulatedExpenditure( BigDecimal.valueOf(56.25) )
-                .type( null )
-                .comments( "comments" )
-                .license( true )
                 .audit( getAuditModel() )
                 .build();
     }
@@ -188,30 +253,6 @@ public abstract class MockProvider {
     private static SupplierOrder getSupplierOrderModel() {
         return SupplierOrder.builder()
                 .id( UUID.randomUUID() )
-                .build();
-    }
-
-    private static TokenPair getTokenPairModel() {
-        return TokenPair.builder()
-                .type( "Bearer..." )
-                .refreshToken( "refreshToken..." )
-                .accessToken( "accessToken..." )
-                .build();
-    }
-
-    private static User getUserModel() {
-        return Administrator.builder()
-                .id( UUID.randomUUID() )
-                .username( "jdoe" )
-                .password( "password" )
-                .nickname( "John Doe" )
-                .email( "jdoe@email.com" )
-                .successfulAuth( 2 )
-                .failedAuth( 1 )
-                .lastConnection( LocalDateTime.now() )
-                .releaseBlock( LocalDateTime.now() )
-                .status( UserStatus.ACTIVE )
-                .audit( getAuditModel() )
                 .build();
     }
 

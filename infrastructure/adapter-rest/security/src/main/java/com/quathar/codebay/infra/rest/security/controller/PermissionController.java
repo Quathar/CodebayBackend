@@ -1,6 +1,6 @@
 package com.quathar.codebay.infra.rest.security.controller;
 
-import com.quathar.codebay.application.inputport.security.GrantedPermissionServicePort;
+import com.quathar.codebay.application.inputport.security.PermissionServicePort;
 import com.quathar.codebay.domain.model.security.GrantedPermission;
 import com.quathar.codebay.domain.model.security.RoleOperations;
 import com.quathar.codebay.infra.rest.common.factory.HttpCommonFactory;
@@ -26,7 +26,7 @@ import java.util.UUID;
  * Controller for managing permissions.
  *
  * @see PermissionAPI
- * @see GrantedPermissionServicePort
+ * @see PermissionServicePort
  * @since 2024-03-21
  * @version 1.0
  * @author Q
@@ -40,17 +40,17 @@ public class PermissionController implements PermissionAPI {
     /**
      * The port for granted permission service.
      */
-    private final GrantedPermissionServicePort grantedPermissionServicePort;
+    private final PermissionServicePort permissionServicePort;
 
     // <<-CONSTRUCTOR->>
     /**
      * Constructs a {@code GrantedPermissionController} with the specified {@code GrantedPermissionServicePort}.
      *
-     * @param grantedPermissionServicePort The port for granted permission service.
+     * @param permissionServicePort The port for granted permission service.
      */
     @Autowired
-    public PermissionController(GrantedPermissionServicePort grantedPermissionServicePort) {
-        this.grantedPermissionServicePort = grantedPermissionServicePort;
+    public PermissionController(PermissionServicePort permissionServicePort) {
+        this.permissionServicePort = permissionServicePort;
     }
 
     // <<-METHODS->>
@@ -58,7 +58,7 @@ public class PermissionController implements PermissionAPI {
     public PageContentResponse<GrantedPermissionResponse> getAll(PageContentRequest pageContentRequest) {
         Integer pageIndex = pageContentRequest.page();
         Integer pageSize  = pageContentRequest.size();
-        List<GrantedPermissionResponse> grantedPermissions = this.grantedPermissionServicePort
+        List<GrantedPermissionResponse> grantedPermissions = this.permissionServicePort
                 .getAll( pageIndex, pageSize )
                 .stream()
                 .map( HttpSecurityFactory.getGrantedPermissionResponse()::fromModel )
@@ -75,7 +75,7 @@ public class PermissionController implements PermissionAPI {
 
     @Override
     public PageContentResponse<RoleOperations> getAllGroupedByRole() {
-        List<RoleOperations> grantedPermissionsGroupedByRole = this.grantedPermissionServicePort.getAllGroupedByRole();
+        List<RoleOperations> grantedPermissionsGroupedByRole = this.permissionServicePort.getAllGroupedByRole();
 
         log.debug("Retrieving all granted permissions grouped by role");
 
@@ -89,7 +89,7 @@ public class PermissionController implements PermissionAPI {
     @Override
     public GrantedPermissionResponse getById(UUID id) {
         log.debug("Retrieving granted permission with ID: {}", id);
-        GrantedPermission grantedPermission = this.grantedPermissionServicePort.getById(id);
+        GrantedPermission grantedPermission = this.permissionServicePort.getById(id);
         return HttpSecurityFactory.getGrantedPermissionResponse().fromModel(grantedPermission);
     }
 
@@ -101,14 +101,14 @@ public class PermissionController implements PermissionAPI {
 
         log.debug("Granting permission: {}", grantPermissionRequest);
 
-        GrantedPermission grantedPermission = this.grantedPermissionServicePort.create(permissionToBeGranted);
+        GrantedPermission grantedPermission = this.permissionServicePort.grant(permissionToBeGranted);
         return HttpSecurityFactory.getGrantedPermissionResponse().fromModel(grantedPermission);
     }
 
     @Override
     public void delete(UUID id) {
         log.debug("Deleting granted permission with ID: {}", id);
-        this.grantedPermissionServicePort.deleteById(id);
+        this.permissionServicePort.revoke(id);
     }
 
 }

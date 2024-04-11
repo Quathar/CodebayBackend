@@ -1,5 +1,6 @@
 package com.quathar.codebay.infra.jpa;
 
+import com.quathar.codebay.infra.jpa.adapter.JpaUserRepositoryAdapter;
 import com.quathar.codebay.infra.jpa.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ class JpaUserRepositoryAdapterTest {
     @Autowired
     JpaUserRepositoryAdapterTest(JpaUserRepositoryAdapter jpaUserRepositoryAdapter) {
         this.jpaUserRepositoryAdapter = jpaUserRepositoryAdapter;
-        this.userMapper               = UserMapper.getInstance();
+        this.userMapper               = UserMapper.INSTANCE;
     }
 
     // <<-TESTS->>

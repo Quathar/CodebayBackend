@@ -1,30 +1,30 @@
-package com.quathar.codebay.infra.rest.security.adapter;
+package com.quathar.codebay.infra.rest.security.usecase;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
 
-import com.quathar.codebay.application.inputport.security.JwtServicePort;
 import com.quathar.codebay.domain.model.security.TokenPair;
+import com.quathar.codebay.domain.usecase.security.token.GenerateTokenPairUseCase;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.util.Map;
 
 /**
- * <h1>JWT (JSON Web Token) Service Adapter</h1>
+ * <h1>Generate Token Pair Use Case Implementation</h1>
  *
  * @since 2024-03-10
  * @version 1.0
  * @author Q
  */
-@Service
-public class JwtServiceAdapter implements JwtServicePort {
+@Component
+public final class GenerateTokenPair implements GenerateTokenPairUseCase {
 
     private static final Logger log = LoggerFactory.getLogger(JwtServiceAdapter.class);
 
@@ -52,7 +52,7 @@ public class JwtServiceAdapter implements JwtServicePort {
      */
     private final Long refreshTokenExpirationTime;
 
-    // <<-CONSTRUCTOR->>
+
     /**
      * Constructs a {@code JwtServiceAdapter} with the provided secret key and token expiration times.
      *
@@ -61,7 +61,7 @@ public class JwtServiceAdapter implements JwtServicePort {
      * @param refreshTokenExpirationTime The expiration time for refresh tokens, in seconds.
      */
     @Autowired
-    public JwtServiceAdapter(
+    public GenerateTokenPair(
             @Value("${jwt.secret-key}")
             String secretKey,
             @Value("${jwt.access-token.expiration-time}")
@@ -75,7 +75,6 @@ public class JwtServiceAdapter implements JwtServicePort {
         this.refreshTokenExpirationTime = refreshTokenExpirationTime;
     }
 
-    // <<-METHODS->>
     /**
      * Generates the key byte array from the secret key string.
      *
@@ -86,7 +85,7 @@ public class JwtServiceAdapter implements JwtServicePort {
     }
 
     @Override
-    public TokenPair generateTokenPair(String subject, java.util.Map<String, ?> extraClaims) {
+    public TokenPair generateTokenPair(String subject, Map<String, ?> extraClaims) {
         Instant now = Instant.now();
         Instant accessTokenExpirationTime  = now.plusSeconds(this.accessTokenExpirationTime);
         Instant refreshTokenExpirationTime = now.plusSeconds(this.refreshTokenExpirationTime);
@@ -126,23 +125,6 @@ public class JwtServiceAdapter implements JwtServicePort {
     @Override
     public TokenPair generateTokenPair(String subject) {
         return this.generateTokenPair(subject, null);
-    }
-
-    /**
-     * Verifies the authenticity of the provided token.
-     *
-     * @param token The token to verify.
-     * @return The decoded JWT if verification is successful.
-     */
-    private DecodedJWT verify(String token) {
-        return JWT.require( this.algorithm )
-                .build()
-                .verify( token );
-    }
-
-    @Override
-    public String extractUsername(String token) {
-        return this.verify(token).getSubject();
     }
 
 }
