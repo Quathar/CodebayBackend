@@ -1,32 +1,30 @@
 plugins {
     java
-    id("org.springframework.boot")        version "3.2.0"
-    id("io.spring.dependency-management") version "1.1.4"
+    id( Plugin.SPRING_BOOT_PLUGIN ) version Version.SPRING_BOOT_VERSION
+    id( Plugin.SPRING_DM          ) version Version.SPRING_DM_VERSION
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_17
-
 allprojects {
+    apply( plugin = Plugin.JAVA_PLUGIN        )
+    apply( plugin = Plugin.SPRING_BOOT_PLUGIN )
+    apply( plugin = Plugin.SPRING_DM          )
+
     group   = "com.quathar.codebay"
     version = "0.0.1-SNAPSHOT"
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
 
     repositories {
         mavenCentral()
     }
-}
-
-subprojects {
-    apply(plugin = "java")
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
 
     dependencies {
-        // Lombok
-        compileOnly("org.projectlombok:lombok")
-        annotationProcessor("org.projectlombok:lombok")
-
-        // JUnit
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        compileOnly        ( Lib.LOMBOK           )
+        annotationProcessor( Lib.LOMBOK_PROCESSOR )
+        testImplementation ( Lib.SPRING_BOOT_TEST )
     }
 
     tasks.withType<Test> {
@@ -35,54 +33,46 @@ subprojects {
 }
 
 // <<-PROJECTS CONFIGURATION->>
-project(":domain") {
-    // In a typical Spring Boot project, the bootJar task
-    // generates an executable JAR file containing all the necessary dependencies
-    // and configurations to run the Spring Boot application.
-    // On the other hand, the jar task
-    // generates a standard JAR file containing only the project's compiled classes.
-    tasks.getByName("bootJar") {
-        enabled = false
-    }
+listOf(Module.DOMAIN, Module.APP, Module.INFRA)
+        .forEach { projectName ->
+            project(":$projectName") {
+                // In a typical Spring Boot project, the bootJar task
+                // generates an executable JAR file containing all the necessary dependencies
+                // and configurations to run the Spring Boot application.
+                // On the other hand, the jar task
+                // generates a standard JAR file containing only the project's compiled classes.
+                tasks.getByName("bootJar") {
+                    enabled = false
+                }
 
-    tasks.getByName("jar") {
-        enabled = true
+                tasks.getByName("jar") {
+                    enabled = true
+                }
+            }
+        }
+
+project(":${ Module.DOMAIN }") {
+    // Not necessary
+    // Only showing that domain doesn't have any dependency on other modules
+}
+
+project(":${ Module.APP }") {
+    dependencies {
+        implementation( project(":${ Module.DOMAIN }") )
     }
 }
 
-project(":application") {
-    tasks.getByName("bootJar") {
-        enabled = false
-    }
-
-    tasks.getByName("jar") {
-        enabled = true
-    }
-
+project(":${ Module.INFRA }") {
     dependencies {
-        implementation(project(":domain"))
+        implementation( project(":${ Module.DOMAIN }") )
+        implementation( project(":${ Module.APP    }") )
     }
 }
 
-project(":infrastructure") {
-    tasks.getByName("bootJar") {
-        enabled = false
-    }
-
-    tasks.getByName("jar") {
-        enabled = true
-    }
-
+project(":${ Module.BOOTLOADER }") {
     dependencies {
-        implementation(project(":domain"))
-        implementation(project(":application"))
-    }
-}
-
-project(":bootloader") {
-    dependencies {
-        implementation(project(":domain"))
-        implementation(project(":application"))
-        implementation(project(":infrastructure"))
+        implementation( project(":${ Module.DOMAIN }") )
+        implementation( project(":${ Module.APP    }") )
+        implementation( project(":${ Module.INFRA  }") )
     }
 }
