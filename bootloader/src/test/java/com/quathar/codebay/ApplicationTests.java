@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @author Q
  */
 @SpringBootTest
-class CodebayApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {

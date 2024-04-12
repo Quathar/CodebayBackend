@@ -1,7 +1,8 @@
 package com.quathar.codebay;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import static org.springframework.boot.SpringApplication.run;
 
 /**
  * <h1>Codebay Application</h1>
@@ -11,10 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Q
  */
 @SpringBootApplication
-public class CodebayApplication {
+public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CodebayApplication.class, args);
-	}
+    public static void main(String... quathar) {
+        run( Application.class, quathar );
+    }
 
 }
