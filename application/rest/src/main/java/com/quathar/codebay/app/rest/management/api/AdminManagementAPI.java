@@ -80,7 +80,6 @@ public interface AdminManagementAPI {
      */
     @GetMapping(path = "/username/{username}", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('READ_ADMIN_BY_USERNAME')")
-    @PostAuthorize("returnObject.username == authentication.principal")
     @ResponseStatus(OK)
     ManagementAdminResponse getByUsername(@PathVariable String username);
 
@@ -106,7 +105,7 @@ public interface AdminManagementAPI {
             produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @ResponseStatus(CREATED)
-    ManagementAdminResponse signup(@RequestBody @Valid CreateAdminRequest createRequest);
+    FullAdminResponse signup(@Valid @RequestBody CreateAdminRequest createRequest);
 
     /**
      * Updates an existing admin.
@@ -122,7 +121,7 @@ public interface AdminManagementAPI {
     @ResponseStatus(OK)
     ManagementAdminResponse update(
             @PathVariable UUID id,
-            @RequestBody @Valid
+            @Valid @RequestBody
             UpdateAdminRequest updateRequest
     );
 

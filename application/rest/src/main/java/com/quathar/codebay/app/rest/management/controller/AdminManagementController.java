@@ -41,14 +41,14 @@ public class AdminManagementController implements AdminManagementAPI {
     /**
      * The port for admin service.
      */
-    private final AdministratorService adminServicePort;
+    private final AdministratorService adminService;
 
     // <<-METHODS->>
     @Override
     public PageContentResponse<FullAdminResponse> getAll(PageContentRequest pageContentRequest) {
         var pageIndex = pageContentRequest.page();
         var pageSize  = pageContentRequest.size();
-        var response  = this.adminServicePort
+        var response  = this.adminService
                 .getAll(pageIndex, pageSize)
                 .map(HttpManagementFactory.getFullAdminResponse()::fromModel)
                 .toList();
@@ -64,7 +64,7 @@ public class AdminManagementController implements AdminManagementAPI {
 
     @Override
     public FullAdminResponse getById(UUID id) {
-        Administrator admin = this.adminServicePort.getById(id);
+        Administrator admin = this.adminService.getById(id);
 
         log.debug("Retrieving administrator with ID: {}", id);
 
@@ -75,7 +75,7 @@ public class AdminManagementController implements AdminManagementAPI {
 
     @Override
     public ManagementAdminResponse getByUsername(String username) {
-        Administrator admin = this.adminServicePort.getByUsername(username);
+        Administrator admin = this.adminService.getByUsername(username);
 
         log.debug("Retrieving administrator with username: {}", username);
 
@@ -91,7 +91,7 @@ public class AdminManagementController implements AdminManagementAPI {
                 .getAuthentication()
                 .getPrincipal()
                 .toString();
-        Administrator admin = this.adminServicePort.getByUsername(username);
+        Administrator admin = this.adminService.getByUsername(username);
 
         log.debug("Retrieving administrator through <<Authentication>> with username: {}", username);
 
@@ -101,16 +101,16 @@ public class AdminManagementController implements AdminManagementAPI {
     }
 
     @Override
-    public ManagementAdminResponse signup(CreateAdminRequest createRequest) {
+    public FullAdminResponse signup(CreateAdminRequest createRequest) {
         Administrator adminToRegister = HttpManagementFactory
                 .setCreateAdminRequest()
                 .toModel(createRequest);
-        Administrator createdAdmin = this.adminServicePort.create(adminToRegister);
+        Administrator createdAdmin = this.adminService.create(adminToRegister);
 
         log.debug("Creating administrator: {}", createRequest);
 
         return HttpManagementFactory
-                .getManagementAdminResponse()
+                .getFullAdminResponse()
                 .fromModel(createdAdmin);
     }
 
@@ -120,7 +120,7 @@ public class AdminManagementController implements AdminManagementAPI {
                 .setUpdateAdminRequest()
                 .toModel(updateRequest);
         adminToUpdate.setId(id);
-        Administrator updatedAdmin = this.adminServicePort.update(adminToUpdate);
+        Administrator updatedAdmin = this.adminService.update(adminToUpdate);
 
         log.debug("Updating administrator with ID {}: {}", id, updateRequest);
 
@@ -132,7 +132,7 @@ public class AdminManagementController implements AdminManagementAPI {
     @Override
     public void delete(UUID id) {
         log.debug("Deleting administrator with ID: {}", id);
-        this.adminServicePort.deleteById(id);
+        this.adminService.deleteById(id);
     }
 
 }
