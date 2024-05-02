@@ -64,15 +64,16 @@ project(":${ Module.APP }") {
 
 project(":${ Module.INFRA }") {
     dependencies {
-        implementation( project(":${ Module.DOMAIN }") )
-        implementation( project(":${ Module.APP    }") )
+        implementation( project(":${ Module.DOMAIN   }") )
+        implementation( project(":${ Module.APP_CORE }") )
     }
 }
 
 project(":${ Module.BOOTLOADER }") {
     dependencies {
-        implementation( project(":${ Module.DOMAIN }") )
-        implementation( project(":${ Module.APP    }") )
-        implementation( project(":${ Module.INFRA  }") )
+        implementation( project(":${ Module.APP_REST         }") )
+        implementation( project(":${ Module.CONFIGURATION    }") )
+        implementation( project(":${ Module.SECURITY_ADAPTER }") )
+        implementation( project(":${ Module.JPA_ADAPTER      }") )
     }
 }
