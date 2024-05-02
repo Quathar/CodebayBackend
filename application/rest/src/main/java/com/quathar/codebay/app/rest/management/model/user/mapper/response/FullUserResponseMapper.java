@@ -1,6 +1,7 @@
 package com.quathar.codebay.app.rest.management.model.user.mapper.response;
 
 import com.quathar.codebay.app.rest.common.model.mapper.HttpUserResponseMapper;
+import com.quathar.codebay.app.rest.management.model.mapper.AuditResponseMapper;
 import com.quathar.codebay.app.rest.management.model.user.response.FullUserResponse;
 import com.quathar.codebay.domain.model.User;
 
@@ -18,7 +19,7 @@ import static org.mapstruct.ReportingPolicy.IGNORE;
  * @version 1.0
  * @author Q
  */
-@Mapper(unmappedTargetPolicy = IGNORE)
+@Mapper(uses = AuditResponseMapper.class, unmappedTargetPolicy = IGNORE)
 public interface FullUserResponseMapper extends HttpUserResponseMapper<FullUserResponse> {
 
     @Override
