@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 /**
- * <h1>Audit</h1>
+ * <h1>Audit Value Object</h1>
  *
  * @since 2023-05-13
  * @version 2.0
