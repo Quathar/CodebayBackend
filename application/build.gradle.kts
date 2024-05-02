@@ -27,5 +27,9 @@ project(":${ Module.APP_REST }") {
         implementation( Lib.SPRING_BOOT_WEB        )
         implementation( Lib.SPRING_BOOT_VALIDATION )
         implementation( Lib.SPRING_BOOT_SECURITY   )
+
+        // [ Mapstruct ]
+        implementation     ( Lib.MAPSTRUCT            )
+        annotationProcessor( Lib.MAPSTRUCT_PROCESSOR  )
     }
 }
