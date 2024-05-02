@@ -24,7 +24,7 @@ public final class DeleteAdminByUsernameUseCase implements DeleteByUsernameUseCa
      */
     private static final String DISABLED_STATUS = "DISABLED";
 
-    // <<-CONSTANT->>
+    // <<-FIELD->>
     /**
      * The administrator repository port.
      */
