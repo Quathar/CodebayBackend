@@ -15,7 +15,7 @@ insert into Role(id, name, description)
 insert into Operation(id, name)
     values
         ('77b678af-db22-4920-821b-a89ef5869fbe', 'READ_MY_PROFILE'),
-        ('c5004c5a-273a-42cb-a099-4d167b2e3392', 'MODIFY_MY_PROFILE'),
+        ('c5004c5a-273a-42cb-a099-4d167b2e3392', 'UPDATE_MY_PROFILE'),
         ('f6ae619f-8fdb-4948-bd09-9c2c32105b91', 'DELETE_MY_PROFILE'),
         ('33600df7-5a4d-48e4-b90b-9fa41bbf8c38', 'READ_ALL_ROLES'),
         ('9d05134c-244b-4204-a326-0ebe7415fbd8', 'READ_ROLE'),
@@ -93,8 +93,9 @@ insert into Granted_Permission(id, role_id, operation_id)
         ('b6fd3567-b738-45f3-83ca-56dedb19cd7c', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- ASSISTANT, MODIFY_MY_PROFILE
 
         -- USER Permissions
+        ('5b7241b9-a6e0-49c6-9fe0-627b79391be2', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', '94ce90e2-6106-4f26-a492-df3b7962b764'), -- ADMIN, READ_USER_BY_USERNAME
         ('33a8641e-2fb8-40ec-a797-970683165b85', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', '77b678af-db22-4920-821b-a89ef5869fbe'), -- USER, READ_MY_PROFILE
-        ('5c436f0f-3fb6-432a-9117-a57367a3b713', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- USER, MODIFY_MY_PROFILE
+        ('5c436f0f-3fb6-432a-9117-a57367a3b713', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- USER, UPDATE_MY_PROFILE
         ('f8971916-93e5-4b59-8428-0f756385e018', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'f6ae619f-8fdb-4948-bd09-9c2c32105b91'); -- USER, DELETE_MY_PROFILE
 
 -- [ USER SCHEMA ]
