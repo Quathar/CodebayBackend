@@ -6,13 +6,7 @@ import com.quathar.codebay.app.usecase.DeleteModelUseCase;
 import com.quathar.codebay.app.usecase.ReadAllModelsUseCase;
 import com.quathar.codebay.app.usecase.ReadModelUseCase;
 import com.quathar.codebay.app.usecase.UpdateModelUseCase;
-import com.quathar.codebay.app.usecase.user.CreateAdminUseCase;
-import com.quathar.codebay.app.usecase.user.CreateUserUseCase;
-import com.quathar.codebay.app.usecase.user.DeleteAdminById;
-import com.quathar.codebay.app.usecase.user.DeleteAdminByUsernameUseCase;
-import com.quathar.codebay.app.usecase.user.DeleteUserByUsernameUseCase;
-import com.quathar.codebay.app.usecase.user.ReadAdminByUsernameUseCase;
-import com.quathar.codebay.app.usecase.user.ReadUserByUsernameUseCase;
+import com.quathar.codebay.app.usecase.user.*;
 import com.quathar.codebay.domain.port.out.user.AdministratorRepositoryPort;
 import com.quathar.codebay.domain.port.out.user.UserRepositoryPort;
 import com.quathar.codebay.domain.port.out.security.PasswordServicePort;
@@ -43,6 +37,7 @@ public class ApplicationServiceConfig {
                 .readByUsernameUseCase( new ReadUserByUsernameUseCase(userRepositoryPort) )
                 .createUseCase( new CreateUserUseCase(userRepositoryPort, roleRepositoryPort, passwordServicePort) )
                 .updateUseCase( new UpdateModelUseCase<>(userRepositoryPort) )
+                .updateByUsernameUseCase( new UpdateUserByUsernameUseCase(userRepositoryPort) )
                 .deleteUseCase( new DeleteModelUseCase<>(userRepositoryPort) )
                 .deleteByUsernameUseCase( new DeleteUserByUsernameUseCase(userRepositoryPort) )
                 .seal();
