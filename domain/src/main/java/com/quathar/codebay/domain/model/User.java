@@ -20,7 +20,9 @@ import java.util.UUID;
 @SuperBuilder
 @Getter
 @Setter
-public sealed class User permits Administrator {
+public sealed class User
+       permits      Administrator,
+                    Customer {
 
     // <<-FIELDS->>
     private UUID          id;
