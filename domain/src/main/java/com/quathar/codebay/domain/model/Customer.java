@@ -1,7 +1,7 @@
 package com.quathar.codebay.domain.model;
 
-import com.quathar.codebay.domain.valueobject.shop.Address;
 import com.quathar.codebay.domain.valueobject.PersonalInfo;
+import com.quathar.codebay.domain.valueobject.shop.Address;
 import com.quathar.codebay.domain.valueobject.shop.BankCard;
 
 import lombok.Getter;
@@ -27,11 +27,21 @@ public final class Customer extends User {
     private PersonalInfo     personalInfo;
     private String           country;
     private Address          homeAddress;
-    private Stream<Address>  addresses;
+    private Stream<Address>  deliveryAddresses;
     private Stream<BankCard> bankCards;
     private BigDecimal       accumulatedExpenditure;
     private String           type;
     private String           comments;
     private Boolean          license;
+
+    // <<-METHOD->>
+    /**
+     * Updates the accumulated expenditure.
+     *
+     * @param expenditure The expenditure to add to the accumulated expenditure
+     */
+    public void updateExpenditure(BigDecimal expenditure) {
+        this.accumulatedExpenditure = this.accumulatedExpenditure.add(expenditure);
+    }
 
 }
