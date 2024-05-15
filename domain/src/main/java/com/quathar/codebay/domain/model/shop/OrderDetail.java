@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.stream.Stream;
 
 /**
  * <h1>Order Detail Model</h1>
@@ -22,5 +23,15 @@ public final class OrderDetail {
     private Product    product;
     private Integer    units;
     private BigDecimal price;
+
+    // <<-METHOD->>
+    /**
+     * Returns a sequential {@code Stream} containing only this order detail.
+     *
+     * @return A sequential {@code Stream} containing only this order detail
+     */
+    public Stream<OrderDetail> stream() {
+        return Stream.of(this);
+    }
 
 }
