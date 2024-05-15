@@ -26,7 +26,8 @@ public final class Order {
     // <<-FIELDS->>
     private UUID                id;
     private Customer            customer;
-    private LocalDateTime       date;
+    private LocalDateTime       creationDate;
+    private LocalDateTime       deliveryDate;
     private Stream<OrderDetail> details;
     private BigDecimal          totalPrice;
     private String              status;
