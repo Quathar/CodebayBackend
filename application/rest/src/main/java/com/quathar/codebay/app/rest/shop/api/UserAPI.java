@@ -6,7 +6,6 @@ import com.quathar.codebay.app.rest.shop.model.response.BasicUserResponse;
 
 import jakarta.validation.Valid;
 
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +44,7 @@ public interface UserAPI {
 
     // <<-METHODS->>
     /**
-     * Retrieves a model by their username.
+     * Retrieves a user by their username.
      *
      * @param username The username of the user.
      * @return BasicUserResponse containing the basic user information if found.
@@ -88,8 +87,7 @@ public interface UserAPI {
     @PutMapping(path = "/{username}",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAuthority('UPDATE_MY_PROFILE')")
-    @PostAuthorize("returnObject.username == authentication.principal")
+    @PreAuthorize("hasAuthority('UPDATE_MY_PROFILE') AND #username == authentication.principal")
     @ResponseStatus(OK)
     BasicUserResponse update(
             @PathVariable String username,
