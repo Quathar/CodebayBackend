@@ -7,12 +7,12 @@ import com.quathar.codebay.domain.model.Customer;
  *
  * Represents a contract for managing customer domain models.
  *
- * @see GenericUserRepositoryPort
+ * @see AbstractUserRepositoryPort
  * @see Customer
  * @since 2024-05-07
  * @version 1.0
  * @author Q
  */
 public interface CustomerRepositoryPort
-       extends   GenericUserRepositoryPort<Customer, java.util.UUID> {
+       extends   AbstractUserRepositoryPort<Customer, java.util.UUID> {
 }

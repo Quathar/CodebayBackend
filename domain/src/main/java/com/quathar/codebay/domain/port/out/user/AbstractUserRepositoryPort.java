@@ -16,7 +16,7 @@ import java.util.Optional;
  * @version 2.0
  * @author Q
  */
-public interface GenericUserRepositoryPort<M extends User, ID>
+public interface AbstractUserRepositoryPort<M extends User, ID>
        extends   CrudRepositoryPort<M, ID> {
 
     /**

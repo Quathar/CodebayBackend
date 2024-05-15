@@ -7,14 +7,14 @@ import com.quathar.codebay.domain.model.User;
  *
  * Represents a contract for managing User domain models.
  *
- * @see GenericUserRepositoryPort
+ * @see AbstractUserRepositoryPort
  * @see User
  * @since 2023-12-10
  * @version 2.0
  * @author Q
  */
 public interface UserRepositoryPort
-       extends   GenericUserRepositoryPort<User, java.util.UUID> {
+       extends   AbstractUserRepositoryPort<User, java.util.UUID> {
 
     /**
      * Retrieves a user by their unique authentication key.
