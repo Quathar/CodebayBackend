@@ -1,22 +1,24 @@
 package com.quathar.codebay.app.usecase.user;
 
-import com.quathar.codebay.domain.model.Administrator;
+import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.port.in.user.DeleteByUsernameUseCasePort;
-import com.quathar.codebay.domain.port.out.user.AdministratorRepositoryPort;
-
+import com.quathar.codebay.domain.port.out.user.AbstractUserRepositoryPort;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 
 /**
- * <h1>Delete Administrator by Username Use Case Implementation</h1>
+ * <h1>Delete abstract user by username Use Case Implementation</h1>
+ *
+ * @param <M> The type of abstract user
  *
  * @see DeleteByUsernameUseCasePort
+ * @see User
  * @since 2023-12-19
  * @version 1.0
  * @author Q
  */
 @AllArgsConstructor
-public final class DeleteAdminByUsernameUseCase implements DeleteByUsernameUseCasePort {
+public final class DeleteAbstractUserByUsernameUseCase<M extends User> implements DeleteByUsernameUseCasePort {
 
     // <<-CONSTANT->>
     /**
@@ -26,25 +28,25 @@ public final class DeleteAdminByUsernameUseCase implements DeleteByUsernameUseCa
 
     // <<-FIELD->>
     /**
-     * The administrator repository port.
+     * The abstract repository port.
      */
     @NonNull
-    private final AdministratorRepositoryPort adminRepositoryPort;
+    private final AbstractUserRepositoryPort<M, ?> abstractUserRepositoryPort;
 
     // <<-METHODS->>
     /**
-     * Deactivates an admin.
+     * Deactivates a user.
      *
-     * @param admin The admin to deactivate
+     * @param admin The user to deactivate
      */
-    private void deactivate(Administrator admin) {
+    private void deactivate(M admin) {
         admin.setStatus(DISABLED_STATUS);
-        this.adminRepositoryPort.save(admin);
+        this.abstractUserRepositoryPort.save(admin);
     }
 
     @Override
     public void deleteByUsername(String username) {
-        this.adminRepositoryPort
+        this.abstractUserRepositoryPort
                 .findByUsername(username)
                 .ifPresent(this::deactivate);
     }
