@@ -13,6 +13,7 @@ import lombok.experimental.SuperBuilder;
  *
  * @param <M> The user type
  *
+ * @see CrudService
  * @see ReadByUsernameUseCasePort
  * @see DeleteByUsernameUseCasePort
  * @since 2024-04-14
@@ -25,7 +26,8 @@ public sealed class CommonUserService<M extends User>
        implements   ReadByUsernameUseCasePort<M>,
                     DeleteByUsernameUseCasePort
        permits      UserService,
-                    AdministratorService {
+                    AdministratorService,
+                    CustomerService {
 
     // <<-FIELDS->>
     @NonNull protected final ReadByUsernameUseCasePort<M> readByUsernameUseCase;
