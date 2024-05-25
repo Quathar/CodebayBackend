@@ -156,12 +156,12 @@ public interface CustomerProfileAPI {
      * Moves a product from the authenticated customer's wish list to their shopping cart.
      *
      * @param productCode The code of the product to move.
-     * @return A {@link BasicCartResponse} containing the updated cart information.
+     * @return A {@link BasicWishListResponse} containing the updated wish list information.
      */
     @PostMapping(path = "/wish-list/move/{productCode}", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('MOVE_WISHLIST_TO_CART')")
     @ResponseStatus(OK)
-    BasicCartResponse fromWishListToCart(@PathVariable String productCode);
+    BasicWishListResponse fromWishListToCart(@PathVariable String productCode);
 
     // [ ORDERS ]
     /**
