@@ -44,7 +44,9 @@ public interface CustomerAPI {
      * @param createRequest The request body containing the information of the customer to be registered.
      * @return {@link BasicCustomerResponse} containing the registered customer information.
      */
-    @PostMapping(path = "/sign-up", produces = APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/sign-up",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(CREATED)
     BasicCustomerResponse signup(@Valid @RequestBody CreateCustomerRequest createRequest);
