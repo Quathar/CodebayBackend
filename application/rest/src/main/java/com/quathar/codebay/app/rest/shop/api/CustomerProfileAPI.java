@@ -2,6 +2,7 @@ package com.quathar.codebay.app.rest.shop.api;
 
 import com.quathar.codebay.app.rest.common.model.request.PageContentRequest;
 import com.quathar.codebay.app.rest.common.model.response.PageContentResponse;
+import com.quathar.codebay.app.rest.shop.model.request.IntoCartRequest;
 import com.quathar.codebay.app.rest.shop.model.response.BasicCartResponse;
 import com.quathar.codebay.app.rest.shop.model.response.BasicCustomerResponse;
 import com.quathar.codebay.app.rest.shop.model.response.BasicOrderResponse;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import static com.quathar.codebay.app.rest.common.api.BaseAPI.BASE_URL;
@@ -68,26 +69,24 @@ public interface CustomerProfileAPI {
     /**
      * Adds a product to the authenticated customer's shopping cart.
      *
-     * @param productCode The code of the product to add.
-     * @param units       The number of units of the product to add.
+     * @param intoCartRequest The {@link IntoCartRequest} request body.
      * @return A {@link BasicCartResponse} containing the updated cart information.
      */
-    @PostMapping(path = "/cart/add/{productCode}", produces = APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/cart/add", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('ADD_TO_MY_CART')")
     @ResponseStatus(OK)
-    BasicCartResponse addToCart(@PathVariable String productCode, @RequestParam Integer units);
+    BasicCartResponse addToCart(@Valid @RequestBody IntoCartRequest intoCartRequest);
 
     /**
      * Updates the quantity of a product in the authenticated customer's shopping cart.
      *
-     * @param productCode The code of the product to update.
-     * @param units       The new number of units of the product.
+     * @param intoCartRequest The {@link IntoCartRequest} request body.
      * @return A {@link BasicCartResponse} containing the updated cart information.
      */
-    @PostMapping(path = "/cart/update/{productCode}", produces = APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/cart/update", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('ADD_TO_MY_CART')")
     @ResponseStatus(OK)
-    BasicCartResponse updateCart(@PathVariable String productCode, @RequestParam Integer units);
+    BasicCartResponse updateCart(@Valid @RequestBody IntoCartRequest intoCartRequest);
 
     /**
      * Removes a product from the authenticated customer's shopping cart.
