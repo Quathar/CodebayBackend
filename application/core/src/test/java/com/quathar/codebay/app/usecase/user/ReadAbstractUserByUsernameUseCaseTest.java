@@ -1,9 +1,10 @@
 package com.quathar.codebay.app.usecase.user;
 
-import com.quathar.codebay.domain.model.Administrator;
-import com.quathar.codebay.domain.port.out.user.AdministratorRepositoryPort;
+import com.quathar.codebay.domain.model.User;
+import com.quathar.codebay.domain.port.out.user.UserRepositoryPort;
 
 import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.mockito.InjectMocks;
@@ -18,38 +19,39 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * <h1>Read Administrator by Username Use Case Implementation Test</h1>
+ * <h1>Read abstract user by username Use Case Implementation Test</h1>
  *
- * @see ReadAdminByUsernameUseCase
- * @since 2023-12-19
+ * @see ReadAbstractUserByUsernameUseCase
+ * @since 2023-12-10
  * @version 1.0
  * @author Q
  */
 @ExtendWith(MockitoExtension.class)
-class ReadAdminByUsernameUseCaseTest {
+public class ReadAbstractUserByUsernameUseCaseTest {
 
-    // <<-FIELD->>
+    // <<-FIELDS->>
     @Mock
-    private AdministratorRepositoryPort adminRepositoryPort;
+    private UserRepositoryPort userRepositoryPort;
     @InjectMocks
-    private ReadAdminByUsernameUseCase readByUsernameUseCase;
+    private ReadAbstractUserByUsernameUseCase<User> readByUsernameUseCase;
 
+    // <<-TEST->>
     @Test
-    void GivenUsername_WhenFindingAdmin_ThenFindByUsernameMethodIsInvokedOnce() {
+    void GivenUsername_WhenFindingUser_ThenFindByUsernameMethodIsInvokedOnce() {
         // [Given]
         var username = "username";
-        var mockedAdmin = Administrator.builder()
+        var mockedUser = User.builder()
                 .id( randomUUID() )
                 .build();
 
-        when(this.adminRepositoryPort.findByUsername(username))
-                .thenAnswer(invocation -> of(mockedAdmin));
+        when(this.userRepositoryPort.findByUsername(username))
+                .thenAnswer(invocation -> of(mockedUser));
 
         // [When]
         this.readByUsernameUseCase.getByUsername(username);
 
         // [Then]
-        verify(this.adminRepositoryPort, only()).findByUsername(username);
+        verify(this.userRepositoryPort, only()).findByUsername(username);
     }
 
 }
