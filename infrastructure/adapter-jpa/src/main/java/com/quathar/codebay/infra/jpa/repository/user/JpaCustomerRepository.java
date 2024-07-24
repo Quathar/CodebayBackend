@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 /**
  * <h1>JPA (Java Persistence API) Customer Repository</h1>
  *
+ * @see JpaAbstractUserRepository
  * @see CustomerEntity
  * @since 2023-05-07
  * @version 1.0

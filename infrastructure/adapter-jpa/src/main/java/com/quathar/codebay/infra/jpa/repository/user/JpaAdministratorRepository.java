@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 /**
  * <h1>JPA (Java Persistence API) Administrator Repository</h1>
  *
+ * @see JpaAbstractUserRepository
  * @see AdministratorEntity
  * @since 2023-12-19
  * @version 1.0

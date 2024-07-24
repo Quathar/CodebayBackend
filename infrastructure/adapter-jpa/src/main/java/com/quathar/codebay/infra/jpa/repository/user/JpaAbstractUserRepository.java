@@ -14,6 +14,7 @@ import java.util.UUID;
  *
  * @param <T> The type of entity this repository manages.
  *
+ * @see JpaRepository
  * @since 2023-12-10
  * @version 1.0
  * @author Q

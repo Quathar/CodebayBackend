@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
  * <h1>JPA (Java Persistence API) User Repository</h1>
  *
+ * @see JpaAbstractUserRepository
  * @see UserEntity
  * @since 2023-12-10
  * @version 1.0
