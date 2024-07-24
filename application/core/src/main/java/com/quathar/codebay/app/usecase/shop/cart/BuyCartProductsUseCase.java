@@ -63,7 +63,7 @@ public final class BuyCartProductsUseCase implements BuyCartProductsUseCasePort 
     /**
      * Checks if the product in the cart detail is available for purchase.
      *
-     * @param cartDetail The cart detail to check for product availability
+     * @param cartDetail The {@link CartDetail} to check for product availability
      * @return {@code true} if the product is available for purchase, {@code false} otherwise
      */
     private boolean availableProducts(CartDetail cartDetail) {
@@ -74,8 +74,8 @@ public final class BuyCartProductsUseCase implements BuyCartProductsUseCasePort 
     /**
      * Creates an order detail from a cart detail.
      *
-     * @param cartDetail The cart detail to create the order detail from
-     * @return The order detail created from the cart detail
+     * @param cartDetail The {@link CartDetail} to create the order detail from
+     * @return The {@link OrderDetail} created from the cart detail
      */
     private OrderDetail createOrderDetail(CartDetail cartDetail) {
         // 1. Update product info
@@ -98,17 +98,18 @@ public final class BuyCartProductsUseCase implements BuyCartProductsUseCasePort 
      * @param cart         The shopping cart containing the purchased products
      * @param totalPrice   The total price of the purchased products
      * @param orderDetails The collection of order details for the purchased products
-     * @return The updated customer after updating the information
+     * @return The updated {@link Customer} after updating the information
      */
     private Customer updateCartAndGetCustomer(ShoppingCart cart, BigDecimal totalPrice, java.util.Collection<OrderDetail> orderDetails) {
         // 1. Update the Customer
         var customer = cart.getCustomer();
         customer.updateExpenditure(totalPrice);
-        var updatedCustomer = this.customerRepositoryPort.save(customer);
+        var updatedCustomer = this.customerRepositoryPort.update(customer);
 
         // 2. Set the updated Customer in the ShoppingCart
+
         // This is done to avoid future java.util.Stream problems
-        // since some streams were consumed when save() method was invoked
+        // since some streams were consumed when update() method was invoked
         cart.setCustomer(updatedCustomer);
 
         // 3. Remove all purchased products
@@ -125,7 +126,7 @@ public final class BuyCartProductsUseCase implements BuyCartProductsUseCasePort 
     /**
      * Processes the order based on the products in the shopping cart.
      *
-     * @param cart The shopping cart containing the products to process the order for
+     * @param cart The {@link ShoppingCart} containing the products to process the order for
      * @return A collector to accumulate and process the order details into an order object
      */
     private java.util.stream.Collector<OrderDetail, ?, Order> processOrder(ShoppingCart cart) {
@@ -137,11 +138,11 @@ public final class BuyCartProductsUseCase implements BuyCartProductsUseCasePort 
                             .reduce(BigDecimal.ZERO, BigDecimal::add);
                     var customer = this.updateCartAndGetCustomer(cart, totalPrice, orderDetailsSet);
                     return Order.builder()
-                            .creationDate(java.time.LocalDateTime.now())
-                            .status(OPENED_ORDER_STATUS)
-                            .customer(customer)
-                            .details(orderDetailsSet.stream())
-                            .totalPrice(totalPrice)
+                            .creationDate( java.time.LocalDateTime.now() )
+                            .status( OPENED_ORDER_STATUS )
+                            .customer( customer )
+                            .details( orderDetailsSet.stream() )
+                            .totalPrice( totalPrice )
                             .build();
                 }
         );
