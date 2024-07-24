@@ -80,7 +80,7 @@ public class UserController implements UserAPI {
     @Override
     public BasicUserResponse update(String username, UpdateUserRequest updateRequest) {
         User userToUpdate = HttpShopFactory
-                .setUpdateUserResponse()
+                .setUpdateUserRequest()
                 .toModel(updateRequest);
         userToUpdate.setUsername(username);
         User updatedUser = this.userService.updateByUsername(userToUpdate);
