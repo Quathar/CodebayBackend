@@ -5,6 +5,7 @@ import com.quathar.codebay.app.rest.common.model.request.PageContentRequest;
 import com.quathar.codebay.app.rest.common.model.response.PageContentResponse;
 import com.quathar.codebay.app.rest.shop.api.CustomerProfileAPI;
 import com.quathar.codebay.app.rest.shop.model.factory.HttpShopFactory;
+import com.quathar.codebay.app.rest.shop.model.request.IntoCartRequest;
 import com.quathar.codebay.app.rest.shop.model.response.BasicCartResponse;
 import com.quathar.codebay.app.rest.shop.model.response.BasicCustomerResponse;
 import com.quathar.codebay.app.rest.shop.model.response.BasicOrderResponse;
@@ -100,8 +101,10 @@ public class CustomerProfileController implements CustomerProfileAPI {
     }
 
     @Override
-    public BasicCartResponse addToCart(String productCode, Integer units) {
-        var username = this.getAuthenticatedUsername();
+    public BasicCartResponse addToCart(IntoCartRequest requestBody) {
+        var username    = this.getAuthenticatedUsername();
+        var productCode = requestBody.productCode();
+        var units       = requestBody.units();
         ShoppingCart updatedCart = this.cartService.addToCart(username, productCode, units);
 
         log.debug("Adding {} units of product {} to customer {} shopping cart", units, productCode, username);
@@ -112,8 +115,10 @@ public class CustomerProfileController implements CustomerProfileAPI {
     }
 
     @Override
-    public BasicCartResponse updateCart(String productCode, Integer units) {
-        var username = this.getAuthenticatedUsername();
+    public BasicCartResponse updateCart(IntoCartRequest requestBody) {
+        var username    = this.getAuthenticatedUsername();
+        var productCode = requestBody.productCode();
+        var units       = requestBody.units();
         ShoppingCart updatedCart = this.cartService.updateInCart(username, productCode, units);
 
         log.debug("Updating {} units of product {} in customer {} shopping cart", units, productCode, username);
