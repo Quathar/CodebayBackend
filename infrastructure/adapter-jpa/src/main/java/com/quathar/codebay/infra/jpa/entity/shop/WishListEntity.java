@@ -51,6 +51,6 @@ public final class WishListEntity {
             foreignKey  = @ForeignKey(name = "FK_wishlist-product_wishlist"),
             inverseJoinColumns = @JoinColumn(name = "product_id"),
             inverseForeignKey  = @ForeignKey(name = "FK_wishlist-product_product"))
-    private List<ProductEntity> details;
+    private List<ProductEntity> products;
 
 }
