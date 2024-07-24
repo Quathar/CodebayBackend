@@ -6,9 +6,9 @@ import com.quathar.codebay.domain.port.out.CrudRepositoryPort;
 import java.util.Optional;
 
 /**
- * <h1>Generic User Repository Port</h1>
+ * <h1>Abstract User Repository Port</h1>
  *
- * Represents a contract for managing generic User domain models.
+ * Represents a contract for managing abstract User domain models.
  *
  * @see CrudRepositoryPort
  * @see User
@@ -23,7 +23,7 @@ public interface AbstractUserRepositoryPort<M extends User, ID>
      * Retrieves a user by their username.
      *
      * @param username the username of the user to retrieve
-     * @return an optional containing the user if found, empty otherwise
+     * @return An {@link Optional} containing the user if found, empty otherwise
      */
     Optional<M> findByUsername(String username);
 
@@ -31,7 +31,7 @@ public interface AbstractUserRepositoryPort<M extends User, ID>
      * Retrieves a user by their email.
      *
      * @param email the email of the user to retrieve
-     * @return an optional containing the user if found, empty otherwise
+     * @return An {@link Optional} containing the user if found, empty otherwise
      */
     Optional<M> findByEmail(String email);
 
