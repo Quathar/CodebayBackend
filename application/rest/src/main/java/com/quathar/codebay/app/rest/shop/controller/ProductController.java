@@ -45,7 +45,7 @@ public class ProductController implements ProductAPI {
     public PageContentResponse<BasicProductResponse> getAll(ShopProductParams searchParams) {
         var pageIndex = searchParams.page();
         var filters   = HttpShopFactory
-                .setShopProductSearchParams()
+                .setShopProductParams()
                 .toModel(searchParams);
         // This endpoint will show only products on sale
         // since it's invoked from the shop area
