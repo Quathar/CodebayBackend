@@ -4,6 +4,7 @@ import com.quathar.codebay.app.rest.common.model.factory.HttpCommonFactory;
 import com.quathar.codebay.app.rest.common.model.response.PageContentResponse;
 import com.quathar.codebay.app.rest.shop.api.ProductAPI;
 import com.quathar.codebay.app.rest.shop.model.factory.HttpShopFactory;
+import com.quathar.codebay.app.rest.shop.model.request.BuyProductRequest;
 import com.quathar.codebay.app.rest.shop.model.request.ShopProductParams;
 import com.quathar.codebay.app.rest.shop.model.response.BasicOrderResponse;
 import com.quathar.codebay.app.rest.shop.model.response.BasicProductResponse;
@@ -76,12 +77,14 @@ public class ProductController implements ProductAPI {
     }
 
     @Override
-    public BasicOrderResponse buyOneProduct(String code, Integer units) {
+    public BasicOrderResponse buyOneProduct(BuyProductRequest buyRequest) {
         var username = SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal()
                 .toString();
+        var code  = buyRequest.productCode();
+        var units = buyRequest.units();
         Order createdOrder = this.productService.buyProduct(username, code, units);
 
         log.debug("Buying {} units of product with code: {}", units, code);
