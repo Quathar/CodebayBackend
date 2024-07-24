@@ -36,6 +36,14 @@ public interface AbstractUserRepositoryPort<M extends User, ID>
     Optional<M> findByEmail(String email);
 
     /**
+     * Retrieves the ID of a user by their username.
+     *
+     * @param username the username of the user whose ID is to be retrieved
+     * @return An {@link Optional} containing the ID of the user if found, empty otherwise
+     */
+    Optional<ID> findIdByUsername(String username);
+
+    /**
      * Deletes a user by their username.
      *
      * @param username the username of the user to delete
