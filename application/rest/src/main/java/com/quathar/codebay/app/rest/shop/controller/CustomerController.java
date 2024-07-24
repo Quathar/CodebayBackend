@@ -57,7 +57,7 @@ public class CustomerController implements CustomerAPI {
                 .setUpdateCustomerRequest()
                 .toModel(updateRequest);
         customerToUpdate.setUsername(username);
-        Customer updatedCustomer = this.customerService.update(customerToUpdate);
+        Customer updatedCustomer = this.customerService.updateByUsername(customerToUpdate);
 
         log.debug("Updating customer with username {}: {}", username, updateRequest);
 
