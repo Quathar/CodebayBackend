@@ -61,14 +61,15 @@ public final class BuyProductUseCase implements BuyProductUseCasePort {
         // 2. Check product availability
         if (!productToBuy.isAvailable(units))
             // TODO: Look for a different specific exception to be thrown here
+            // Maybe ProductUnitsOutOfBoundsException ?
             throw new RuntimeException("Product can't be purchased");
 
         // 3. Update product & customer information
         java.math.BigDecimal totalPrice = productToBuy.purchase(units);
-        Product productUpdated = this.productRepositoryPort.save(productToBuy);
+        Product productUpdated = this.productRepositoryPort.update(productToBuy);
 
         customer.updateExpenditure(totalPrice);
-        Customer customerUpdated = this.customerRepositoryPort.save(customer);
+        Customer customerUpdated = this.customerRepositoryPort.update(customer);
 
         // 5. Create the order
         var orderDetails = OrderDetail.builder()
