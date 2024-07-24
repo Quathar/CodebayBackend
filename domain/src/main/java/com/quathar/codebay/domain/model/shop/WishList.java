@@ -28,22 +28,24 @@ public final class WishList {
 
     // <<-METHODS->>
     /**
+     * Clones the products of the wish list.
      *
-     * @return
+     * @return A {@link Stream} of cloned products
      */
-    public Stream<Product> copyProducts() {
+    public Stream<Product> cloneProducts() {
         var productList = this.products.toList();
         this.products = productList.stream();
         return productList.stream();
     }
 
     /**
+     * Checks if the wish list contains the specified product.
      *
-     * @param productToCheck
-     * @return
+     * @param productToCheck The product to check
+     * @return {@code true} if the shopping cart contains the specified product, otherwise {@code false}
      */
     public boolean hasProduct(Product productToCheck) {
-        return this.copyProducts().anyMatch(product -> product.equals(productToCheck));
+        return this.cloneProducts().anyMatch(product -> product.equals(productToCheck));
     }
 
     /**
