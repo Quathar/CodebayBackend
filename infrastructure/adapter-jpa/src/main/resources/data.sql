@@ -44,12 +44,17 @@ insert into Operation(id, name)
         ('2e23910c-eccb-4941-81ec-480a4609e9d3', 'UPDATE_USER'),
         ('1a04015d-22ff-4ed0-8591-108e101a1f7a', 'DELETE_USER'),
         ('c393fd55-3ff4-4926-b9c1-f2257d8daded', 'READ_MY_CUSTOMER_PROFILE'),
+        ('35877dd6-c3c7-4042-9395-963db57575e4', 'UPDATE_MY_CUSTOMER_PROFILE'),
         ('5ed26a29-c50e-4ffd-ae45-099ac4523a53', 'READ_MY_WISHLIST'),
         ('a9b480ed-bf1a-4c55-9ed7-75c92591b066', 'READ_MY_CART'),
         ('8f42697b-70dd-4f55-9dcf-783eb4f72c75', 'ADD_TO_MY_CART'),
         ('406fef21-e64b-4310-92ca-887da457732b', 'REMOVE_FROM_MY_CART'),
+        ('20217087-4a43-4e57-b344-9ac42b54bb0b', 'MOVE_CART_TO_WISHLIST'),
         ('f7df451e-266d-4cdb-bb3d-d4b4618ef603', 'BUY_ONE_PRODUCT'),
         ('a99d6d18-be0e-486e-b473-4fc1c9c1506a', 'BUY_MY_CART_PRODUCTS'),
+        ('f73918ea-d305-4467-a7d6-672f4b06e45e', 'ADD_TO_MY_WISHLIST'),
+        ('0c755e1f-06bc-4512-9249-ebce33fb5fd0', 'REMOVE_FROM_MY_WISHLIST'),
+        ('9ffb3ab4-f851-4b22-8912-887398957de5', 'MOVE_WISHLIST_TO_CART'),
         ('d9888bbf-4cc6-4198-98a0-b4a61dcf3e1f', 'READ_MY_ORDERS'),
         ('bdafc9d1-3ee2-4a9c-8561-de02b0350fd5', 'READ_ONE_ORDER');
 
@@ -107,10 +112,18 @@ values
     ('66463aaa-2c06-4eac-905c-400ec70cc5e5', '119847ec-c01d-443f-9756-87f58e285aed', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- CUSTOMER, UPDATE_MY_PROFILE
     ('abd787b8-0064-4c97-9d0c-4e6713900ac8', '119847ec-c01d-443f-9756-87f58e285aed', 'f6ae619f-8fdb-4948-bd09-9c2c32105b91'), -- CUSTOMER, DELETE_MY_PROFILE
     ('7cd3c239-d891-47e9-b447-5d27bd3e3078', '119847ec-c01d-443f-9756-87f58e285aed', 'c393fd55-3ff4-4926-b9c1-f2257d8daded'), -- CUSTOMER, READ_MY_CUSTOMER_PROFILE
-    ('79575ef5-d9ae-4678-886d-a4d2dd344a1e', '119847ec-c01d-443f-9756-87f58e285aed', '5ed26a29-c50e-4ffd-ae45-099ac4523a53'), -- CUSTOMER, READ_MY_WISHLIST
+    ('eb788f35-e79b-481e-a37e-228907a0c7fb', '119847ec-c01d-443f-9756-87f58e285aed', '35877dd6-c3c7-4042-9395-963db57575e4'), -- CUSTOMER, UPDATE_MY_CUSTOMER_PROFILE
+
     ('32aa683b-eeeb-4ede-a0c1-68ff605f3776', '119847ec-c01d-443f-9756-87f58e285aed', 'a9b480ed-bf1a-4c55-9ed7-75c92591b066'), -- CUSTOMER, READ_MY_CART
     ('72fecd9a-a9ee-415f-b576-42d2b36d91cb', '119847ec-c01d-443f-9756-87f58e285aed', '8f42697b-70dd-4f55-9dcf-783eb4f72c75'), -- CUSTOMER, ADD_TO_MY_CART
     ('7e3171bd-f23a-4e37-8a70-efe28b01a105', '119847ec-c01d-443f-9756-87f58e285aed', '406fef21-e64b-4310-92ca-887da457732b'), -- CUSTOMER, REMOVE_FROM_MY_CART
+    ('de7f14c3-14ea-4a42-988d-43c16d85a6b0', '119847ec-c01d-443f-9756-87f58e285aed', '20217087-4a43-4e57-b344-9ac42b54bb0b'), -- CUSTOMER, MOVE_CART_TO_WISHLIST
+
+    ('79575ef5-d9ae-4678-886d-a4d2dd344a1e', '119847ec-c01d-443f-9756-87f58e285aed', '5ed26a29-c50e-4ffd-ae45-099ac4523a53'), -- CUSTOMER, READ_MY_WISHLIST
+    ('b1b8e794-4bc4-469e-b1f1-ed7bf8a8e4bf', '119847ec-c01d-443f-9756-87f58e285aed', 'f73918ea-d305-4467-a7d6-672f4b06e45e'), -- CUSTOMER, ADD_TO_MY_WISHLIST
+    ('b832fcef-2b6c-4154-8616-728183ee5557', '119847ec-c01d-443f-9756-87f58e285aed', '0c755e1f-06bc-4512-9249-ebce33fb5fd0'), -- CUSTOMER, REMOVE_FROM_MY_WISHLIST
+    ('604ab7f6-8388-4370-b89c-dad3a02bc34e', '119847ec-c01d-443f-9756-87f58e285aed', '9ffb3ab4-f851-4b22-8912-887398957de5'), -- CUSTOMER, MOVE_WISHLIST_TO_CART
+
     ('b65d8832-17a2-43cc-af4d-db1016dfaab0', '119847ec-c01d-443f-9756-87f58e285aed', 'f7df451e-266d-4cdb-bb3d-d4b4618ef603'), -- CUSTOMER, BUY_ONE_PRODUCT
     ('f7eb8989-6994-4771-8f52-e2aa5d14038d', '119847ec-c01d-443f-9756-87f58e285aed', 'a99d6d18-be0e-486e-b473-4fc1c9c1506a'), -- CUSTOMER, BUY_MY_CART_PRODUCTS
     ('243d6732-b87f-41d2-8b60-1333450b87ee', '119847ec-c01d-443f-9756-87f58e285aed', 'd9888bbf-4cc6-4198-98a0-b4a61dcf3e1f'), -- CUSTOMER, READ_MY_ORDERS
@@ -123,17 +136,23 @@ values
     ('f8971916-93e5-4b59-8428-0f756385e018', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'f6ae619f-8fdb-4948-bd09-9c2c32105b91'); -- USER, DELETE_MY_PROFILE
 
 -- [ USER SCHEMA ]
--- insert into User_Status()
---     values
---         ('', 'ENABLED'),
---         ('', 'BLOCKED'),
---         ('', 'DISABLED');
+insert into User_Status(code, text)
+    values
+        ('ENB', 'ENABLED'),
+        ('DSB', 'DISABLED'),
+        ('BLK', 'BLOCKED');
 
--- insert into Document_Type()
---     values
---         ('', 'NID'),        -- National Identification Document
---         ('', 'Passport'),
---         ('', 'SSN');        -- Social Security Number
+insert into Gender(code, text)
+    values
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other');
+
+insert into Document_Type(code, text)
+    values
+        ('NID', 'National Identification Document'),
+        ('PSP', 'Passport'),
+        ('SSN', 'Social Security Number');
 
 -- The User password is always 'aA1?12345678'
 insert into Users(id,
@@ -177,7 +196,7 @@ values
      'jsmith', 'Janie_Smith', 'jane@email.com',
      'ENABLED', '119847ec-c01d-443f-9756-87f58e285aed', 5,  2,
      '2023-12-01T00:00:00',
-     '$2a$10$0L4xnPbdGlQsBzAn785ZreMCyd5I7yLeUdJguyLXdbyy.cEOoNQci', '2024-06-01T00:00:00',
+     '$2a$10$0L4xnPbdGlQsBzAn785ZreMCyd5I7yLeUdJguyLXdbyy.cEOoNQci', '2025-06-01T00:00:00',
      '2023-12-20T18:30:00', null),
     ('959bc138-68cc-441e-9b2b-ec2ce523042c',
      'lucasb',   'Lucas-Brown', 'lucas@email.com',
@@ -201,7 +220,7 @@ values
      'thompson', 'SaraT', 'sarathompson@email.com',
      'ENABLED', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 7,  2,
      '2023-12-01T00:00:00',
-     '$2a$10$M15VX22oNpRWWeNkH3nVcOYFM7tKo6tu4zeyPrvWPpNmld0EgyxFq', '2024-06-01T00:00:00',
+     '$2a$10$M15VX22oNpRWWeNkH3nVcOYFM7tKo6tu4zeyPrvWPpNmld0EgyxFq', '2024-10-01T00:00:00',
      '2023-12-21T12:45:00', null),
     ('9d5d8ea4-4b4e-414d-82cb-0fa2fc5f868f',
      'no_wi',    'Noah', 'noah_wilson@email.com',
@@ -215,6 +234,15 @@ values
      '2023-12-01T00:00:00',
      '$2a$10$EQGDnbxNIJxzhJP/tNxYAePeky6DIoafWCxmHqICXSOoBd0REnmfy', '2024-06-01T00:00:00',
      '2023-12-22T09:15:00', null);
+
+insert into Country(code, text)
+    values
+        ('ES', 'Spain'),
+        ('PT', 'Portugal'),
+        ('CH', 'Switzerland'),
+        ('DE', 'Germany'),
+        ('UK', 'United Kingdom'),
+        ('FR', 'France');
 
 insert into Administrator(user_id,
                           document_type, document,
@@ -253,7 +281,7 @@ insert into Customer(user_id,
 values
     ('e2c00c47-e16b-45ac-9dd0-950a105fe67c',
     'NID', '57546224V',
-    'Jennet', 'Smith', 'FEMALE', '2000-01-01',
+    'Jannet', 'Smith', 'FEMALE', '2000-01-01',
     '+34', '690 209 636',
     'Spain', 'Street', 'todo: Change later', '8', null,
     null, 'Madrid', 'Comunidad de Madrid', '20000',
@@ -301,7 +329,11 @@ values
      'This sleek and sophisticated timepiece complements your style with class. With a stainless steel band and a shiny dial, it''s perfect for formal or casual occasions. In addition to displaying the time, it also features additional functions such as a stopwatch and date.');
 
 insert into Cart_Details(cart_id, product_id, units)
-values
-    ('250f629c-4b1d-46db-ae08-17b5fd77e2f9', '61c1b256-9ce9-424e-aa10-889e03014a4f', 1),
-    ('250f629c-4b1d-46db-ae08-17b5fd77e2f9', 'eb0b1182-a2c2-440a-886f-0c64f1f3330b', 1),
-    ('250f629c-4b1d-46db-ae08-17b5fd77e2f9', 'add5bb23-9fa9-45b0-b3b2-c3f9169cc5b4', 1);
+    values
+        ('250f629c-4b1d-46db-ae08-17b5fd77e2f9', '61c1b256-9ce9-424e-aa10-889e03014a4f', 1),
+        ('250f629c-4b1d-46db-ae08-17b5fd77e2f9', 'eb0b1182-a2c2-440a-886f-0c64f1f3330b', 1),
+        ('250f629c-4b1d-46db-ae08-17b5fd77e2f9', 'add5bb23-9fa9-45b0-b3b2-c3f9169cc5b4', 1);
+
+insert into Wishlist_Product(wishlist_id, product_id)
+    values
+        ('bfca0d8d-a7a4-42ca-9cb1-014782340112', '9dcff90c-c5bd-4eae-81fd-80fb08d67b98');
