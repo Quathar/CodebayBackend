@@ -11,13 +11,18 @@ import com.quathar.codebay.app.usecase.ReadModelUseCase;
 import com.quathar.codebay.app.usecase.UpdateModelUseCase;
 import com.quathar.codebay.app.usecase.shop.cart.AddProductToCartUseCase;
 import com.quathar.codebay.app.usecase.shop.cart.BuyCartProductsUseCase;
+import com.quathar.codebay.app.usecase.shop.cart.MoveProductToWishListUseCase;
 import com.quathar.codebay.app.usecase.shop.cart.ReadCartByUsernameUseCase;
 import com.quathar.codebay.app.usecase.shop.cart.RemoveProductFromCartUseCase;
+import com.quathar.codebay.app.usecase.shop.cart.UpdateProductInCartUseCase;
 import com.quathar.codebay.app.usecase.shop.order.ReadAllOrdersByUsernameUseCase;
 import com.quathar.codebay.app.usecase.shop.product.BuyProductUseCase;
 import com.quathar.codebay.app.usecase.shop.product.ReadAllProductsFilteredWithUseCase;
 import com.quathar.codebay.app.usecase.shop.product.ReadProductByCodeUseCase;
+import com.quathar.codebay.app.usecase.shop.wishlist.AddProductToWishListUseCase;
+import com.quathar.codebay.app.usecase.shop.wishlist.MoveProductToCartUseCase;
 import com.quathar.codebay.app.usecase.shop.wishlist.ReadWishListByUsernameUseCase;
+import com.quathar.codebay.app.usecase.shop.wishlist.RemoveProductFromWishListUseCase;
 import com.quathar.codebay.domain.port.out.shop.OrderRepositoryPort;
 import com.quathar.codebay.domain.port.out.shop.ProductRepositoryPort;
 import com.quathar.codebay.domain.port.out.shop.ShoppingCartRepositoryPort;
@@ -64,20 +69,30 @@ public class ShopServiceConfig {
             ShoppingCartRepositoryPort cartRepository,
             ProductRepositoryPort      productRepository,
             CustomerRepositoryPort     customerRepository,
+            WishListRepositoryPort     wishListRepository,
             OrderRepositoryPort        orderRepository
     ) {
         return ShoppingCartService.setup()
-                .readCartByUsernameUseCasePort( new ReadCartByUsernameUseCase(cartRepository) )
+                .readCartByUsernameUseCase( new ReadCartByUsernameUseCase(cartRepository) )
                 .addProductToCartUseCase( new AddProductToCartUseCase(cartRepository, productRepository) )
+                .updateProductInCartUseCase( new UpdateProductInCartUseCase(cartRepository, productRepository) )
                 .removeProductFromCartUseCase( new RemoveProductFromCartUseCase(cartRepository, productRepository) )
+                .moveProductToWishListUseCase( new MoveProductToWishListUseCase(cartRepository, wishListRepository, productRepository) )
                 .buyCartProductsUseCase( new BuyCartProductsUseCase(cartRepository, productRepository, customerRepository, orderRepository) )
                 .seal();
     }
 
     @Bean
-    public WishListService wishListService(WishListRepositoryPort wishListRepository) {
+    public WishListService wishListService(
+            WishListRepositoryPort     wishListRepository,
+            ProductRepositoryPort      productRepository,
+            ShoppingCartRepositoryPort cartRepository
+    ) {
         return WishListService.setup()
                 .readWishListByUsernameUseCase( new ReadWishListByUsernameUseCase(wishListRepository) )
+                .addProductToWishListUseCase( new AddProductToWishListUseCase(wishListRepository, productRepository) )
+                .removeProductFromWishListUseCase( new RemoveProductFromWishListUseCase(wishListRepository, productRepository) )
+                .moveProductToCartUseCase( new MoveProductToCartUseCase(wishListRepository, cartRepository, productRepository) )
                 .seal();
     }
 
