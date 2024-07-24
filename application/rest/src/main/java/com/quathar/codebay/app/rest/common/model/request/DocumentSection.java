@@ -1,5 +1,7 @@
 package com.quathar.codebay.app.rest.common.model.request;
 
+import com.quathar.codebay.app.rest.common.model.validation.constraint.UniqueDocument;
+
 import jakarta.validation.constraints.NotBlank;
 
 /**
@@ -16,6 +18,7 @@ import jakarta.validation.constraints.NotBlank;
 public record DocumentSection(
         @NotBlank
         String type,
+        @UniqueDocument
         @NotBlank
         String content
 ) {}
