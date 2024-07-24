@@ -18,25 +18,25 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 /**
- * <h1>Delete User by Username Use Case Test</h1>
+ * <h1>Delete abstract user by username Use Case Implementation Test</h1>
  *
- * @see DeleteUserByUsernameUseCase
- * @since 2023-12-10
+ * @see DeleteAbstractUserByUsernameUseCase
+ * @since 2023-12-19
  * @version 1.0
  * @author Q
  */
 @ExtendWith(MockitoExtension.class)
-class DeleteUserByUsernameUseCaseTest {
+class DeleteAbstractUserByUsernameUseCaseTest {
 
     // <<-FIELDS->>
     @Mock
     private UserRepositoryPort userRepositoryPort;
     @InjectMocks
-    private DeleteUserByUsernameUseCase deleteUserByUsernameUseCase;
+    private DeleteAbstractUserByUsernameUseCase<User> deleteAdminByUsernameUseCase;
 
     // <<-TEST->>
     @Test
-    void GivenValidUsername_WhenDeleteUserByUsername_ThenFindByUsernameAndSaveInvokedOnce() {
+    void GivenValidUsername_WhenDeleteAdminByUsername_ThenFindByUsernameAndSaveInvokedOnce() {
         // [Given]
         var username = "username";
         var mockedUser = User.builder()
@@ -47,7 +47,7 @@ class DeleteUserByUsernameUseCaseTest {
                 .thenAnswer(invocation -> of(mockedUser));
 
         // [When]
-        this.deleteUserByUsernameUseCase.deleteByUsername(username);
+        this.deleteAdminByUsernameUseCase.deleteByUsername(username);
 
         // [Then]
         verify(this.userRepositoryPort, times(1)).findByUsername(username);
