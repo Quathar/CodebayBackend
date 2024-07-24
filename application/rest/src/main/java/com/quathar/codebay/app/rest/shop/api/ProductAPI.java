@@ -1,6 +1,7 @@
 package com.quathar.codebay.app.rest.shop.api;
 
 import com.quathar.codebay.app.rest.common.model.response.PageContentResponse;
+import com.quathar.codebay.app.rest.shop.model.request.BuyProductRequest;
 import com.quathar.codebay.app.rest.shop.model.request.ShopProductParams;
 import com.quathar.codebay.app.rest.shop.model.response.BasicOrderResponse;
 import com.quathar.codebay.app.rest.shop.model.response.BasicProductResponse;
@@ -11,8 +12,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import static com.quathar.codebay.app.rest.common.api.BaseAPI.BASE_URL;
@@ -63,13 +64,12 @@ public interface ProductAPI {
     /**
      * Buys a specified quantity of a product.
      *
-     * @param code  The unique code of the product to be bought.
-     * @param units The number of units to buy.
+     * @param buyRequest The {@link BuyProductRequest} request body.
      * @return {@link BasicOrderResponse} containing the order information after purchase.
      */
-    @PostMapping(path = "/buy/{code}", produces = APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/buy", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('BUY_ONE_PRODUCT')")
     @ResponseStatus(OK)
-    BasicOrderResponse buyOneProduct(@PathVariable String code, @RequestParam Integer units);
+    BasicOrderResponse buyOneProduct(@Valid @RequestBody BuyProductRequest buyRequest);
 
 }
