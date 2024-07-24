@@ -64,7 +64,7 @@ public final class ProductEntity {
             foreignKey  = @ForeignKey(name = "FK_product_images_productId"))
     private Set<ImageEmbeddable> productImages;
 
-    @Column(nullable = false, precision = 2)
+    @Column(nullable = false, scale = 2)
     private BigDecimal price;
 
     @Column(name = "rating_number")
