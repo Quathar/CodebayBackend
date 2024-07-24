@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface JpaUserRepository
-       extends   CommonJpaUserRepository<UserEntity> {
+       extends   JpaAbstractUserRepository<UserEntity> {
 
     /**
      * Finds a user by their username or email.

@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface JpaAdministratorRepository
-       extends   CommonJpaUserRepository<AdministratorEntity> {
+       extends   JpaAbstractUserRepository<AdministratorEntity> {
 }
