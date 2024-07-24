@@ -52,7 +52,9 @@ public interface CustomerProfileAPI {
     @ResponseStatus(OK)
     BasicCustomerResponse getProfile();
 
-    // [ SHOPPING CART ]
+    // =====================
+    // <<- SHOPPING CART ->>
+    // =====================
     /**
      * Retrieves the shopping cart of the authenticated customer by their username.
      *
@@ -119,7 +121,9 @@ public interface CustomerProfileAPI {
     @ResponseStatus(CREATED)
     BasicOrderResponse buyCart();
 
-    // [ WISH LIST ]
+    // =================
+    // <<- WISH LIST ->>
+    // =================
     /**
      * Retrieves the wish list of the authenticated customer by their username.
      *
@@ -163,7 +167,9 @@ public interface CustomerProfileAPI {
     @ResponseStatus(OK)
     BasicWishListResponse fromWishListToCart(@PathVariable String productCode);
 
-    // [ ORDERS ]
+    // ==============
+    // <<- ORDERS ->>
+    // ==============
     /**
      * Retrieves the orders of the authenticated customer.
      *
