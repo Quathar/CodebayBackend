@@ -61,7 +61,15 @@ public abstract class JpaCrudRepositoryAdapter<M, T, ID>
 
     @Override
     public M update(M model) {
-        return this.save(model);
+        // I know this is the same code as the previous one
+        // and previously this method was like: 'return this.save(model)'
+        // Why am I repeating code?
+        // The answer is that if you create your own implementation
+        // of the 'save()' method in the adapter then we'll be calling
+        // that method instead of this one in this abstract class
+        T entityToSave = this.mapperService.fromModel(model);
+        T savedEntity  = this.jpaRepository.save(entityToSave);
+        return this.mapperService.toModel(savedEntity);
     }
 
     @Override
