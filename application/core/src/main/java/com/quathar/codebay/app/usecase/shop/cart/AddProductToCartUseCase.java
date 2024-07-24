@@ -1,6 +1,7 @@
 package com.quathar.codebay.app.usecase.shop.cart;
 
 import com.quathar.codebay.domain.exception.ModelNotFoundException;
+import com.quathar.codebay.domain.model.shop.CartDetail;
 import com.quathar.codebay.domain.model.shop.Product;
 import com.quathar.codebay.domain.model.shop.ShoppingCart;
 import com.quathar.codebay.domain.port.in.shop.cart.AddProductToCartUseCasePort;
@@ -34,6 +35,19 @@ public final class AddProductToCartUseCase implements AddProductToCartUseCasePor
     private final ProductRepositoryPort productRepositoryPort;
 
     // <<-METHOD->>
+    /**
+     * Checks if the specified product is already present in the given shopping cart.
+     *
+     * @param cart           The shopping cart to be checked.
+     * @param productToCheck The product to look for in the shopping cart.
+     * @return {@code true} if the product is already in the cart; {@code false} otherwise.
+     */
+    private boolean isAlreadyInTheCart(ShoppingCart cart, Product productToCheck) {
+        return cart.cloneDetails()
+                .map(CartDetail::getProduct)
+                .anyMatch(product -> product.equals(productToCheck));
+    }
+
     @Override
     public ShoppingCart addToCart(String username, String productCode, int units) {
         Product product = this.productRepositoryPort
@@ -43,7 +57,9 @@ public final class AddProductToCartUseCase implements AddProductToCartUseCasePor
                 .findByUsername(username)
                 .orElseThrow(() -> new ModelNotFoundException("Shopping Cart with customer username " + username + " NOT FOUND"));
 
-        cart.addProduct(product, units);
+        if ( this.isAlreadyInTheCart(cart, product) )
+            cart.updateProductUnits(product, units);
+        else cart.addProduct(product, units);
 
         return this.cartRepositoryPort.save(cart);
     }
