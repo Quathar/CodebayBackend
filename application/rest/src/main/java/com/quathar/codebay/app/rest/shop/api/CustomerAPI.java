@@ -47,7 +47,7 @@ public interface CustomerAPI {
     @PostMapping(path = "/sign-up",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') AND #createRequest.username == authentication.principal")
     @ResponseStatus(CREATED)
     BasicCustomerResponse signup(@Valid @RequestBody CreateCustomerRequest createRequest);
 
