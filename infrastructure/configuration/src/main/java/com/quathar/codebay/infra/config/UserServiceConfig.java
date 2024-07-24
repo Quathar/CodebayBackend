@@ -30,6 +30,9 @@ import org.springframework.context.annotation.Configuration;
 /**
  * <h1>User Service Configuration</h1>
  *
+ * @see UserService
+ * @see AdministratorService
+ * @see CustomerService
  * @since 2024-04-XX
  * @version 1.0
  * @author Q
