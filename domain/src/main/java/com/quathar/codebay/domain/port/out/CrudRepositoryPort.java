@@ -15,11 +15,11 @@ package com.quathar.codebay.domain.port.out;
 public interface CrudRepositoryPort<M, ID> {
 
     /**
-     * Retrieves a collection of domain models with pagination support.
+     * Retrieves a stream of domain models with pagination support.
      *
      * @param pageIndex  The page index.
      * @param pageSize   The number of items per page.
-     * @return A set of domain models within the specified page and size.
+     * @return A stream of domain models within the specified page and size.
      */
     java.util.stream.Stream<M> findAll(int pageIndex, int pageSize);
 
