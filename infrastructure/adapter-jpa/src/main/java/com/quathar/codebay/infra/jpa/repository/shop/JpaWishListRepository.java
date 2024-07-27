@@ -4,7 +4,6 @@ import com.quathar.codebay.infra.jpa.entity.shop.WishListEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 /**
  * <h1>JPA (Java Persistence API) Wish List Repository</h1>
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Repository;
  * @version 1.0
  * @author Q
  */
-@Repository
 public interface JpaWishListRepository extends JpaRepository<WishListEntity, java.util.UUID> {
 
     /**

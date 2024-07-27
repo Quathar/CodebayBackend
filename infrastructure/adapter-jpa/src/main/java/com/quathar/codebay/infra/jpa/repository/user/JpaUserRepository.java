@@ -3,7 +3,6 @@ package com.quathar.codebay.infra.jpa.repository.user;
 import com.quathar.codebay.infra.jpa.entity.UserEntity;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 /**
  * <h1>JPA (Java Persistence API) User Repository</h1>
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Repository;
  * @version 1.0
  * @author Q
  */
-@Repository
 public interface JpaUserRepository
        extends   JpaAbstractUserRepository<UserEntity> {
 

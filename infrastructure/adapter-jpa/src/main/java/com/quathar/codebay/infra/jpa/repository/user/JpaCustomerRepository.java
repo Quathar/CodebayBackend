@@ -7,7 +7,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 /**
  * <h1>JPA (Java Persistence API) Customer Repository</h1>
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Repository;
  * @version 1.0
  * @author Q
  */
-@Repository
 public interface JpaCustomerRepository
        extends   JpaAbstractUserRepository<CustomerEntity> {
 

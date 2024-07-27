@@ -4,7 +4,6 @@ import com.quathar.codebay.infra.jpa.entity.shop.ShoppingCartEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 /**
  * <h1>JPA (Java Persistence API) Shopping Cart Repository</h1>
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Repository;
  * @version 1.0
  * @author Q
  */
-@Repository
 public interface JpaShoppingCartRepository extends JpaRepository<ShoppingCartEntity, java.util.UUID> {
 
     /**
