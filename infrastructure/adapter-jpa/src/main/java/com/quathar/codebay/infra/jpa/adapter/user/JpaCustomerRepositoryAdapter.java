@@ -7,10 +7,8 @@ import com.quathar.codebay.infra.jpa.entity.CustomerEntity;
 import com.quathar.codebay.infra.jpa.mapper.CustomerMapper;
 import com.quathar.codebay.infra.jpa.repository.user.JpaCustomerRepository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,37 +21,37 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  * @author Q
  */
+@Slf4j
 @Component
 public final class JpaCustomerRepositoryAdapter
        extends     JpaAbstractUserRepositoryAdapter<Customer, CustomerEntity>
        implements  CustomerRepositoryPort {
 
-    private static final Logger log = LoggerFactory.getLogger(JpaCustomerRepositoryAdapter.class);
-
     // <<-FIELDS->>
     /**
-     * The JPA repository for admin entities.
+     * The JPA repository for customer entities.
      */
     private final JpaCustomerRepository jpaCustomerRepository;
     /**
-     * Mapper for converting between Administrator and AdministratorEntity.
+     * Mapper for converting between {@link Customer} and {@link CustomerEntity}.
      */
     private final CustomerMapper customerMapper;
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a new {@code JpaAdministratorRepositoryAdapter} with the specified JpaAdministratorRepository.
+     * Constructs a new {@link JpaCustomerRepositoryAdapter} for the {@link CustomerRepositoryPort}
+     * with the specified {@link JpaCustomerRepository} and {@link CustomerMapper}.
      *
-     * @param jpaCustomerRepository The JPA repository for Administrator entities.
+     * @param jpaCustomerRepository The JPA repository for {@link CustomerEntity}.
+     * @param customerMapper        The mapper for converting between {@link Customer} and {@link CustomerEntity}.
      */
-    @Autowired
     public JpaCustomerRepositoryAdapter(JpaCustomerRepository jpaCustomerRepository, CustomerMapper customerMapper) {
         super(jpaCustomerRepository, customerMapper);
         this.jpaCustomerRepository = jpaCustomerRepository;
         this.customerMapper        = customerMapper;
     }
 
-    // <<-METHODS->>
+    // <<-METHOD->>
     @Override
     public Customer save(Customer customerToCreate) {
         /*

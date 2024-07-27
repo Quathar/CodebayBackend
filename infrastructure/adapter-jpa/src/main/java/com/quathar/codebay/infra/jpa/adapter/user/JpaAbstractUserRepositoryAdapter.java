@@ -16,7 +16,9 @@ import java.util.UUID;
  * @param <M> The source type (Model) for mapping.
  * @param <T> The target type (Entity) for mapping.
  *
- * @since 202-
+ * @see AbstractUserRepositoryPort
+ * @see JpaCrudRepositoryAdapter
+ * @since 2023-12-10
  * @version 1.0
  * @author Q
  */
@@ -36,9 +38,11 @@ public abstract class JpaAbstractUserRepositoryAdapter<M extends User, T extends
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a new {@link JpaAbstractUserRepositoryAdapter} with the specified {@link JpaAbstractUserRepository}.
+     * Constructs a new {@link JpaAbstractUserRepositoryAdapter} for the {@link AbstractUserRepositoryPort}
+     * with the specified {@link JpaAbstractUserRepository} and {@link MapperServicePort}.
      *
-     * @param jpaCommonUserRepository The JPA repository for abstract User entities.
+     * @param jpaCommonUserRepository The JPA repository for abstract {@link UserEntity}.
+     * @param mapperService           The mapper for converting between M and T.
      */
     public JpaAbstractUserRepositoryAdapter(JpaAbstractUserRepository<T> jpaCommonUserRepository, MapperServicePort<M, T> mapperService) {
         super(jpaCommonUserRepository, mapperService);

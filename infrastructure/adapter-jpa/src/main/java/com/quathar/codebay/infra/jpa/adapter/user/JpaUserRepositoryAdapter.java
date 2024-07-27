@@ -6,10 +6,7 @@ import com.quathar.codebay.infra.jpa.entity.UserEntity;
 import com.quathar.codebay.infra.jpa.mapper.UserMapper;
 import com.quathar.codebay.infra.jpa.repository.user.JpaUserRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 /**
  * <h1>JPA User Repository Adapter</h1>
@@ -32,17 +29,18 @@ public final class JpaUserRepositoryAdapter
      */
     private final JpaUserRepository jpaUserRepository;
     /**
-     * Mapper for converting between User and UserEntity.
+     * Mapper for converting between {@link User} and {@link UserEntity}.
      */
     private final UserMapper userMapper;
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a new {@code JpaUserRepositoryAdapter} with the specified JpaUserRepository.
+     * Constructs a new {@link JpaUserRepositoryAdapter} for the {@link UserRepositoryPort}
+     * with the specified {@link JpaUserRepository} and {@link UserMapper}.
      *
-     * @param jpaUserRepository The JPA repository for User entities.
+     * @param jpaUserRepository The JPA repository for {@link UserEntity}.
+     * @param userMapper        The mapper for converting between {@link User} and {@link UserEntity}.
      */
-    @Autowired
     public JpaUserRepositoryAdapter(JpaUserRepository jpaUserRepository, UserMapper userMapper) {
         super(jpaUserRepository, userMapper);
         this.jpaUserRepository = jpaUserRepository;
@@ -51,7 +49,7 @@ public final class JpaUserRepositoryAdapter
 
     // <<-METHODS->>
     @Override
-    public Optional<User> findByAuthenticationKey(String authenticationKey) {
+    public java.util.Optional<User> findByAuthenticationKey(String authenticationKey) {
         return this.jpaUserRepository
                 .findByAuthenticationKey(authenticationKey)
                 .map(this.userMapper::toModel);

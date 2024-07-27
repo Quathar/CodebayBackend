@@ -6,7 +6,6 @@ import com.quathar.codebay.infra.jpa.entity.AdministratorEntity;
 import com.quathar.codebay.infra.jpa.mapper.AdministratorMapper;
 import com.quathar.codebay.infra.jpa.repository.user.JpaAdministratorRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,17 +29,18 @@ public final class JpaAdministratorRepositoryAdapter
      */
     private final JpaAdministratorRepository jpaAdminRepository;
     /**
-     * Mapper for converting between Administrator and AdministratorEntity.
+     * Mapper for converting between {@link Administrator} and {@link AdministratorEntity}.
      */
     private final AdministratorMapper adminMapper;
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a new {@code JpaAdministratorRepositoryAdapter} with the specified JpaAdministratorRepository.
+     * Constructs a new {@link JpaAdministratorRepositoryAdapter} for the {@link AdministratorRepositoryPort}
+     * with the specified {@link JpaAdministratorRepository} and {@link AdministratorMapper}.
      *
-     * @param jpaAdminRepository The JPA repository for Administrator entities.
+     * @param jpaAdminRepository The JPA repository for {@link AdministratorEntity}.
+     * @param adminMapper        The mapper for converting between {@link Administrator} and {@link AdministratorEntity}.
      */
-    @Autowired
     public JpaAdministratorRepositoryAdapter(JpaAdministratorRepository jpaAdminRepository, AdministratorMapper adminMapper) {
         super(jpaAdminRepository, adminMapper);
         this.jpaAdminRepository = jpaAdminRepository;
