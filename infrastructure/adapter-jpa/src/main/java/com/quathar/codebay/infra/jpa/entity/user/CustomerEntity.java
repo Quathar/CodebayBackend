@@ -1,4 +1,4 @@
-package com.quathar.codebay.infra.jpa.entity;
+package com.quathar.codebay.infra.jpa.entity.user;
 
 import com.quathar.codebay.infra.jpa.embeddable.PersonalInfoEmbeddable;
 import com.quathar.codebay.infra.jpa.embeddable.shop.AddressEmbeddable;

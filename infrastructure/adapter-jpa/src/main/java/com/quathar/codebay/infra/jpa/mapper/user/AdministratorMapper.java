@@ -4,7 +4,7 @@ import com.quathar.codebay.domain.model.Administrator;
 import com.quathar.codebay.domain.port.out.mapper.MapperServicePort;
 import com.quathar.codebay.infra.jpa.embeddable.mapper.AuditMapper;
 import com.quathar.codebay.infra.jpa.embeddable.mapper.PersonalInfoMapper;
-import com.quathar.codebay.infra.jpa.entity.AdministratorEntity;
+import com.quathar.codebay.infra.jpa.entity.user.AdministratorEntity;
 import com.quathar.codebay.infra.jpa.mapper.security.RoleMapper;
 
 import org.mapstruct.Mapper;

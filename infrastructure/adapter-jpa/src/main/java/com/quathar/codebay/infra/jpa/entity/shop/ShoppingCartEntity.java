@@ -1,6 +1,6 @@
 package com.quathar.codebay.infra.jpa.entity.shop;
 
-import com.quathar.codebay.infra.jpa.entity.CustomerEntity;
+import com.quathar.codebay.infra.jpa.entity.user.CustomerEntity;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;

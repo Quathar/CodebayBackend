@@ -1,6 +1,6 @@
 package com.quathar.codebay.infra.jpa.repository.user;
 
-import com.quathar.codebay.infra.jpa.entity.AdministratorEntity;
+import com.quathar.codebay.infra.jpa.entity.user.AdministratorEntity;
 
 /**
  * <h1>JPA (Java Persistence API) Administrator Repository</h1>

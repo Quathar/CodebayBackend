@@ -1,6 +1,6 @@
 package com.quathar.codebay.infra.jpa.repository.user;
 
-import com.quathar.codebay.infra.jpa.entity.UserEntity;
+import com.quathar.codebay.infra.jpa.entity.user.UserEntity;
 
 import org.springframework.data.jpa.repository.Query;
 

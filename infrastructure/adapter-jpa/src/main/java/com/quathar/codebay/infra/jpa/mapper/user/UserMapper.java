@@ -3,7 +3,7 @@ package com.quathar.codebay.infra.jpa.mapper.user;
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.port.out.mapper.MapperServicePort;
 import com.quathar.codebay.infra.jpa.embeddable.mapper.AuditMapper;
-import com.quathar.codebay.infra.jpa.entity.UserEntity;
+import com.quathar.codebay.infra.jpa.entity.user.UserEntity;
 import com.quathar.codebay.infra.jpa.mapper.security.RoleMapper;
 
 import org.mapstruct.Mapper;

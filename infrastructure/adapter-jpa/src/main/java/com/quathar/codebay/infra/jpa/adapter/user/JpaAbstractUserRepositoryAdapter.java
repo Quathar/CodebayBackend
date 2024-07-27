@@ -4,7 +4,7 @@ import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.port.out.mapper.MapperServicePort;
 import com.quathar.codebay.domain.port.out.user.AbstractUserRepositoryPort;
 import com.quathar.codebay.infra.jpa.adapter.JpaCrudRepositoryAdapter;
-import com.quathar.codebay.infra.jpa.entity.UserEntity;
+import com.quathar.codebay.infra.jpa.entity.user.UserEntity;
 import com.quathar.codebay.infra.jpa.repository.user.JpaAbstractUserRepository;
 
 import java.util.Optional;

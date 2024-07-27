@@ -2,7 +2,7 @@ package com.quathar.codebay.infra.jpa.adapter.user;
 
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.port.out.user.UserRepositoryPort;
-import com.quathar.codebay.infra.jpa.entity.UserEntity;
+import com.quathar.codebay.infra.jpa.entity.user.UserEntity;
 import com.quathar.codebay.infra.jpa.mapper.user.UserMapper;
 import com.quathar.codebay.infra.jpa.repository.user.JpaUserRepository;
 

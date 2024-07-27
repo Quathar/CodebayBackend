@@ -2,7 +2,7 @@ package com.quathar.codebay.infra.jpa.adapter.user;
 
 import com.quathar.codebay.domain.model.Administrator;
 import com.quathar.codebay.domain.port.out.user.AdministratorRepositoryPort;
-import com.quathar.codebay.infra.jpa.entity.AdministratorEntity;
+import com.quathar.codebay.infra.jpa.entity.user.AdministratorEntity;
 import com.quathar.codebay.infra.jpa.mapper.user.AdministratorMapper;
 import com.quathar.codebay.infra.jpa.repository.user.JpaAdministratorRepository;
 
