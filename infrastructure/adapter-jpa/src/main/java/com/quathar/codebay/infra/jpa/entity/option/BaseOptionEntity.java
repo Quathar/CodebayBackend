@@ -12,7 +12,7 @@ import lombok.Setter;
 import static jakarta.persistence.InheritanceType.TABLE_PER_CLASS;
 
 /**
- * <h1>Base Option</h1>
+ * <h1>Base Option Entity</h1>
  *
  * @since 2023-05-13
  * @version 1.0
@@ -23,7 +23,7 @@ import static jakarta.persistence.InheritanceType.TABLE_PER_CLASS;
 @NoArgsConstructor
 @Getter
 @Setter
-public abstract class BaseOption {
+public abstract class BaseOptionEntity {
 
     // <<-FIELDS->>
     @Id
