@@ -8,7 +8,6 @@ import com.quathar.codebay.infra.jpa.entity.security.GrantedPermissionEntity;
 import com.quathar.codebay.infra.jpa.mapper.security.PermissionMapper;
 import com.quathar.codebay.infra.jpa.repository.security.JpaPermissionRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -46,7 +45,6 @@ public final class JpaPermissionRepositoryAdapter
      * @param jpaPermissionRepository The JPA repository for {@link GrantedPermissionEntity}.
      * @param permissionMapper        The mapper for converting between {@link GrantedPermission} and {@link GrantedPermissionEntity}.
      */
-    @Autowired
     public JpaPermissionRepositoryAdapter(JpaPermissionRepository jpaPermissionRepository, PermissionMapper permissionMapper) {
         super(jpaPermissionRepository, permissionMapper);
         this.jpaPermissionRepository = jpaPermissionRepository;
