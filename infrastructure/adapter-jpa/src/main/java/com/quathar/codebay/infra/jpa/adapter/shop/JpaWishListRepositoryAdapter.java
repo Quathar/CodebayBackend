@@ -7,7 +7,6 @@ import com.quathar.codebay.infra.jpa.entity.shop.WishListEntity;
 import com.quathar.codebay.infra.jpa.mapper.shop.WishListMapper;
 import com.quathar.codebay.infra.jpa.repository.shop.JpaWishListRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,21 +27,22 @@ public final class JpaWishListRepositoryAdapter
 
     // <<-FIELDS->>
     /**
-     * The JPA repository for WishList entities.
+     * The JPA repository for {@link WishListEntity}.
      */
     private final JpaWishListRepository jpaWishListRepository;
     /**
-     * Mapper for converting between WishList and WishListEntity.
+     * Mapper for converting between {@link WishList} and {@link WishListEntity}.
      */
     private final WishListMapper wishListMapper;
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a new {@code JpaWishListRepositoryAdapter} with the specified {@code JpaWishListRepository}.
+     * Constructs a new {@link JpaWishListRepositoryAdapter} for the {@link WishListRepositoryPort}
+     * with the specified {@link JpaWishListRepository} and {@link WishListMapper}.
      *
-     * @param jpaWishListRepository The JPA repository for WishList entities.
+     * @param jpaWishListRepository The JPA repository for {@link WishListEntity}.
+     * @param wishListMapper        The mapper for converting between {@link WishList} and {@link WishListEntity}.
      */
-    @Autowired
     public JpaWishListRepositoryAdapter(JpaWishListRepository jpaWishListRepository, WishListMapper wishListMapper) {
         super(jpaWishListRepository, wishListMapper);
         this.jpaWishListRepository = jpaWishListRepository;

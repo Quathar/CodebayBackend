@@ -8,7 +8,6 @@ import com.quathar.codebay.infra.jpa.entity.shop.ProductEntity;
 import com.quathar.codebay.infra.jpa.mapper.shop.ProductMapper;
 import com.quathar.codebay.infra.jpa.repository.shop.JpaProductRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
@@ -30,21 +29,22 @@ public final class JpaProductRepositoryAdapter
 
     // <<-FIELDS->>
     /**
-     * The JPA repository for Product entities.
+     * The JPA repository for {@link ProductEntity}.
      */
     private final JpaProductRepository jpaProductRepository;
     /**
-     * Mapper for converting between Product and ProductEntity.
+     * Mapper for converting between {@link Product} and {@link ProductEntity}.
      */
     private final ProductMapper productMapper;
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a new {@code JpaProductRepositoryAdapter} with the specified JpaProductRepository.
+     * Constructs a new {@link JpaProductRepositoryAdapter} for the {@link ProductRepositoryPort}
+     * with the specified {@link JpaProductRepository} and {@link ProductMapper}.
      *
-     * @param jpaProductRepository The JPA repository for Product entities.
+     * @param jpaProductRepository The JPA repository for {@link ProductEntity}.
+     * @param productMapper        The mapper for converting between {@link Product} and {@link ProductEntity}.
      */
-    @Autowired
     public JpaProductRepositoryAdapter(JpaProductRepository jpaProductRepository, ProductMapper productMapper) {
         super(jpaProductRepository, productMapper);
         this.jpaProductRepository = jpaProductRepository;

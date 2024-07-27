@@ -7,7 +7,6 @@ import com.quathar.codebay.infra.jpa.entity.shop.OrderEntity;
 import com.quathar.codebay.infra.jpa.mapper.shop.OrderMapper;
 import com.quathar.codebay.infra.jpa.repository.shop.JpaOrderRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
@@ -29,21 +28,22 @@ public final class JpaOrderRepositoryAdapter
 
     // <<-FIELDS->>
     /**
-     * The JPA repository for Order entities.
+     * The JPA repository for {@link OrderEntity}.
      */
     private final JpaOrderRepository jpaOrderRepository;
     /**
-     * Mapper for converting between Order and OrderEntity.
+     * Mapper for converting between {@link Order} and {@link OrderEntity}.
      */
     private final OrderMapper orderMapper;
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a new {@code JpaOrderRepositoryAdapter} with the specified JpaOrderRepository.
+     * Constructs a new {@link JpaOrderRepositoryAdapter} for the {@link OrderRepositoryPort}
+     * with the specified {@link JpaOrderRepository} and {@link OrderMapper}.
      *
-     * @param jpaOrderRepository The JPA repository for Order entities.
+     * @param jpaOrderRepository The JPA repository for {@link OrderEntity}.
+     * @param orderMapper        The mapper for converting between {@link Order} and {@link OrderEntity}.
      */
-    @Autowired
     public JpaOrderRepositoryAdapter(JpaOrderRepository jpaOrderRepository, OrderMapper orderMapper) {
         super(jpaOrderRepository, orderMapper);
         this.jpaOrderRepository = jpaOrderRepository;

@@ -7,7 +7,6 @@ import com.quathar.codebay.infra.jpa.entity.shop.ShoppingCartEntity;
 import com.quathar.codebay.infra.jpa.mapper.shop.ShoppingCartMapper;
 import com.quathar.codebay.infra.jpa.repository.shop.JpaShoppingCartRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,21 +27,22 @@ public final class JpaShoppingCartRepositoryAdapter
 
     // <<-FIELDS->>
     /**
-     * The JPA repository for ShoppingCart entities.
+     * The JPA repository for {@link ShoppingCartEntity}.
      */
     private final JpaShoppingCartRepository jpaCartRepository;
     /**
-     * Mapper for converting between ShoppingCart and ShoppingCartEntity.
+     * Mapper for converting between {@link ShoppingCart} and {@link ShoppingCartEntity}.
      */
     private final ShoppingCartMapper cartMapper;
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a new {@code JpaShoppingCartRepositoryAdapter} with the specified JpaShoppingCartRepository.
+     * Constructs a new {@link JpaShoppingCartRepositoryAdapter} for the {@link ShoppingCartRepositoryPort}
+     * with the specified {@link JpaShoppingCartRepository} and {@link ShoppingCartMapper}.
      *
-     * @param jpaCartRepository The JPA repository for ShoppingCart entities.
+     * @param jpaCartRepository The JPA repository for {@link ShoppingCartEntity}.
+     * @param cartMapper        The mapper for converting between {@link ShoppingCart} and {@link ShoppingCartEntity}.
      */
-    @Autowired
     public JpaShoppingCartRepositoryAdapter(JpaShoppingCartRepository jpaCartRepository, ShoppingCartMapper cartMapper) {
         super(jpaCartRepository, cartMapper);
         this.jpaCartRepository = jpaCartRepository;
