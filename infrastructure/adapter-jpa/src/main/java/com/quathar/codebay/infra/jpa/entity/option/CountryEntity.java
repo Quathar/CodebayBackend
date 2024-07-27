@@ -13,5 +13,5 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "Country")
-public class CountryEntity extends BaseOptionEntity {
+public final class CountryEntity extends BaseOptionEntity {
 }

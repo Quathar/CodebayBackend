@@ -13,5 +13,5 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "Gender")
-public class GenderEntity extends BaseOptionEntity {
+public final class GenderEntity extends BaseOptionEntity {
 }

@@ -13,5 +13,5 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "User_Status")
-public class UserStatusEntity extends BaseOptionEntity {
+public final class UserStatusEntity extends BaseOptionEntity {
 }

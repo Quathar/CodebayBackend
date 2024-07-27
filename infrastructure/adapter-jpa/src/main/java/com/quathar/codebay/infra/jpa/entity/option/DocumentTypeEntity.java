@@ -13,5 +13,5 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "Document_Type")
-public class DocumentTypeEntity extends BaseOptionEntity {
+public final class DocumentTypeEntity extends BaseOptionEntity {
 }

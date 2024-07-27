@@ -13,5 +13,5 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "Road_Type")
-public class RoadTypeEntity extends BaseOptionEntity {
+public final class RoadTypeEntity extends BaseOptionEntity {
 }
