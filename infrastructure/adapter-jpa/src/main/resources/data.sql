@@ -135,13 +135,7 @@ values
     ('5c436f0f-3fb6-432a-9117-a57367a3b713', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- USER, UPDATE_MY_PROFILE
     ('f8971916-93e5-4b59-8428-0f756385e018', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'f6ae619f-8fdb-4948-bd09-9c2c32105b91'); -- USER, DELETE_MY_PROFILE
 
--- [ USER SCHEMA ]
-insert into User_Status(code, text)
-    values
-        ('ENB', 'ENABLED'),
-        ('DSB', 'DISABLED'),
-        ('BLK', 'BLOCKED');
-
+-- [ OPTIONS SCHEMA ]
 insert into Gender(code, text)
     values
         ('M', 'Male'),
@@ -154,6 +148,31 @@ insert into Document_Type(code, text)
         ('PSP', 'Passport'),
         ('SSN', 'Social Security Number');
 
+insert into Country(code, text)
+    values
+        ('ES', 'Spain'),
+        ('PT', 'Portugal'),
+        ('CH', 'Switzerland'),
+        ('DE', 'Germany'),
+        ('UK', 'United Kingdom'),
+        ('FR', 'France');
+
+insert into User_Status(code, text)
+    values
+        ('ENB', 'ENABLED'),
+        ('DSB', 'DISABLED'),
+        ('BLK', 'BLOCKED');
+
+insert into Road_Type(code, text)
+    values
+        ('AVE', 'Avenue'),
+        ('STT', 'Street'),
+        ('RBT', 'Roundabout'),
+        ('SQR', 'Square'),
+        ('HWY', 'Highway'),
+        ('BVD', 'Boulevard');
+
+-- [ USER SCHEMA ]
 -- The User password is always 'aA1?12345678'
 insert into Users(id,
                   username, nickname, email,
@@ -166,13 +185,13 @@ values
      'root', 'Root', 'root@codebay.com',
      'ENABLED', '556098f0-b030-4a53-84bd-c5c22e181461', 1,  0,
      '2023-01-01T00:00:00',
-     '$2a$10$CmY1fJn.F/Vncoc9FAO4xuCFSAw8T2FeDLH4Tm5Hc0jL0sujxcO3e', '2024-06-01T00:00:00',
+     '$2a$10$CmY1fJn.F/Vncoc9FAO4xuCFSAw8T2FeDLH4Tm5Hc0jL0sujxcO3e', '2026-06-01T00:00:00',
      '2023-01-01T20:40:00', null),
     ('8bbdbe71-6c4c-4760-ad4c-3a8dd049746e', -- SYSADMIN
      'master', 'Master', 'master@codebay.com',
      'ENABLED', '556098f0-b030-4a53-84bd-c5c22e181461', 7,  0,
      '2023-01-01T00:00:00',
-     '$2a$10$jl.tDahzXPHImKeg9Wm5Qu.xRDB5gCeOdJMJXybTLPiY7S2OS00b.', '2024-06-01T00:00:00',
+     '$2a$10$jl.tDahzXPHImKeg9Wm5Qu.xRDB5gCeOdJMJXybTLPiY7S2OS00b.', '2026-06-01T00:00:00',
      '2023-01-01T20:40:00', null),
     ('7d213d92-64a9-40ed-baee-d48cc501c11a', -- ADMIN
      'hwilson',    'Henry Wilson', 'hwilson@codebay.com',
@@ -235,15 +254,6 @@ values
      '$2a$10$EQGDnbxNIJxzhJP/tNxYAePeky6DIoafWCxmHqICXSOoBd0REnmfy', '2024-06-01T00:00:00',
      '2023-12-22T09:15:00', null);
 
-insert into Country(code, text)
-    values
-        ('ES', 'Spain'),
-        ('PT', 'Portugal'),
-        ('CH', 'Switzerland'),
-        ('DE', 'Germany'),
-        ('UK', 'United Kingdom'),
-        ('FR', 'France');
-
 insert into Administrator(user_id,
                           document_type, document,
                           name, surnames, gender, birthdate,
@@ -288,13 +298,14 @@ values
     574.83, 'GOLD', true,
     null);
 
+-- [ SHOP SCHEMA ]
 insert into Shopping_Cart(id, customer_id)
-values
-    ('250f629c-4b1d-46db-ae08-17b5fd77e2f9', 'e2c00c47-e16b-45ac-9dd0-950a105fe67c');
+    values
+        ('250f629c-4b1d-46db-ae08-17b5fd77e2f9', 'e2c00c47-e16b-45ac-9dd0-950a105fe67c');
 
 insert into Wish_List(id, customer_id)
-values
-    ('bfca0d8d-a7a4-42ca-9cb1-014782340112', 'e2c00c47-e16b-45ac-9dd0-950a105fe67c');
+    values
+        ('bfca0d8d-a7a4-42ca-9cb1-014782340112', 'e2c00c47-e16b-45ac-9dd0-950a105fe67c');
 
 insert into Product(id, code, name,
                     brand, model, price,
