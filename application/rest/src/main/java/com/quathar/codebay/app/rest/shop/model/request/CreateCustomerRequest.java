@@ -16,7 +16,7 @@ import jakarta.validation.constraints.NotNull;
  * @param license
  *
  * @see PersonalInfoSection
- * @since 2024-0X-XX
+ * @since 2023-04-21
  * @version 1.0
  * @author Q
  */
