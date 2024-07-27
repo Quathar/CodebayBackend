@@ -47,12 +47,6 @@ public record ShopProductParams(
         @Min(value = 0)
         @Max(value = 5)
         BigDecimal maxRating,
-        // TODO: I keep this as a example for management, delete later
-        Integer minStock,
-        Integer maxStock,
-        Integer minUnitsSold,
-        Integer maxUnitsSold,
-        // up to this point
         @Min(value = 0)
         @Max(value = 1)
         BigDecimal minDiscount,
