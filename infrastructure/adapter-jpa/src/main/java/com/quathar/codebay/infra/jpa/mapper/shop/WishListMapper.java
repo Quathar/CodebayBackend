@@ -3,7 +3,7 @@ package com.quathar.codebay.infra.jpa.mapper.shop;
 import com.quathar.codebay.domain.model.shop.WishList;
 import com.quathar.codebay.domain.port.out.mapper.MapperServicePort;
 import com.quathar.codebay.infra.jpa.entity.shop.WishListEntity;
-import com.quathar.codebay.infra.jpa.mapper.CustomerMapper;
+import com.quathar.codebay.infra.jpa.mapper.user.CustomerMapper;
 
 import org.mapstruct.Mapper;
 

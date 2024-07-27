@@ -1,4 +1,4 @@
-package com.quathar.codebay.infra.jpa.mapper;
+package com.quathar.codebay.infra.jpa.mapper.user;
 
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.port.out.mapper.MapperServicePort;

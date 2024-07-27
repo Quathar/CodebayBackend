@@ -4,7 +4,7 @@ import com.quathar.codebay.domain.model.shop.Order;
 import com.quathar.codebay.domain.port.out.mapper.MapperServicePort;
 import com.quathar.codebay.infra.jpa.entity.shop.OrderEntity;
 
-import com.quathar.codebay.infra.jpa.mapper.CustomerMapper;
+import com.quathar.codebay.infra.jpa.mapper.user.CustomerMapper;
 import org.mapstruct.Mapper;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
