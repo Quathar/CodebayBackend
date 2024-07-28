@@ -37,4 +37,12 @@ public interface TokenServicePort {
      */
     String extractUsername(String token);
 
+    /**
+     * Refreshes the authentication tokens based on the provided refresh token.
+     *
+     * @param token The refresh token
+     * @return A {@link TokenPair} containing the new access and refresh tokens
+     */
+    TokenPair refresh(String token);
+
 }
