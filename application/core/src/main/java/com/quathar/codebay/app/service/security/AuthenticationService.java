@@ -1,6 +1,7 @@
 package com.quathar.codebay.app.service.security;
 
 import com.quathar.codebay.domain.port.in.security.AuthenticationUseCasePort;
+import com.quathar.codebay.domain.port.in.security.RefreshTokenUseCasePort;
 import com.quathar.codebay.domain.valueobject.security.TokenPair;
 
 import lombok.Builder;
@@ -16,15 +17,22 @@ import lombok.NonNull;
  */
 @Builder(builderMethodName = "setup", buildMethodName = "seal")
 public final class AuthenticationService
-       implements  AuthenticationUseCasePort {
+       implements  AuthenticationUseCasePort,
+                   RefreshTokenUseCasePort {
 
-    // <<-FIELD->>
+    // <<-FIELDS->>
     @NonNull private AuthenticationUseCasePort authenticationUseCase;
+    @NonNull private RefreshTokenUseCasePort   refreshTokenUseCase;
 
-    // <<-METHOD->>
+    // <<-METHODS->>
     @Override
     public TokenPair authenticate(String authenticationKey, String password) {
         return this.authenticationUseCase.authenticate(authenticationKey, password);
+    }
+
+    @Override
+    public TokenPair refresh(String token) {
+        return this.refreshTokenUseCase.refresh(token);
     }
 
 }
