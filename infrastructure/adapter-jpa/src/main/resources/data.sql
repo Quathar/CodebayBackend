@@ -14,6 +14,7 @@ insert into Role(id, name, description)
 
 insert into Operation(id, name)
     values
+        ('bbc5316b-4bae-41cd-8671-3d63538810e7', 'REFRESH_MY_TOKENS'),
         ('77b678af-db22-4920-821b-a89ef5869fbe', 'READ_MY_PROFILE'),
         ('c5004c5a-273a-42cb-a099-4d167b2e3392', 'UPDATE_MY_PROFILE'),
         ('f6ae619f-8fdb-4948-bd09-9c2c32105b91', 'DELETE_MY_PROFILE'),
@@ -61,6 +62,7 @@ insert into Operation(id, name)
 insert into Granted_Permission(id, role_id, operation_id)
 values
     -- SYSADMIN Permissions
+    ('3b902869-195f-4d3f-8b6d-970fbbd19c61', '556098f0-b030-4a53-84bd-c5c22e181461', 'bbc5316b-4bae-41cd-8671-3d63538810e7'), -- SYSADMIN, REFRESH_MY_TOKENS
     ('06e500de-e292-473d-b82a-d6438dbab13d', '556098f0-b030-4a53-84bd-c5c22e181461', '33600df7-5a4d-48e4-b90b-9fa41bbf8c38'), -- SYSADMIN, READ_ALL_ROLES
     ('dd120ee5-1391-4c55-bac1-bdbccd3b5161', '556098f0-b030-4a53-84bd-c5c22e181461', '9d05134c-244b-4204-a326-0ebe7415fbd8'), -- SYSADMIN, READ_ROLE
     ('78e831b3-6ae0-48cc-92b5-2b7b5e178fe0', '556098f0-b030-4a53-84bd-c5c22e181461', 'a642d3e1-5b1c-4b81-a48d-a7d7254aee0b'), -- SYSADMIN, CREATE_ROLE
@@ -90,6 +92,7 @@ values
     ('0fff33d0-905a-4469-8610-9a21ebfddc56', '556098f0-b030-4a53-84bd-c5c22e181461', '1a04015d-22ff-4ed0-8591-108e101a1f7a'), -- SYSADMIN, DELETE_USER
 
     -- ADMIN Permissions
+    ('045c0126-66df-4da9-a695-127098790c7a', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 'bbc5316b-4bae-41cd-8671-3d63538810e7'), -- ADMIN, REFRESH_MY_TOKENS
     ('6ce53dd3-229c-470c-baf7-3e2095f5f202', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 'ab279e72-ae31-4bcb-bd25-d4f6347381f5'), -- ADMIN, READ_ADMIN_BY_USERNAME
     ('044ecf35-1699-4fef-ba95-6d6cf53e2512', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', '77b678af-db22-4920-821b-a89ef5869fbe'), -- ADMIN, READ_MY_PROFILE
     ('04cf5585-0d99-43ef-8edc-d9463cef5d62', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', '3e7f08c9-6d0c-4425-8c83-94cc01f01a4f'), -- ADMIN, READ_ALL_USERS
@@ -101,12 +104,14 @@ values
     ('cba67817-6727-44f1-9773-5c5bcf0be0d2', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- ADMIN, MODIFY_MY_PROFILE
 
     -- ASSISTANT Permissions
+    ('b64e63c1-2c1f-4f69-b537-b9361ebff265', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', 'bbc5316b-4bae-41cd-8671-3d63538810e7'), -- ASSISTANT, REFRESH_MY_TOKENS
     ('fc586245-3ee4-45af-bec2-aafc0f01c95e', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', '77b678af-db22-4920-821b-a89ef5869fbe'), -- ASSISTANT, READ_MY_PROFILE
     ('620f340a-c393-4a73-b837-7a08fcd2f08b', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', '94ce90e2-6106-4f26-a492-df3b7962b764'), -- ASSISTANT, READ_USER_BY_USERNAME
     ('6f2f243e-3849-4e2b-b3f7-28c10e020f4b', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', 'ca317bbc-db38-4fda-9687-90e20836a112'), -- ASSISTANT, CREATE_USER
     ('b6fd3567-b738-45f3-83ca-56dedb19cd7c', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- ASSISTANT, MODIFY_MY_PROFILE
 
     -- CUSTOMER Permissions
+    ('9b10c2bd-b9da-4eaa-822b-025c2e8ab952', '119847ec-c01d-443f-9756-87f58e285aed', 'bbc5316b-4bae-41cd-8671-3d63538810e7'), -- CUSTOMER, REFRESH_MY_TOKENS
     ('8d4876d1-5a24-4600-9339-62524e4db565', '119847ec-c01d-443f-9756-87f58e285aed', '94ce90e2-6106-4f26-a492-df3b7962b764'), -- CUSTOMER, READ_USER_BY_USERNAME
     ('46a04a9f-3920-4349-bf22-92e2df4513fb', '119847ec-c01d-443f-9756-87f58e285aed', '77b678af-db22-4920-821b-a89ef5869fbe'), -- CUSTOMER, READ_MY_PROFILE
     ('66463aaa-2c06-4eac-905c-400ec70cc5e5', '119847ec-c01d-443f-9756-87f58e285aed', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- CUSTOMER, UPDATE_MY_PROFILE
@@ -130,6 +135,7 @@ values
     ('14a17ee4-38f9-4b57-84c3-9c551d9f333c', '119847ec-c01d-443f-9756-87f58e285aed', 'bdafc9d1-3ee2-4a9c-8561-de02b0350fd5'), -- CUSTOMER, READ_ONE_ORDER
 
     -- USER Permissions
+    ('c09cc2ae-8e3d-441e-a71a-9f76f8586953', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'bbc5316b-4bae-41cd-8671-3d63538810e7'), -- USER, REFRESH_MY_TOKENS
     ('5b7241b9-a6e0-49c6-9fe0-627b79391be2', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', '94ce90e2-6106-4f26-a492-df3b7962b764'), -- USER, READ_USER_BY_USERNAME
     ('33a8641e-2fb8-40ec-a797-970683165b85', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', '77b678af-db22-4920-821b-a89ef5869fbe'), -- USER, READ_MY_PROFILE
     ('5c436f0f-3fb6-432a-9117-a57367a3b713', '20b53285-3ab0-427d-b8bf-f4e3cba7933b', 'c5004c5a-273a-42cb-a099-4d167b2e3392'), -- USER, UPDATE_MY_PROFILE
@@ -197,19 +203,19 @@ values
      'hwilson',    'Henry Wilson', 'hwilson@codebay.com',
      'ENABLED', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 1,  1,
      '2023-12-01T00:00:00',
-     '$2a$10$3Uuz05L/r6ChtPNojKemCuw4QXKcgmdaNNm2HrZWA2QnonuqJc0bi', '2024-06-01T00:00:00',
+     '$2a$10$3Uuz05L/r6ChtPNojKemCuw4QXKcgmdaNNm2HrZWA2QnonuqJc0bi', '2025-06-01T00:00:00',
      '2023-12-23T10:45:00', null),
     ('98585064-1044-4941-831a-e56bc273e3bf', -- ADMIN
      'ilee',    'Isabella Lee', 'ilee@codebay.com',
      'ENABLED', 'c4f7aa87-b916-40a1-b2da-b79dea51784b', 1,  1,
      '2023-12-01T00:00:00',
-     '$2a$10$3Uuz05L/r6ChtPNojKemCuw4QXKcgmdaNNm2HrZWA2QnonuqJc0bi', '2024-06-01T00:00:00',
+     '$2a$10$3Uuz05L/r6ChtPNojKemCuw4QXKcgmdaNNm2HrZWA2QnonuqJc0bi', '2025-06-01T00:00:00',
      '2023-12-23T10:45:00', null),
     ('a0c819da-d3a7-439d-aa5c-7b3b14c8cd0f', -- ASSISTANT
      'wjones',    'William Jones', 'wjones@codebay.com',
      'ENABLED', 'c65576bf-dfb0-443a-bad5-fa9aebc6ea0a', 1,  2,
      '2023-12-01T00:00:00',
-     '$2a$10$EQGDnbxNIJxzhJP/tNxYAePeky6DIoafWCxmHqICXSOoBd0REnmfy', '2024-06-01T00:00:00',
+     '$2a$10$EQGDnbxNIJxzhJP/tNxYAePeky6DIoafWCxmHqICXSOoBd0REnmfy', '2025-06-01T00:00:00',
      '2023-12-22T09:15:00', null),
     ('e2c00c47-e16b-45ac-9dd0-950a105fe67c',
      'jsmith', 'Janie_Smith', 'jane@email.com',
