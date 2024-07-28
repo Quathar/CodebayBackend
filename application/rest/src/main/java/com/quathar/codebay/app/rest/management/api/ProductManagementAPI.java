@@ -59,7 +59,6 @@ public interface ProductManagementAPI {
      *
      * @param id The ID of the product to retrieve.
      * @return The product with the specified ID in a {@link FullProductResponse}.
-     *
      */
     @GetMapping(path = "/id/{id}", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('READ_PRODUCT_BY_ID')")

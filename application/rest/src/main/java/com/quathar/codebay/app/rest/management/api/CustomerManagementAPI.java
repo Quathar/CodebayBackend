@@ -2,7 +2,6 @@ package com.quathar.codebay.app.rest.management.api;
 
 import com.quathar.codebay.app.rest.common.model.request.PageContentRequest;
 import com.quathar.codebay.app.rest.common.model.response.PageContentResponse;
-import com.quathar.codebay.app.rest.management.model.product.response.ManagementProductResponse;
 import com.quathar.codebay.app.rest.management.model.user.response.FullCustomerResponse;
 import com.quathar.codebay.app.rest.management.model.user.response.ManagementCustomerResponse;
 
@@ -58,7 +57,6 @@ public interface CustomerManagementAPI {
      *
      * @param id The ID of the customer to retrieve.
      * @return The customer with the specified ID in a {@link FullCustomerResponse}.
-     *
      */
     @GetMapping(path = "/id/{id}", produces = APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('READ_CUSTOMER_BY_ID')")
