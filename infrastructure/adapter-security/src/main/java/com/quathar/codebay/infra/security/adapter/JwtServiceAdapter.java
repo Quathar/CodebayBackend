@@ -2,19 +2,27 @@ package com.quathar.codebay.infra.security.adapter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.AlgorithmMismatchException;
+import com.auth0.jwt.exceptions.IncorrectClaimException;
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.MissingClaimException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+import com.quathar.codebay.domain.exception.security.NotAccessTokenException;
+import com.quathar.codebay.domain.exception.security.NotRefreshTokenException;
+import com.quathar.codebay.domain.exception.security.TokenVerificationException;
 import com.quathar.codebay.domain.port.out.security.TokenServicePort;
 import com.quathar.codebay.domain.valueobject.security.TokenPair;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.util.Map;
 
 /**
  * <h1>JWT (JSON Web Token) Token Service Adapter</h1>
@@ -24,16 +32,27 @@ import java.time.Instant;
  * @version 1.0
  * @author Q
  */
+@Slf4j
 @Component
 public class JwtServiceAdapter implements TokenServicePort {
 
-    private static final Logger log = LoggerFactory.getLogger(JwtServiceAdapter.class);
-
-    // <<-CONSTANT->>
+    // <<-CONSTANTS->>
     /**
      * The issuer of the JWT.
      */
     private static final String ISSUER = "Codebay";
+    /**
+     * The intended audience specifying the 'application'.
+     */
+    private static final String APP_AUDIENCE = "Application";
+    /**
+     * The intended audience specifying the 'authorization server'.
+     */
+    private static final String AUTH_AUDIENCE = "Authorization Server";
+    /**
+     * The claim key used to represent the user's role.
+     */
+    private static final String ROLE_CLAIM = "role";
 
     // <<-FIELDS->>
     /**
@@ -61,7 +80,6 @@ public class JwtServiceAdapter implements TokenServicePort {
      * @param accessTokenExpirationTime  The expiration time for access tokens, in seconds.
      * @param refreshTokenExpirationTime The expiration time for refresh tokens, in seconds.
      */
-    @Autowired
     public JwtServiceAdapter(
             @Value("${jwt.secret-key}")
             String secretKey,
@@ -85,9 +103,10 @@ public class JwtServiceAdapter implements TokenServicePort {
         return java.util.Base64.getDecoder().decode(this.secretKey);
     }
 
-    // <<-METHOD->>
+    // <<-METHODS->>
     @Override
-    public TokenPair generateTokenPair(String subject, java.util.Map<String, ?> extraClaims) {
+    public TokenPair generateTokenPair(String subject, Map<String, ?> extraClaims) {
+        log.info("Generating a new token pair");
         Instant now = Instant.now();
         Instant accessTokenExpirationTime = now.plusSeconds(this.accessTokenExpirationTime);
         Instant refreshTokenExpirationTime = now.plusSeconds(this.refreshTokenExpirationTime);
@@ -103,21 +122,26 @@ public class JwtServiceAdapter implements TokenServicePort {
         // A claim with no value, only the key
         //      .withNullClaim("Only for you to know this exist ;)")
         String accessToken = JWT.create()
-                .withPayload(extraClaims)
-                .withIssuer(ISSUER)
-                .withSubject(subject)
-                .withIssuedAt(now)
-                .withExpiresAt(accessTokenExpirationTime)
+                .withPayload( extraClaims )
+                .withIssuer( ISSUER )
+                .withSubject( subject )
+                .withIssuedAt( now )
+                .withExpiresAt( accessTokenExpirationTime )
+                .withAudience( APP_AUDIENCE )
                 .sign(this.algorithm);
         String refreshToken = JWT.create()
-                .withPayload(extraClaims)
-                .withIssuer(ISSUER)
-                .withSubject(subject)
-                .withIssuedAt(now)
-                .withExpiresAt(refreshTokenExpirationTime)
-                .withNotBefore(accessTokenExpirationTime)
-                .sign(this.algorithm);
+                .withPayload( extraClaims )
+                .withIssuer( ISSUER )
+                .withSubject( subject )
+                .withIssuedAt( now )
+                .withExpiresAt( refreshTokenExpirationTime )
+                .withNotBefore( accessTokenExpirationTime )
+                // TODO: This is working but check this, try to use only AUTH_AUDIENCE
+                .withAudience( APP_AUDIENCE, AUTH_AUDIENCE )
+                .sign( this.algorithm );
 
+        log.debug("Returning access token: {}", accessToken);
+        log.debug("Returning refresh token: {}", refreshToken);
         return TokenPair.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
@@ -134,16 +158,64 @@ public class JwtServiceAdapter implements TokenServicePort {
      *
      * @param token The token to verify.
      * @return The decoded JWT if verification is successful.
+     * @throws AlgorithmMismatchException     if the algorithm stated in the token's header is not equal to
+     *                                        the one defined in the {@link com.auth0.jwt.JWTVerifier}.
+     * @throws SignatureVerificationException if the signature is invalid.
+     * @throws TokenExpiredException          if the token has expired.
+     * @throws MissingClaimException          if a claim to be verified is missing.
+     * @throws IncorrectClaimException        if a claim contained a different value than the expected one.
+     * @throws JWTDecodeException             if the token is null or doesn't have the correct structure
      */
     private DecodedJWT verify(String token) {
-        return JWT.require(this.algorithm)
-                .build()
-                .verify(token);
+        log.debug("Verifying token {}", token);
+        try {
+            return JWT.require(this.algorithm)
+                    .build()
+                    .verify(token);
+        } catch (
+                AlgorithmMismatchException
+                | SignatureVerificationException
+                | TokenExpiredException
+                | MissingClaimException
+                | IncorrectClaimException
+                | JWTDecodeException e
+        ) {
+            throw new TokenVerificationException(e);
+        }
     }
 
     @Override
     public String extractUsername(String token) {
-        return this.verify(token).getSubject();
+        log.debug("Extracting << username >> from token: {}", token);
+        DecodedJWT decoded = this.verify(token);
+
+        if (!decoded.getAudience().contains(APP_AUDIENCE)) {
+            log.error("The token used for access is not an 'access token'.");
+            // NOT IMPLEMENTED - Token registry
+            // this.invalidTokenFamily(decoded.getClaim(FAMILY_CLAIM))
+            throw new NotAccessTokenException();
+        }
+        return decoded.getSubject();
+    }
+
+    @Override
+    public TokenPair refresh(String token) {
+        log.debug("Refreshing token: {}", token);
+        DecodedJWT decoded = this.verify(token);
+
+        // The two tokens we create have an audience,
+        // so we don't do null check
+        if (!decoded.getAudience().contains(AUTH_AUDIENCE)) {
+            log.error("The token used for refreshing is not a 'refresh token'.");
+            // NOT IMPLEMENTED - Token registry
+            // this.invalidTokenFamily(decoded.getClaim(FAMILY_CLAIM))
+            throw new NotRefreshTokenException();
+        }
+
+        var username = decoded.getSubject();
+        var role     = decoded.getClaim(ROLE_CLAIM).asString();
+        log.debug("The new token pair will be generated with username [ {} ] and role [ {} ]", username, role);
+        return this.generateTokenPair( username, Map.of(ROLE_CLAIM, role) );
     }
 
 }
