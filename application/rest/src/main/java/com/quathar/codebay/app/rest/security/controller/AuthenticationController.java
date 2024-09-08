@@ -10,10 +10,9 @@ import com.quathar.codebay.app.service.security.AuthenticationService;
 import com.quathar.codebay.domain.valueobject.security.TokenPair;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,11 +28,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  * @author Q
  */
+@Slf4j
 @RestController
 @AllArgsConstructor
 public class AuthenticationController implements AuthenticationAPI {
-
-    private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
 
     // <<-FIELD->>
     /**
@@ -50,31 +48,43 @@ public class AuthenticationController implements AuthenticationAPI {
      * @return An AuthenticationResponse object containing authentication tokens.
      */
     private AuthenticationResponse handleAuthentication(String authenticationKey, String password) {
-        log.debug("Handling authentication request in handleAuthentication method");
+        log.info("Handling authentication request in handleAuthentication method");
 
         TokenPair tokenPair = this.authService.authenticate(authenticationKey, password);
 
-        log.debug("Authentication successful. Returning 200 OK status");
+        log.info("Authentication successful. Returning 200 OK status");
 
         return HttpSecurityFactory.getAuthenticationResponse().fromModel(tokenPair);
     }
 
     @Override
     public AuthenticationResponse handleUsernameAuthentication(UsernameAuthRequest authRequest) {
-        log.debug("Handling username authentication request");
+        log.info("Handling username authentication request");
         return this.handleAuthentication( authRequest.username(), authRequest.password() );
     }
 
     @Override
     public AuthenticationResponse handleEmailAuthentication(EmailAuthRequest authRequest) {
-        log.debug("Handling email authentication request");
+        log.info("Handling email authentication request");
         return this.handleAuthentication( authRequest.email(), authRequest.password() );
     }
 
     @Override
     public AuthenticationResponse handleIdAuthentication(IdAuthenticationRequest authRequest) {
-        log.debug("Handling id authentication request");
+        log.info("Handling id authentication request");
         return this.handleAuthentication( authRequest.id().toString(), authRequest.password() );
+    }
+
+    @Override
+    public AuthenticationResponse handleTokenRefresh() {
+        log.info("Refreshing token");
+        String token = SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getCredentials()
+                .toString();
+        TokenPair tokenPair = this.authService.refresh(token);
+
+        return HttpSecurityFactory.getAuthenticationResponse().fromModel(tokenPair);
     }
 
 }

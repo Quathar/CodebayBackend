@@ -1,6 +1,7 @@
 package com.quathar.codebay.app.rest.security.filter;
 
 import com.quathar.codebay.app.service.user.UserService;
+import com.quathar.codebay.domain.exception.security.TokenVerificationException;
 import com.quathar.codebay.domain.model.security.GrantedPermission;
 import com.quathar.codebay.domain.model.security.Operation;
 import com.quathar.codebay.domain.port.out.security.TokenServicePort;
@@ -12,8 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import lombok.AllArgsConstructor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,11 +37,10 @@ import java.io.IOException;
  * @version 1.0
  * @author Q
  */
+@Slf4j
 @Component
 @AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-    private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     // <<-CONSTANT->>
     /**
@@ -69,7 +68,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      *
      * @param username The username of the authenticated user.
      */
-    private void setSecurityContextHolder(String username) {
+    private void setSecurityContextHolder(String username, String jwt) {
         var role = this.userService
                 .getByUsername(username)
                 .getRole();
@@ -82,7 +81,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         authorities.add(roleAuthority);
         Authentication authToken = new UsernamePasswordAuthenticationToken(
                 username,
-                null,
+                jwt,
                 authorities
         );
         SecurityContextHolder.getContext().setAuthentication(authToken);
@@ -94,29 +93,32 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain         filterChain
     ) throws ServletException, IOException {
-        log.debug("JWT Authentication Filter is processing");
+        log.info("JWT Authentication Filter is processing");
 
         // 1. Get the header that contains the JWT (JSON Web Token)
         String authorizationHeader = request.getHeader(AUTHORIZATION_HEADER);
         if (authorizationHeader == null || !authorizationHeader.startsWith(BEARER_PREFIX)) {
-            log.debug("JWT Authentication failed. Continue with other filters");
+            log.error("JWT Authentication failed. Continue with other filters");
             filterChain.doFilter(request, response);
             return;
         }
 
         // 2. Get the JWT token
-        String jwtToken = authorizationHeader.substring(BEARER_PREFIX.length()).trim();
+        String jwt = authorizationHeader.substring(BEARER_PREFIX.length()).trim();
 
-        // 3. Get 'subject/username' from JWT
-        log.debug("Extracting <username> from the JWT");
-        String username = this.jwtService.extractUsername(jwtToken);
+        try {
+            // 3. Get 'subject/username' from JWT
+            String username = this.jwtService.extractUsername(jwt);
 
-        // 4. Set an Authentication object inside the SecurityContextHolder
-        this.setSecurityContextHolder(username);
-        log.debug("Authenticated user: {}", username);
+            // 4. Set an Authentication object inside the SecurityContextHolder
+            this.setSecurityContextHolder(username, jwt);
+            log.debug("Authenticated user: {}", username);
+        } catch(TokenVerificationException e) {
+            log.error("The token verification failed");
+        }
 
         // 5. Execute all other filters
-        log.debug("Continue with other filters");
+        log.info("Continue with other filters");
         filterChain.doFilter(request, response);
     }
 

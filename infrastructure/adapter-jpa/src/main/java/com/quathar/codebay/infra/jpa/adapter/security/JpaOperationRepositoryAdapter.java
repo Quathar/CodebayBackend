@@ -7,7 +7,6 @@ import com.quathar.codebay.infra.jpa.entity.security.OperationEntity;
 import com.quathar.codebay.infra.jpa.mapper.security.OperationMapper;
 import com.quathar.codebay.infra.jpa.repository.security.JpaOperationRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,17 +31,18 @@ public final class JpaOperationRepositoryAdapter
      */
     private final JpaOperationRepository jpaOperationRepository;
     /**
-     * Mapper for converting between Operation and OperationEntity.
+     * Mapper for converting between {@link Operation} and {@link OperationEntity}.
      */
     private final OperationMapper operationMapper;
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a new {@code JpaOperationRepositoryAdapter} with the specified JpaOperationRepository.
+     * Constructs a new {@link JpaOperationRepositoryAdapter} for the {@link OperationRepositoryPort}
+     * with the specified {@link JpaOperationRepository} and {@link OperationMapper}.
      *
-     * @param jpaOperationRepository The JPA repository for Operation entities.
+     * @param jpaOperationRepository The JPA repository for {@link OperationEntity}.
+     * @param operationMapper        The mapper for converting between {@link Operation} and {@link OperationEntity}.
      */
-    @Autowired
     public JpaOperationRepositoryAdapter(JpaOperationRepository jpaOperationRepository, OperationMapper operationMapper) {
         super(jpaOperationRepository, operationMapper);
         this.jpaOperationRepository = jpaOperationRepository;

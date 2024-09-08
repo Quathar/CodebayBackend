@@ -84,4 +84,14 @@ public interface AuthenticationAPI {
             IdAuthenticationRequest authRequest
     );
 
+    /**
+     * Refreshes the authentication tokens based on the provided refresh token.
+     *
+     * @return The authentication response.
+     */
+    @PostMapping(path = "/refresh-token", produces = APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('REFRESH_MY_TOKENS')")
+    @ResponseStatus(OK)
+    AuthenticationResponse handleTokenRefresh();
+
 }

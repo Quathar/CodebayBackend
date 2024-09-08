@@ -2,15 +2,11 @@ package com.quathar.codebay.infra.jpa.adapter.user;
 
 import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.port.out.user.UserRepositoryPort;
-import com.quathar.codebay.infra.jpa.adapter.JpaCrudRepositoryAdapter;
-import com.quathar.codebay.infra.jpa.entity.UserEntity;
-import com.quathar.codebay.infra.jpa.mapper.UserMapper;
+import com.quathar.codebay.infra.jpa.entity.user.UserEntity;
+import com.quathar.codebay.infra.jpa.mapper.user.UserMapper;
 import com.quathar.codebay.infra.jpa.repository.user.JpaUserRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 /**
  * <h1>JPA User Repository Adapter</h1>
@@ -24,7 +20,7 @@ import java.util.Optional;
  */
 @Component
 public final class JpaUserRepositoryAdapter
-       extends     JpaCrudRepositoryAdapter<User, UserEntity, java.util.UUID>
+       extends     JpaAbstractUserRepositoryAdapter<User, UserEntity>
        implements  UserRepositoryPort {
 
     // <<-FIELDS->>
@@ -33,17 +29,18 @@ public final class JpaUserRepositoryAdapter
      */
     private final JpaUserRepository jpaUserRepository;
     /**
-     * Mapper for converting between User and UserEntity.
+     * Mapper for converting between {@link User} and {@link UserEntity}.
      */
     private final UserMapper userMapper;
 
     // <<-CONSTRUCTOR->>
     /**
-     * Constructs a new {@code JpaUserRepositoryAdapter} with the specified JpaUserRepository.
+     * Constructs a new {@link JpaUserRepositoryAdapter} for the {@link UserRepositoryPort}
+     * with the specified {@link JpaUserRepository} and {@link UserMapper}.
      *
-     * @param jpaUserRepository The JPA repository for User entities.
+     * @param jpaUserRepository The JPA repository for {@link UserEntity}.
+     * @param userMapper        The mapper for converting between {@link User} and {@link UserEntity}.
      */
-    @Autowired
     public JpaUserRepositoryAdapter(JpaUserRepository jpaUserRepository, UserMapper userMapper) {
         super(jpaUserRepository, userMapper);
         this.jpaUserRepository = jpaUserRepository;
@@ -52,31 +49,18 @@ public final class JpaUserRepositoryAdapter
 
     // <<-METHODS->>
     @Override
-    public Optional<User> findByUsername(String username) {
-        return this.jpaUserRepository
-                .findByUsername(username)
-                .map(this.userMapper::toModel);
-    }
-
-    @Override
-    public Optional<User> findByEmail(String email) {
-        return this.jpaUserRepository
-                .findByEmail(email)
-                .map(this.userMapper::toModel);
-    }
-
-    @Override
-    public Optional<User> findByAuthenticationKey(String authenticationKey) {
+    public java.util.Optional<User> findByAuthenticationKey(String authenticationKey) {
         return this.jpaUserRepository
                 .findByAuthenticationKey(authenticationKey)
                 .map(this.userMapper::toModel);
     }
 
-    @Override
-    public void deleteByUsername(String username) {
-        this.jpaUserRepository.deleteByUsername(username);
-    }
-
+    /**
+     * Updates the {@link UserEntity} identified by the given username using the provided updater function.
+     *
+     * @param username The username of the user whose entity needs to be updated.
+     * @param updater  A {@link java.util.function.Consumer} that takes a {@link UserEntity} and performs updates on it.
+     */
     private void updateEntity(String username, java.util.function.Consumer<UserEntity> updater) {
         this.jpaUserRepository
                 .findByUsername(username)

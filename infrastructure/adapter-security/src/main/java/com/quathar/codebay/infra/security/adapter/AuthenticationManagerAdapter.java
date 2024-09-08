@@ -6,13 +6,15 @@ import com.quathar.codebay.domain.valueobject.security.TokenPair;
 
 import lombok.AllArgsConstructor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * <h1>Authentication Manager Adapter</h1>
@@ -24,11 +26,16 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  * @author Q
  */
+@Slf4j
 @Component
 @AllArgsConstructor
 public class AuthenticationManagerAdapter implements AuthenticationManagerPort {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthenticationManagerAdapter.class);
+    // <<-CONSTANTS->>
+    /**
+     * Prefix used for role-based authorities.
+     */
+    private static final String ROLE_PREFIX = "ROLE_";
 
     // <<-FIELDS->>
     /**
@@ -41,19 +48,40 @@ public class AuthenticationManagerAdapter implements AuthenticationManagerPort {
     private final TokenServicePort tokenServicePort;
 
     // <<-METHOD->>
+    /**
+     * Generates additional custom claims based on the provided valid authentication token.
+     *
+     * @param validToken The valid authentication token.
+     * @return A {@link Map} containing the additional custom claims.
+     */
+    private Map<String, ?> generateExtraClaims(Authentication validToken) {
+        log.info("Generating extra claims");
+        String role = validToken.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .filter(authority -> authority.startsWith(ROLE_PREFIX))
+                .findFirst()
+                .get()
+                .substring(ROLE_PREFIX.length());
+        return Map.of("role", role);
+    }
+
     @Override
     public TokenPair performAuthentication(String authenticationKey, String password) {
-        log.debug("Performing authentication");
+        log.info("Performing authentication");
         Authentication authToken = new UsernamePasswordAuthenticationToken(authenticationKey, password);
 
         // If authentication fails it throws an AuthenticationException
         Authentication validToken = this.authenticationManager.authenticate(authToken);
 
-        log.debug("Authentication successful");
+        log.info("Authentication successful");
+        return this.tokenServicePort.generateTokenPair( validToken.getName(), this.generateExtraClaims(validToken) );
+    }
 
-        log.debug("Generating token pair");
-
-        return this.tokenServicePort.generateTokenPair( validToken.getName() );
+    @Override
+    public TokenPair performRefresh(String token) {
+        log.info("Performing refresh");
+        return this.tokenServicePort.refresh(token);
     }
 
 }

@@ -1,21 +1,20 @@
 package com.quathar.codebay.infra.jpa.repository.user;
 
-import com.quathar.codebay.infra.jpa.entity.UserEntity;
+import com.quathar.codebay.infra.jpa.entity.user.UserEntity;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 /**
  * <h1>JPA (Java Persistence API) User Repository</h1>
  *
+ * @see JpaAbstractUserRepository
  * @see UserEntity
  * @since 2023-12-10
  * @version 1.0
  * @author Q
  */
-@Repository
 public interface JpaUserRepository
-       extends   CommonJpaUserRepository<UserEntity> {
+       extends   JpaAbstractUserRepository<UserEntity> {
 
     /**
      * Finds a user by their username or email.

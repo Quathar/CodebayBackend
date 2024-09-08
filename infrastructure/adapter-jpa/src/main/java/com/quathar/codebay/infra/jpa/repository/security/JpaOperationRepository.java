@@ -3,7 +3,6 @@ package com.quathar.codebay.infra.jpa.repository.security;
 import com.quathar.codebay.infra.jpa.entity.security.OperationEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * <h1>JPA (Java Persistence API) Operation Repository</h1>
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Repository;
  * @version 1.0
  * @author Q
  */
-@Repository
 public interface JpaOperationRepository extends JpaRepository<OperationEntity, java.util.UUID> {
 
     /**

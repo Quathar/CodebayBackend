@@ -66,17 +66,18 @@ public class SecurityControllerAdvice {
      */
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Map<String, String>> handleAccessDeniedException(AccessDeniedException exception) {
-        boolean isAnonymous = SecurityContextHolder
+        var username = SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal()
-                .equals("anonymousUser");
+                .toString();
 
+        boolean isAnonymous = "anonymousUser".equals(username);
         if (isAnonymous)
             return ResponseEntity
                     .status(UNAUTHORIZED)
                     .body(Map.of("error", "Invalid Credentials"));
-        log.debug("ACCESS DENIED");
+        log.debug("ACCESS DENIED for user [ {} ]" , username);
         return ResponseEntity
                 .status(FORBIDDEN)
                 .body(Map.of("error", "ACCESS DENIED"));

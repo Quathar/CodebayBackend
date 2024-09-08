@@ -10,6 +10,7 @@ import com.quathar.codebay.app.usecase.ReadAllModelsUseCase;
 import com.quathar.codebay.app.usecase.ReadModelUseCase;
 import com.quathar.codebay.app.usecase.UpdateModelUseCase;
 import com.quathar.codebay.app.usecase.security.authentication.AuthenticationUseCase;
+import com.quathar.codebay.app.usecase.security.authentication.RefreshTokenUseCase;
 import com.quathar.codebay.app.usecase.security.authorization.GrantPermissionUseCase;
 import com.quathar.codebay.app.usecase.security.authorization.ReadAllPermissionsGroupedByRoleUseCase;
 import com.quathar.codebay.app.usecase.security.authorization.RevokePermissionUseCase;
@@ -24,6 +25,10 @@ import org.springframework.context.annotation.Configuration;
 /**
  * <h1>Security Service Configuration</h1>
  *
+ * @see AuthenticationService
+ * @see RoleService
+ * @see OperationService
+ * @see PermissionService
  * @since 2024-03-10
  * @version 1.0
  * @author Q
@@ -35,6 +40,7 @@ public class SecurityServiceConfig {
     public AuthenticationService authenticationService(AuthenticationManagerPort authenticationManagerPort) {
         return AuthenticationService.setup()
                 .authenticationUseCase( new AuthenticationUseCase(authenticationManagerPort) )
+                .refreshTokenUseCase( new RefreshTokenUseCase(authenticationManagerPort) )
                 .seal();
     }
 

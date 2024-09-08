@@ -22,4 +22,12 @@ public interface AuthenticationManagerPort {
      */
     TokenPair performAuthentication(String authenticationKey, String password);
 
+    /**
+     * Refreshes the authentication tokens based on the provided refresh token.
+     *
+     * @param token The refresh token
+     * @return A {@link TokenPair} containing the access and refresh tokens upon successful authentication
+     */
+    TokenPair performRefresh(String token);
+
 }

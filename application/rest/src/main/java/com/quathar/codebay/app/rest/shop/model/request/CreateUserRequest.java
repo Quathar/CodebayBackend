@@ -1,5 +1,8 @@
 package com.quathar.codebay.app.rest.shop.model.request;
 
+import com.quathar.codebay.app.rest.common.model.validation.constraint.UniqueEmail;
+import com.quathar.codebay.app.rest.common.model.validation.constraint.UniqueUsername;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -19,6 +22,7 @@ import jakarta.validation.constraints.Size;
  * @author Q
  */
 public record CreateUserRequest(
+        @UniqueUsername
         @NotBlank
         @Size(min = 3, max = 16)
         String username,
@@ -28,6 +32,7 @@ public record CreateUserRequest(
         @NotBlank
         @Size(min = 3, max = 30)
         String nickname,
+        @UniqueEmail
         @NotBlank
         @Pattern(regexp = "^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}(\\.[a-zA-Z]{2,3})?$")
         String email

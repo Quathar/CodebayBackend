@@ -14,5 +14,6 @@ import lombok.experimental.SuperBuilder;
  * @author Q
  */
 @SuperBuilder(builderMethodName = "setup", buildMethodName = "seal")
-public final class AdministratorService extends CommonUserService<Administrator> {
+public final class AdministratorService
+       extends     CommonUserService<Administrator> {
 }

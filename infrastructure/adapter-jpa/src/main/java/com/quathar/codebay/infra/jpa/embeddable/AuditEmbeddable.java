@@ -1,6 +1,6 @@
 package com.quathar.codebay.infra.jpa.embeddable;
 
-import com.quathar.codebay.infra.jpa.entity.AdministratorEntity;
+import com.quathar.codebay.infra.jpa.entity.user.AdministratorEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

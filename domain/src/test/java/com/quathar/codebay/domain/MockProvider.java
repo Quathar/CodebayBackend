@@ -5,13 +5,16 @@ import com.quathar.codebay.domain.model.User;
 import com.quathar.codebay.domain.model.security.GrantedPermission;
 import com.quathar.codebay.domain.model.security.Operation;
 import com.quathar.codebay.domain.model.security.Role;
+import com.quathar.codebay.domain.model.shop.Product;
 import com.quathar.codebay.domain.valueobject.Audit;
 import com.quathar.codebay.domain.valueobject.Document;
 import com.quathar.codebay.domain.valueobject.PersonalInfo;
 import com.quathar.codebay.domain.valueobject.Phone;
 import com.quathar.codebay.domain.valueobject.security.RoleOperations;
 import com.quathar.codebay.domain.valueobject.security.TokenPair;
+import com.quathar.codebay.domain.valueobject.shop.Image;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -53,6 +56,7 @@ public class MockProvider {
             case "Document"      -> getDocumentModel();
             case "Phone"         -> getPhoneModel();
             // ---
+            case "Product" -> getProductModel();
             default -> null;
         };
     }
@@ -167,6 +171,43 @@ public class MockProvider {
         return Phone.builder()
                 .countryCode( STRING )
                 .number( STRING )
+                .build();
+    }
+
+    private static Product getProductModel() {
+        return Product.builder()
+                .id( IDENTIFIER )
+                .code( STRING )
+                .name( STRING )
+                .description( STRING )
+                .brand( STRING )
+                .model( STRING )
+                // TODO: Change this
+                .productImages( Stream.of(getImageModel()) )
+                .price( BigDecimal.ZERO )
+                .ratingNumber( INTEGER )
+                .rating( BigDecimal.ZERO )
+                .stock( INTEGER )
+                .unitsSold( INTEGER )
+                .upperLimit( INTEGER )
+                .lowerLimit( INTEGER )
+                .totalEarnings( BigDecimal.ZERO )
+                .onSale( true )
+                .onOffer( true )
+                .isNew( true )
+                .discount( BigDecimal.ZERO )
+                .comments( STRING )
+                .audit( getAuditModel() )
+                .build();
+    }
+
+    private static Image getImageModel() {
+        return Image.builder()
+                .format( STRING )
+                .fileName( STRING )
+                .path( STRING )
+                .description( STRING )
+                .size( STRING )
                 .build();
     }
 
