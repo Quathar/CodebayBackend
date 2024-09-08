@@ -91,4 +91,9 @@ public final class JpaCustomerRepositoryAdapter
                 .orElseThrow(ModelNotFoundException::new);
     }
 
+    @Override
+    public boolean existsByDocument(String document) {
+        return this.jpaCustomerRepository.existsByPersonalInfoDocumentContent(document);
+    }
+
 }

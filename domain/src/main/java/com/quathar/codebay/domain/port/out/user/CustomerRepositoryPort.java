@@ -15,4 +15,13 @@ import com.quathar.codebay.domain.model.Customer;
  */
 public interface CustomerRepositoryPort
        extends   AbstractUserRepositoryPort<Customer, java.util.UUID> {
+
+    /**
+     * Doc later
+     *
+     * @param document
+     * @return
+     */
+    boolean existsByDocument(String document);
+
 }

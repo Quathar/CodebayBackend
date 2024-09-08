@@ -28,11 +28,8 @@ public class UniqueDocumentValidator implements ConstraintValidator<UniqueDocume
     // <<-METHOD->>
     @Override
     public boolean isValid(String documentContent, ConstraintValidatorContext context) {
-//        return this.customerRepositoryPort
-//                .findByDocument(documentContent)
-//                .isEmpty();
-        // TODO: The goal is to use the previous statement
-        return true;
+        return this.customerRepositoryPort
+                .existsByDocument(documentContent);
     }
 
 }

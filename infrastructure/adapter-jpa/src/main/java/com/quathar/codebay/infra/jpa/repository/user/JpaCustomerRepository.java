@@ -21,6 +21,14 @@ public interface JpaCustomerRepository
        extends   JpaAbstractUserRepository<CustomerEntity> {
 
     /**
+     * Doc later
+     *
+     * @param documentContent
+     * @return
+     */
+    boolean existsByPersonalInfoDocumentContent(String documentContent);
+
+    /**
      * Inserts a new customer record into the Customer table.
      *
      * @param customer The {@link CustomerEntity} containing all the necessary information to be inserted.
