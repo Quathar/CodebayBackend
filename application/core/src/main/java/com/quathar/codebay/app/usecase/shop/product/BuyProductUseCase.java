@@ -1,6 +1,7 @@
 package com.quathar.codebay.app.usecase.shop.product;
 
 import com.quathar.codebay.domain.exception.ModelNotFoundException;
+import com.quathar.codebay.domain.exception.ProductUnitsOutOfBoundsException;
 import com.quathar.codebay.domain.model.Customer;
 import com.quathar.codebay.domain.model.shop.Order;
 import com.quathar.codebay.domain.model.shop.OrderDetail;
@@ -60,9 +61,7 @@ public final class BuyProductUseCase implements BuyProductUseCasePort {
 
         // 2. Check product availability
         if (!productToBuy.isAvailable(units))
-            // TODO: Look for a different specific exception to be thrown here
-            // Maybe ProductUnitsOutOfBoundsException ?
-            throw new RuntimeException("Product can't be purchased");
+            throw new ProductUnitsOutOfBoundsException("Product can't be purchased");
 
         // 3. Update product & customer information
         java.math.BigDecimal totalPrice = productToBuy.purchase(units);
